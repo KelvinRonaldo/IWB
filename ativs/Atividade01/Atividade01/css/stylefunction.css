@@ -1,0 +1,87 @@
+/* CSS */
+
+div, body{
+    margin: 0;
+    padding: 0;
+}
+
+.center{
+    margin: auto;
+    padding: auto;
+}
+
+#caixa_principal{
+    width: 1000px;
+    height: 750px;
+    background-color: black;
+    color: aliceblue;
+}
+
+#titulo{
+    width: inherit;
+    height: 100px;
+    background-color: red;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 35px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#calculo{
+    width: 450px;
+    height: 600px;
+    background-color: darkred;
+    float: left;
+    padding: 25px;
+}
+
+#caixa_radio{
+   width: 200px;
+    height: 100px;
+/*    background-color: aliceblue;*/
+    padding-top: 30px;
+}
+
+#resultado{
+    width: 450px;
+    height: 600px;
+    background-color: crimson;
+    float: left;
+    padding: 25px;
+    
+}
+
+#titulo_resultado{
+    width: inherit;
+    height: 50px;
+    background-color: black;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 30px;
+}
+
+.resultado{
+    width: 300px;
+    height: 350px;
+    text-align: center;
+    font-size: 50px;
+    box-sizing: border-box;
+    margin: 80px;
+    border: solid black 2px;
+}
+
+#caixa_resultado{
+    width: 450px;
+    height: 450px;
+    text-align: center;
+    font-size: 70px;
+    background-color: black;
+    box-sizing: border-box;
+    padding-top: 180px;
+    margin-top: 50px;
+}
+
+
+

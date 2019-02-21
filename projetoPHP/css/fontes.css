@@ -1,0 +1,29 @@
+@font-face{
+    font-family: cabin;
+    src:  url(../fontes/cabin/Cabin-Regular.ttf);
+}
+@font-face{
+    font-family: modern;
+    src:  url(../fontes/modern_sans/ModernSans-Light.otf);
+}
+@font-face{
+    font-family: bebas;
+    src:  url(../fontes/bebas/BebasNeue-Regular.otf);
+}
+@font-face{
+    font-family: light;
+    src:  url(../fontes/the_light_font/TheLightFont.otf);
+}
+@font-face{
+    font-family: megan;
+    src:  url(../fontes/megan_june/Megan\ June.otf);
+}
+@font-face{
+    font-family: existence;
+    src:  url(../fontes/existence/ExiL-OT/Existence-Light.otf);
+}
+@font-face{
+    font-family: arrow;
+    src:  url(../fontes/arrow_symbols_1/Arrow\ Symbols\ 1.ttf);
+}
+

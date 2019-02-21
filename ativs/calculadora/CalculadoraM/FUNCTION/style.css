@@ -1,0 +1,82 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.center{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#caixa-conteudo{
+    width: 600px;
+    height: 450px;
+    border: 1px solid black;
+}
+
+#card-titulo{
+    width: inherit;
+    height: 80px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 23px;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+#card-conteudo{
+    width: inherit;
+    height: 520px;
+}
+
+#card-esquerdo{
+    width: 300px;
+    height: inherit;
+    float: left;
+    padding-top: 20px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+#card-direito{
+    width: 300px;
+    height: inherit;
+    float: left;
+}
+
+#caixa-resultado{
+    margin-top: 13px;
+    width: 260px;
+    height: 400px;
+}
+
+#titulo-resultado{
+    width: inherit;
+    height: 40px;
+    text-align: center;
+    padding-top: 8px;
+    font-size: 20px;
+    box-sizing: border-box;
+    color: white;
+    font-weight: bold;
+    background-color: black;
+}
+
+#conteudo-resultado{
+    width: 258px;
+    height: 260px;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 90px;
+    background-color: antiquewhite;
+    box-sizing: border-box;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+
+
+
+
+

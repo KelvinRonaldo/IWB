@@ -1,0 +1,134 @@
+h1, h2, h3, h4, p, input{
+    margin: 0px;
+    padding: 0px;
+}
+#all{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 800px;
+    height: 600px;
+}
+
+#header{
+    width: inherit;
+    height: 100px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    background-color: #000000;
+}
+#title-header{
+    font-size: 50px; 
+    color: #ffffff;
+    font-family: 'Agency Fb';
+    text-align: center;
+}
+#content-left{
+    width: 450px;
+    height: 500px;
+    padding-top: 20px;
+    float: left;
+    box-sizing: border-box;
+    padding-left: 20px;
+}
+#values{
+    width: 410px;
+    height: 130px;
+}
+#valor1, #valor2{
+    font-size: 30px;
+    font-family: 'Agency Fb';
+    margin-top: 7px;
+    float: left;
+}
+#txt-valor1, #txt-valor2{
+    width: 301px;
+    height: 50px;
+    float: left;
+    font-size: 30px;
+    margin-right: 10px;
+}
+#valor2{
+    clear: both;
+}
+#txt-valor1{
+    margin-bottom: 30px;
+}
+#radios{
+    width: 410px;
+    height: 250px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    font-size: 30px;
+    font-family: 'Agency Fb';
+}
+.radios{
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-family: 'Agency Fb';
+}
+#submit{
+    width: 410px;
+    height: 75px;
+    box-sizing: border-box;
+}
+#btn-submit{
+    width: 410px;
+    height: 40px;
+    background-color: #42db1c;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    border: ridge 2px #49cf27;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: 'Agency fb';
+    font-size: 23px;
+}
+#btn-limpar{
+    width: 410px;
+    height: 30px;
+    background-color: #e6370b;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: 'Agency fb';
+    font-size: 18px;
+}
+#content-right{
+    min-width: 350px;
+    width: auto;
+    overflow: hidden;
+    height: 500px;
+    float: left;
+    box-sizing: border-box;
+}
+
+#right-head{
+    width: inherit;
+    height: 80px;
+    box-sizing: border-box;
+    padding-top: 25px;
+}
+#title-right{
+    font-size: 35px;
+    color: #000000;
+    font-family: 'Agency Fb';
+    text-align: center;
+}
+#right-box{
+    width: 300px;
+    height: 380px;
+    margin-top: 15px;
+    margin-left: 25px;
+    border: solid 5px #000000;
+    box-sizing: border-box;
+    padding-top: 80px;
+    /* vertical-align: middle; */
+    background-color: rgb(250, 96, 68);
+    word-wrap: break-word;
+    font-family: 'Agency FB';
+    text-align: center;
+    font-size: 25px;
+}
+#txt-result{
+    font-size: 80px;
+}
