@@ -8,7 +8,7 @@
 }
 @font-face{
     font-family: bebas;
-    src:  url(../fontes/bebas/BebasNeue-Regular.otf);
+    src:  url(../fontes/bebas/BebasKai.ttf);
 }
 @font-face{
     font-family: light;
@@ -19,8 +19,8 @@
     src:  url(../fontes/megan_june/Megan\ June.otf);
 }
 @font-face{
-    font-family: existence;
-    src:  url(../fontes/existence/ExiL-OT/Existence-Light.otf);
+    font-family: chawp;
+    src:  url(../fontes/existence/ExiL-TT/Existence-Light.ttf);
 }
 @font-face{
     font-family: arrow;

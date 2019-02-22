@@ -16,14 +16,22 @@ a{
 .img-div{
     width: inherit;
     height: inherit;
+    border-radius: inherit;
 }
 /* CLASSSE PADRÃO */
 /* https://color.adobe.com/pt/Palette-de-couleurs-2-color-theme-11910469/ */
+body{
+    background-image: url(../imgs/fundo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 header{
     width: 100%;
-    height: 100px;
-    background-color: #000000;
+    height: 90px;
+    background-color: rgb(23, 33, 59, 0.99);
     position: fixed;
+    z-index: 999;
 }
 #cabecalho{
     width: 1300px;
@@ -40,14 +48,13 @@ header{
 }
 #logo{
     width: 150px;
-    height: 90px;
-    background-color: blue;
+    height: 80px;
     margin-left: 10px;
     box-sizing: border-box;
     float: left;
 }
 #menu{ 
-    width: 90px;
+    width: 100px;
     height: 50px;
     /* background-color: rgb(153, 135, 135); */
     float: left;
@@ -55,16 +62,16 @@ header{
     margin-left: 15px;
     cursor: pointer;
     box-sizing: border-box;
-    padding-top: 8px;
+    padding-top: 6px;
     transition: 0.2s;
 
-    font-family: existence;
-    color: #BF591F;
+    font-family: chawp;
+    color: rgb(255, 171, 45);
     font-size: 25px;
+    font-weight: bold;
 }
 #seta-menu{
     font-family: arrow;
-    color: #BF591F;
 }
 #caixa-menu{
     opacity: 0;
@@ -82,171 +89,228 @@ header{
 }
 .item-menu{
     width: auto;
-    height: inherit;
+    height: 93px;
     margin-left: 10px;
+    margin-top: -20px;
     padding-right: 5px;
     padding-left: 5px;
-    padding-top: 13px;
+    padding-top: 30px;
     /* background-color: #260101; */
     list-style: none;
     display: inline-block;
     transition: 0.2s;
     box-sizing: border-box;
     transition: 0.2s;
+    font-weight: bold;
     
-    color: #F28B30;
+    color: rgb(255, 157, 0);
     text-align: center;
     word-wrap: normal;
-    font-size: 23px;
+    font-size: 25px;
 }
 .item-menu:hover{
-    /* background-color: #2e0101; */
-    background-image: linear-gradient(#260101,#260101,#260101,#260101,#7c4718);
-    border-bottom: solid 3px #7c4718;
+    transition: 0.25s;
+    background-image: linear-gradient(rgba(241, 200, 172, 0.219),rgba(0, 0, 12, 0),rgba(236, 163, 47, 0.16));
+    color: #Fededd;
 }
-/* #promocoes{
-    font-size: 20px;
-    letter-spacing: -1px;
-} */
+#menu:hover{
+   color: rgba(0, 0, 0, 0);
+}
 #menu:hover > #caixa-menu{
     opacity: 1;
     visibility: visible;
-    width: 600px;
+    width: auto;
     transition: 0.4s;
-    margin-left: 90px;
+    margin-left: 0px;
 } 
 #cabecalho-dir{
+    /* opacity: 0;
+    visibility: hidden; */
     width: 420px;
     height: inherit;
     /* background-color: rgb(212, 0, 255); */
     float: left;
+    z-index: 2;
 }
 .text-login{
-    width: 170px;
-    height: 100px;
+    width: 168px;
+    height: 90px;
     /* background-color: coral; */
     float: left;
-    padding: 10px;
+    padding-left: 5px;
+    padding-top: 10px;
     box-sizing: border-box;
+    margin-right: 1px;
 }
 #usuario, #senha{
-    font-size: 15px;
-    font-family: existence;
-    margin-bottom: 15px;
+    font-size: 22px;
+    font-family: megan;
+    margin-bottom: 10px;
     margin-left: 5px;
 
-    color: #F29F05;
+    color: #ffa114;
 }
 #txt-usuario, #txt-senha{
-    width: 140px;
-    height: 25px;
-    border-radius: 70px;
-    background-color: #3b0202;
+    width: 160px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #ffffff;
     border: none;
-    margin-left: 5px;
+    text-align: center;
     
-    color: #f8e8d5;
+    color: rgba(71, 5, 5, 0.931);
     font-size: 17px;
     transition: 0.4s;
 }
 #txt-usuario:hover, #txt-senha:hover{
-    background-color: #550303;
+    background-color: #e9e3d6;
     transition: 0.4s;
 }
 #btn{
     width: 80px;
-    height: 30px;
-    background-color: wheat;
-    margin-top: 41px;
+    height: 32px;
+    /* background-color: wheat; */
+    margin-top: 45px;
     box-sizing: border-box;
-    padding-left: 10px;
+    padding-left: 5px;
     float: left;
 }
 #btn-login{
-    width: 60px;
+    width: 70px;
     height: inherit;
-    background-color: saddlebrown;
+    background-color: rgb(177, 135, 20);
     border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    color: #D8FFE2;
+    font-size: 20px;
+    font-family: megan;
+}
+#btn-login:hover{
+    background-color: rgb(133, 101, 15);
+    color: rgb(237, 250, 241);
+    transition: 0.3s;
+}
+#btn-login:active{
+    background-color: #D8FFE2;
+    color: rgb(177, 135, 20);
+    transition: 0.3s;
 }
 #aux{
     width: 100%;
-    height: 100px;
+    height: 90px;
 }
 #tudo{
     width: 1300px;
     min-height: 1500px;
     height: auto;
     overflow: hidden;
-    background-color: #a523af;
+    /* background-color: #a523af; */
 }
 #slider{
     width: inherit;
     height: 500px;
     background-color: aqua;
     padding: 0px;
+    border-bottom: solid 3px #090a4d;
 }
 #conteudo{
     width: 1300px;
     min-height: 700px;
     height: auto;
     overflow: hidden;
-    background-color: rgb(189, 199, 47);
+    background-color: rgba(248, 234, 40, 0.324);
 }
 #redes-sociais{
-    width: 100px;
-    height: 330px;
-    background-color: saddlebrown;
+    width: 70px;
+    height: 240px;
+    /* background-color: saddlebrown; */
     position: fixed;
     margin-top: -300px;
-    margin-left: 1325px;
+    margin-left: 1350px;
 }
 .divs-redes{
-    width: inherit;
-    height: 100px;
-    background-color: slategrey;
+    width: 70px;
+    height: 70px;
+    /* background-color: slategrey; */
     margin-bottom: 10px;
+    cursor: pointer;
 }
 #menu-esq{
     width: 200px;
     min-height: 700px;
     height: auto;
     overflow: hidden;
-    background-color: black;
+    /* background-color: rgb(22, 30, 51, 0.98); */
     float: left;
 }
 .item-menu-esq{
     width: inherit;
     height: 80px;
-    background-color: darkcyan;
+    background-color: rgba(255, 255, 255, 0.575);
     box-sizing: border-box;
-    border: solid 2px #ffffff;
+    border-bottom: solid 3px #090a4d;
+    padding-left: 10px;
+    padding-top: 25px;
+    transition: 0.25s;
+    cursor: pointer;
+
+    font-family: cabin;
+    font-size: 20px;
+    color: #e47d1d;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.61);
+}
+.item-menu-esq:hover{
+    background-color: rgba(255, 255, 255);
+    transition: 0.25s;
 }
 #produtos{
     width: 1100px;
     min-height: 700px;
     height: auto;
     overflow: hidden;
-    background-color: rgb(56, 128, 89);
     float: left;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    border-left: solid 3px #090a4d;
 }
 .produto{
     width: 350px;
-    height: 350px;
-    background-color: cornflowerblue;
+    height: 395px;
+    background-color: rgba(6, 26, 93, 0.808);
     box-sizing: border-box;
     padding-top: 10px;
     margin: 5px;
     float: left;
+    border-radius: 5px;
+    border: solid 2px rgba(255, 151, 54, 0.98);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.479);
+    transition: 0.25s;
     
     font-family: Arial, Helvetica, sans-serif;
+}
+.produto:hover{
+    transform: scale(1.03);
+    background-color: rgba(6, 26, 93, 0.85);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.479);
+    transition: 0.25s;
 }
 .produto-img{
     width: 150px;
     height: 150px;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
     margin-bottom: 10px;
+    border-radius: 75px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.479);
+    transition: 0.25s;
+    cursor: pointer;
+}
+.produto-img:hover{
+    transform: scale(0.95);
+    transition: 0.25s;
 }
 .titles-nome, .titles-descricao, .titles-preco{
     width: 110px;
@@ -254,77 +318,93 @@ header{
     text-align: right;
     padding-right: 5px;
     box-sizing: border-box;
+    border-top: solid 2px rgba(255, 151, 54, 0.98);
+    border-bottom: solid 2px rgba(255, 151, 54, 0.98);
+    text-shadow: 1px 1px 2px #666666;
+    cursor: pointer;
 
-    font-size: 19px;
+    font-size: 17px;
+    font-family: cabin;
+    text-transform: uppercase;
 }
 .titles-nome{
-    height: 30px;
-    background-color: darkkhaki;
-    padding-top: 4px;
+    height: 50px;
+    padding-top: 13px;
+    background-color: rgba(255, 255, 255, 0.98);
     clear: both;
+
+    color: #03032e;
 }
 .titles-descricao{
     height: 80px;
-    background-color: rgb(87, 60, 207);
     padding-top: 30px;
+    background-color: rgba(255, 255, 255, 0.98);
     clear: both;
+
+    color: #03032e;
 }
 .titles-preco{
-    height: 30px;
-    background-color: cyan;
-    padding-top: 4px;
+    height: 50px;
+    padding-top: 13px;
+    background-color: rgba(255, 255, 255, 0.98);
     clear: both;
+
+    color: #3b9c0e;
 }
 
 .nome-texts, .descricao-texts, .preco-texts{
-    width: 240px;
+    width: 236px;
     float: left;
     margin-bottom: 5px;
     box-sizing: border-box;
+    border-top: solid 2px rgba(255, 151, 54, 0.98);
+    border-bottom: solid 2px rgba(255, 151, 54, 0.98);
+    text-shadow: 1px 1px 2px #666666;
+    cursor: pointer;
 
-    font-size: 18px;
+    font-family: bebas;
 }
 .nome-texts{
-    height: 30px;
-    background-color: rgb(212, 66, 21);
-    padding-top: 5px;
+    height: 50px;
+    padding-top: 2px;
     padding-left: 4px;
+    background-color: rgba(255, 255, 255, 0.98);
+
+    font-size: 18px;
+
+    color: #5f120b;
+    text-transform: capitalize;
 }
 .descricao-texts{
     height: 80px;
-    /* overflow: auto; */
-    background-color: rgb(212, 21, 164);
-    font-family: cabin;
     text-align: justify;
     line-height: 1.15;
-    padding-right: 5px;
-}
-/*
-.descricao-texts::-webkit-scrollbar {
-  width: 5px;
-}
-
-.descricao-texts::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
-
-.descricao-texts::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-/* Handle on hover *
-.descricao-texts::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-*/
-.preco-texts{
-    height: 30px;
-    background-color: sienna;
-    padding-top: 5px;
+    padding-right: 4px;
     padding-left: 4px;
+
+    color: #5f120b;
+    background-color: rgba(255, 255, 255, 0.98);
+    
+    font-size: 17px;
 }
+.preco-texts{
+    height: 50px;
+    padding-left: 4px;
+    background-color: rgba(255, 255, 255, 0.98);
+
+    color: #f71313;
+    font-size: 40px;
+    font-style: italic;
+}
+
 .detalhes{
-    margin-left: 250px;
-    color: blue;
+    margin-left: 275px;
+    color: rgb(247, 160, 80);
     text-decoration: underline;
+}
+
+footer{
+    width: 1300px;
+    height: 200px;
+    background-color: #5f120b;
 }
