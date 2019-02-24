@@ -26,4 +26,8 @@
     font-family: arrow;
     src:  url(../fontes/arrow_symbols_1/Arrow\ Symbols\ 1.ttf);
 }
+@font-face{
+    font-family: roboto;
+    src:  url(../fontes/roboto/Roboto-Regular.ttf);
+}
 

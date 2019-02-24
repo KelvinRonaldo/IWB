@@ -20,12 +20,12 @@
                     <nav id="menu">
                         <h3 id="titulo-menu">MENU<span id="seta-menu">X</span></h3>
                         <ul id="caixa-menu">
-                            <li class="item-menu">Notícias</li>
-                            <li class="item-menu">Sobre</li>
-                            <li class="item-menu">Promoções</li>
-                            <li class="item-menu">Lojas</li>
-                            <li class="item-menu">Eventos</li>
-                            <li class="item-menu">Contato</li>
+                            <li class="item-menu" onclick="window.location.href='#'">Notícias</li>
+                            <li class="item-menu" onclick="window.location.href='#'">Sobre</li>
+                            <li class="item-menu" onclick="window.location.href='#'">Promoções</li>
+                            <li class="item-menu" onclick="window.location.href='#'">Lojas</li>
+                            <li class="item-menu" onclick="window.location.href='#'">Eventos</li>
+                            <li class="item-menu" onclick="window.location.href='#'">Contato</li>
                         </ul>
                     </nav>
                 </div>
@@ -56,21 +56,27 @@
             <section id="slider">
                 <h2 hidden> VALIDADOR</h2>
                 <?php
-                    require_once('standard.php');
+                    require_once('slider.php');
                 ?>
             </section>
             <div id="conteudo">
 
                 <div id="redes-sociais">
-                    <div class="divs-redes">
-                        <img class="img-div" src="imgs/faceicon.png" alt="Facebook" title="Facebook">
-                    </div>
-                    <div class="divs-redes">
-                        <img class="img-div" src="imgs/gplusicon.png" alt="G+" title="G+">
-                    </div>
-                    <div class="divs-redes">
-                        <img class="img-div" src="imgs/twittericon.png" alt="Twitter" title="Twitter">
-                    </div>
+                    <a href="#">
+                        <div class="divs-redes">
+                            <img class="img-div" src="imgs/faceicon.png" alt="Facebook" title="Facebook">
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="divs-redes">
+                            <img class="img-div" src="imgs/gplusicon.png" alt="G+" title="G+">
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="divs-redes">
+                            <img class="img-div" src="imgs/twittericon.png" alt="Twitter" title="Twitter">
+                        </div>
+                    </a>
                 </div>
 
                 <ul id="menu-esq">
@@ -290,19 +296,48 @@
             </div>
         </div>
         <footer class="center">
-            oi
+            <div id="footer-linha1" class="center">
+                <div id="center-footerL1" class="center">
+                    <div id="contatos">
+                        <figure>
+                            <div id="contatos-icon">
+                                <img class="img-div" src="imgs/phone.png">
+                            </div>
+                        </figure>
+                        <div id="contatos-text">
+                            <h3 id="title-contatos">Contatos</h3>
+                            <p id="text-contatos">(11) 4637-0192 <br> (11) 6870-2345</p>
+                        </div>
+                    </div>
+                    <div id="horario">
+                        <figure>
+                            <div id="horario-icon">
+                                <img class="img-div" src="imgs/watch.png">
+                            </div>
+                        </figure>
+                        <div id="horario-text">
+                            <h3 id="title-hora">Horários de Atendimento</h3>
+                            <p id="text-hora">Segunda à Sexta | 08:30h às 18:30h <br> Sábados | 10h às 14h</p>
+                        </div>
+                    </div>
+                    <div id="endereco">
+                        <figure>
+                            <div id="endereco-icon">
+                                <img class="img-div" src="imgs/local.png">
+                            </div>
+                        </figure>
+                        <div id="endereco-text">
+                            <h3 id="title-endereco">Endereço</h3>
+                            <p id="text-endereco">Rua Clodomiro Amazonas, 74 Itaim - São Paulo SP CEP: 04537-001</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer-linha2" class="center">
+                <div id="center-footerL2" class="center">
+                    <h2>Desenvolvido por Kelvin Ronaldo</h2>
+                </div>
+            </div>
         </footer>
-        <!-- <script>
-            function teste(){
-                let caixa2 = document.getElementById("oi");     
-                let caixa = document.getElementById("cabecalho-dir");           
-                caixa2.style.opacity = "0";
-                caixa2.style.visibility = "hidden";
-                
-                caixa.style.opacity = "1";
-                caixa.style.marginTop = "-45px";
-                caixa.style.visibility = "visible";
-            }
-        </script> -->
     </body>
 </html>
