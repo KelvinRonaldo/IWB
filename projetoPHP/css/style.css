@@ -202,6 +202,11 @@ header{
     width: 100%;
     height: 90px;
 }
+
+
+
+
+
 #tudo{
     width: 1300px;
     min-height: 500px;
@@ -209,6 +214,11 @@ header{
     overflow: hidden;
     /* background-color: #a523af; */
 }
+
+
+
+
+
 #slider{
     width: inherit;
     height: 502px;
@@ -216,6 +226,10 @@ header{
     padding: 0px;
     border-bottom: solid 3px #090a4d;
 }
+
+
+
+
 #conteudo{
     width: 1300px;
     min-height: 700px;
@@ -223,11 +237,23 @@ header{
     overflow: hidden;
     background-color: rgba(248, 234, 40, 0.324);
 }
+
+
+
+
+
 #redes-sociais{
     width: 70px;
     height: 280px;
-    position: fixed;
+    /* position: fixed; */
     margin-top: -300px;
+    margin-left: 1350px;
+}
+#redes-sociais-noticias{
+    width: 70px;
+    height: 280px;
+    position: fixed;
+    margin-top: 120px;
     margin-left: 1350px;
 }
 .divs-redes{
@@ -236,6 +262,14 @@ header{
     margin-bottom: 20px;
     cursor: pointer;
 }
+
+
+
+
+
+
+
+
 #menu-esq{
     width: 200px;
     min-height: 700px;
@@ -265,9 +299,16 @@ header{
     transition: 0.25s;
     border-bottom: solid 7px #f3b21a;
 }
+
+
+
+
+
+
+
 #produtos{
     width: 1100px;
-    min-height: 700px;
+    min-height: inherit;
     height: auto;
     overflow: hidden;
     float: left;
@@ -361,7 +402,7 @@ header{
     text-shadow: 1px 1px 2px #666666;
     cursor: pointer;
 
-    font-family: bebas;
+    font-family: 'bebas kai';
 }
 .nome-texts{
     height: 50px;
@@ -410,6 +451,184 @@ header{
     text-decoration: underline;
 }
 
+
+
+
+/* ------------------ */
+
+#conteudo-noticias{
+    width: 1300px;
+    min-height: 700px;
+    height: auto;
+    overflow: hidden;
+    background-color: rgba(248, 234, 40, 0.324);
+    box-sizing: border-box;
+}
+#titulo-pagina{
+    width: 1300px;
+    height: 120px;
+    background-color: rgb(23, 33, 59, 0.9);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 45px;
+    font-family: 'agency fb';
+    color: #f3b21a;
+}
+#noticias-esq{
+    width: 970px;
+    min-height: inherit;
+    height: auto;
+    overflow: hidden;
+    /* background-color: #666666; */
+    /* border-right: solid 3px rgb(23, 33, 59, 0.99); */
+    float: left;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;    
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+.container-noticias{
+    transition: 0.2s;
+    width: 940px;
+    height: 300px;
+    background-color: rgba(244, 244, 250, 0.698);
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.452);
+}
+.container-noticias:hover{
+    transition: 0.2s;
+    background-color: rgba(255, 255, 255);
+}
+.img-noticias{
+    width: 330px;
+    height: inherit;
+    /* background-color: violet; */
+    border-radius: 15px 0px 0px 15px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: left;
+}
+.txt-noticias{
+    width: 610px;
+    height: inherit;
+    border-radius: 0px 15px 15px 0px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    float: left;
+}
+.titulo-noticias{
+    transition: 0.2s;
+    width: 550px;
+    height: 110px;
+    /* background-color: royalblue; */
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-bottom: solid 5px #ff6600;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    /* border-radius: 0px 15px 0px 0px; */
+    
+    font-size: 22px;
+    color: #03062a;
+    font-family: steelfish;
+    letter-spacing: 1px;
+}
+.titulo-noticias:hover{
+    transition: 0.2s;
+    border-bottom: solid 5px #ff9b59;
+    color: #081064;
+}
+.texto-noticias{
+    width: 550px;
+    height: 180px;
+    /* background-color: rgb(255, 157, 0); */
+
+    font-family: cabin;
+    font-size: 20px;
+    text-align: justify;
+    word-wrap: normal;
+    color: #03032e;
+}
+#noticias-dir{
+    width: 330px;
+    min-height: inherit;
+    height: auto;
+    overflow: hidden;
+    /* background-color: #8a1a1a; */
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+#topo-lidos{
+    width: 200px;
+    height: 80px;
+    background-color: #03032e;
+    margin-top: 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: cabin;
+    color: #f3b21a;
+    font-size: 18px;
+    /* text-align: center; */
+}
+.mais-lidos{
+    width: 315px;
+    min-height: 100px;
+    height: auto;
+    overflow: hidden;
+    margin-top: 20px;
+    background-color: #f3b21a;
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-left: 40px;
+    padding-right: 5px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.452);
+    flex-wrap: wrap;
+    
+    font-family: cabin;
+    color: #03032e;
+    font-size: 20px;
+    /* text-align: justify; */
+}
+.item-lidos{
+    list-style: radio;
+    margin-bottom: 20px;
+    vertical-align: -webkit-baseline-middle;
+}
+.item-lidos:hover{
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
 footer{
     width: 100%;
     height: 200px;
@@ -422,6 +641,7 @@ footer{
 #center-footerL1{
     width: 1300px;
     height: 150px;
+    background-color: rgb(23, 33, 59, 0.99);
 }
 #footer-linha2{
     width: 100%;
@@ -432,9 +652,11 @@ footer{
     width: 1300px;
     height: 50px;
     box-sizing: border-box;
-    padding-top: 10px;
+    padding-top: 17px;
+    background-color: rgba(200, 214, 248, 0.99);
 
-    font-family: roboto;
+    font-size: 10px;
+    font-family: cabin;
     text-align: center;
 }
 #horario, #contatos, #endereco{
@@ -476,6 +698,5 @@ footer{
     font-size: 22px;
     padding-left: 10px;
     color: #efefef;
-    font-weight: bold;
     letter-spacing: 1px;
 }

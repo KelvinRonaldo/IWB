@@ -7,7 +7,7 @@
     src:  url(../fontes/modern_sans/ModernSans-Light.otf);
 }
 @font-face{
-    font-family: bebas;
+    font-family: 'bebas kai';
     src:  url(../fontes/bebas/BebasKai.ttf);
 }
 @font-face{
@@ -24,10 +24,14 @@
 }
 @font-face{
     font-family: arrow;
-    src:  url(../fontes/arrow_symbols_1/Arrow\ Symbols\ 1.ttf);
+    src:  url(../fontes/arrows/Arrows.otf);
 }
 @font-face{
     font-family: roboto;
     src:  url(../fontes/roboto/Roboto-Regular.ttf);
+}
+@font-face{
+    font-family: steelfish;
+    src:  url(../fontes/steelfish/steelfish\ rg.ttf);
 }
 
