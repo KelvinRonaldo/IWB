@@ -1,3 +1,51 @@
+<?php
+
+    // IMAGEM DA NOTICIA GERAL NÃO ESTA VINDO PARA ESSA PÁGINA
+
+    $tituloNvl1 = null;
+    $tituloNvl2 = null;
+    $tituloNvl3 = null;
+    $resumoNvl1 = null;
+    $resumoNvl2 = null;
+    $resumoNvl3 = null;
+    $imgNvl1 = null;
+    $imgNvl2 = null;
+    $imgNvl3 = null;
+    $titutoIndisponivel = "INDISPONIVEL";
+    $resumoIndisponivel = "Essa noticia principal não esta disponivel no momento";
+    $imgIndisponivel = "naoDisponivel.jpg";
+
+
+    require_once('./bd/conexao.php');
+    $conexao = conexaoMySql();
+
+    $sql = "SELECT * FROM tbl_noticia_principal";
+    $select = mysqli_query($conexao, $sql);
+
+    while($rsNoticia = mysqli_fetch_array($select)){
+        
+
+        if($rsNoticia['cod_destaque'] == '1' && $rsNoticia['status'] == 'ativado'){
+            $tituloNvl1 = $rsNoticia['titulo_noticia'];
+            $resumoNvl1 = $rsNoticia['resumo'];
+            $imgNvl1 = $rsNoticia['imagem'];
+        }
+        
+        if($rsNoticia['cod_destaque'] == '2' && $rsNoticia['status'] == 'ativado'){
+            $tituloNvl2= $rsNoticia['titulo_noticia'];
+            $resumoNvl2 = $rsNoticia['resumo'];       
+            $imgNvl2 = $rsNoticia['imagem'];                     
+        }
+        
+        if($rsNoticia['cod_destaque'] == '3' && $rsNoticia['status'] == 'ativado'){
+            $tituloNvl3 = $rsNoticia['titulo_noticia'];
+            $resumoNvl3 = $rsNoticia['resumo'];               
+            $imgNvl3 = $rsNoticia['imagem'];
+        }
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -5,105 +53,155 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/fontes.css">
         <title>NOTÍCIAS</title>
+        <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        <?php 
-            require_once('header.html');
-        ?>
-        <div id="aux">
-            
-        </div>
-        <div id="tudo" class="center">
-            <div id="titulo-pagina">
-                <h1>NOTÍCIAS</h1>
-            </div>
-            <div id="conteudo-noticias" class="center">
+        <!-- AREA QUE SEGURADO TODA A PAGINA -->
+        <div id="pagina">
+            <!-- IMPORTANDO HEADER DA PAGINA -->
+            <?php 
+                require_once('header.html');
+            ?>
+            <!-- AREA ONDE ESTÁ TODA ESTRUTURA DO SITE, EXCETO HEADER E FOOTER -->
+            <div id="tudo" class="center">
+                <!-- AREA COM TITULO DA PAGINA -->
+                <div id="titulo-pagina">
+                    <h1>NOTÍCIAS EM DESTAQUE</h1>
+                </div>
+                <!-- AREA ONDE ESTÃO AS NOTICIAS PRINCIPAIS -->
+                <article id="noticias-principais">
+                    <!-- AREA DAS REDES SOCIAIS -->
+                    <div id="redes-sociais-noticias">
+                        <a href="#">
+                            <div class="divs-redes">
+                                <img class="img-div" src="imgs/faceicon.png" alt="Facebook" title="Facebook">
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="divs-redes">
+                                <img class="img-div" src="imgs/gplusicon.png" alt="G+" title="G+">
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="divs-redes">
+                                <img class="img-div" src="imgs/twittericon.png" alt="Twitter" title="Twitter">
+                            </div>
+                        </a>
+                    </div>
 
-                <div id="redes-sociais-noticias">
-                    <a href="#">
-                        <div class="divs-redes">
-                            <img class="img-div" src="imgs/faceicon.png" alt="Facebook" title="Facebook">
+                    <!-- NOTICIAS PRINCIPAIS A ESQUERDA -->
+                    <div id="principais-esq">
+                        <!-- AREA DA PRIMEIRA NOTICIA PRINCIPAL -->
+                        <div id="noticia-principal1">
+                            <div id="conteudo-principal1" style="background-image: url(./arquivos/<?php echo($imgNvl1 == null ? $imgIndisponivel : $imgNvl1); ?>);">
+                                <div id="texto-principal1">
+                                    <h2><?php echo($tituloNvl1 == "" ? $titutoIndisponivel : $tituloNvl1); ?></h2>
+                                    <p>
+                                        <?php echo($resumoNvl1 == "" ? $resumoIndisponivel : $resumoNvl1); ?>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </a>
-                    <a href="#">
-                        <div class="divs-redes">
-                            <img class="img-div" src="imgs/gplusicon.png" alt="G+" title="G+">
+                    </div>
+                    <!-- NOTICIAS PRINCIPAIS A DIREITA -->
+                    <div id="principais-dir">
+                        <!-- AREA DA SEGUNDA NOTICIA PRINCIPAL -->
+                        <div id="noticia-principal2">
+                            <div id="conteudo-principal2" style="background-image: url(./arquivos/<?php echo($imgNvl2 == null ? $imgIndisponivel : $imgNvl2); ?>);">
+                                <div id="texto-principal2">
+                                    <h2><?php echo($tituloNvl2 == "" ? $titutoIndisponivel : $tituloNvl2); ?></h2>
+                                    <p>
+                                        <?php echo($resumoNvl2 == "" ? $resumoIndisponivel : $resumoNvl2); ?>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </a>
-                    <a href="#">
-                        <div class="divs-redes">
-                            <img class="img-div" src="imgs/twittericon.png" alt="Twitter" title="Twitter">
+                        <!-- AREA DA TERCEIRA NOTICIA PRINCIPAL -->
+                        <div id="noticia-principal3">
+                            <div id="conteudo-principal3" style="background-image: url(./arquivos/<?php echo($imgNvl3 == null ? $imgIndisponivel : $imgNvl3); ?>);">
+                                <div id="texto-principal3">
+                                    <h2><?php echo($tituloNvl3 == "" ? $titutoIndisponivel : $tituloNvl3); ?></h2>
+                                    <p>
+                                        <?php echo($resumoNvl3 == "" ? $resumoIndisponivel : $resumoNvl3); ?>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </article>
 
-                <div id="noticias-esq">
-                    <div class="container-noticias">
-                        <div class="img-noticias" style="background-image: url(imgs/noticias.jpg);">                            
-                        </div>
-                        <div class="txt-noticias">
-                            <div class="titulo-noticias">
-                                <a href="#">
-                                    <h1>Pilotos têm desafio equivalente a prédio de 45 andares na Descida das Escadas de Santos</h1>
-                                </a>
+                <!-- AREA DO DO CONTEUDO  DA PAGINA -->
+                <div id="conteudo">
+                    <!-- NOTICIAS A ESQUERDA DO SITE  -->
+                    <article id="noticias-esq">
+                        <?php
+                            $sql = "SELECT * FROM tbl_noticia";
+                            $select = mysqli_query($conexao, $sql);
+
+                            while($rsNoticia = mysqli_fetch_array($select)){
+                                if($rsNoticia['status'] == 'ativado'){
+                                    $tituloNoticia = $rsNoticia['titulo_noticia'];
+                                    $resumo = $rsNoticia['resumo'];
+                                    $autor = $rsNoticia['autor'];
+                                    $imagem = $rsNoticia['imagem'];
+                                
+                                    $dataDb = explode("-", $rsNoticia['data']);
+                                    $data = $dataDb[2]."/".$dataDb[1]."/".$dataDb[0];
+                        ?>
+                        <!-- AREA QUE SEGURA AS INFORMAÇÕES DA NOTICIA -->
+                        <div class="container-noticias">
+                            <!-- IMAGEM RELACIONADA A NOTICIA -->
+                            <div class="img-noticias" style="background-image: url(./arquivos/<?php echo($imagem); ?>);">                            
                             </div>
-                            <div class="texto-noticias">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa consequatur nam vero, quo consectetur alias corporis porro repudiandae tempora ut adipisci corrupti blanditiis, minus facere voluptatum. Nisi explicabo sint ab. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum placeat iste rem optio provident delectus nisi, cupiditate ipsam blanditiis velit, quaerat, sint esse rerum perferendis. Reiciendis ipsa autem beatae eaque.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-noticias">
-                        <div class="img-noticias" style="background-image: url(imgs/noticias.jpg);">                            
-                        </div>
-                        <div class="txt-noticias">
-                            <div class="titulo-noticias">
-                                <a href="#">
-                                    <h1>Pilotos têm desafio equivalente a prédio de 45 andares na Descida das Escadas de Santos</h1>
-                                </a>
-                            </div>
-                            <div class="texto-noticias">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa consequatur nam vero, quo consectetur alias corporis porro repudiandae tempora ut adipisci corrupti blanditiis, minus facere voluptatum. Nisi explicabo sint ab. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum placeat iste rem optio provident delectus nisi, cupiditate ipsam blanditiis velit, quaerat, sint esse rerum perferendis. Reiciendis ipsa autem beatae eaque.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-noticias">
-                        <div class="img-noticias" style="background-image: url(imgs/noticias.jpg);">                            
-                        </div>
-                        <div class="txt-noticias">
-                            <div class="titulo-noticias">
-                                <a href="#">
-                                    <h1>Pilotos têm desafio equivalente a prédio de 45 andares na Descida das Escadas de Santos</h1>
-                                </a>
-                            </div>
-                            <div class="texto-noticias">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa consequatur nam vero, quo consectetur alias corporis porro repudiandae tempora ut adipisci corrupti blanditiis, minus facere voluptatum. Nisi explicabo sint ab. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum placeat iste rem optio provident delectus nisi, cupiditate ipsam blanditiis velit, quaerat, sint esse rerum perferendis. Reiciendis ipsa autem beatae eaque.</p>
+                            <div class="txt-noticias">
+                                <!-- NOME DO AUTO E DATA DA NOTICIA -->
+                                <div class="noticias-autor-data">
+                                    <h3><?php echo($autor." - ".$data); ?></h3>
+                                </div>
+                                <!-- TITULO DA NOTICIA -->
+                                <div class="titulo-noticias">
+                                    <a href="#">
+                                        <h2><?php echo($tituloNoticia); ?></h2>
+                                    </a>
+                                </div>
+                                <!-- PEQUENO TEXTO QUE RESUME A NOTICIA -->
+                                <div class="resumo-noticias">
+                                    <p> <?php echo($resumo); ?> </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div id="noticias-dir">
-                    <div id="topo-lidos">
-                        <h2>MAIS LIDOS</h2>
-                    </div>
-                    <div class="mais-lidos">                    
-                        <ul>
-                            <li class="item-lidos">
-                                <a href="#">
-                                    Pilotos têm desafio equivalente a prédio de 45 andares na Descida das Escadas de Santos
-                                </a>
-                            </li>
-                            <li class="item-lidos">
-                                <a href="#">
-                                    Lorem ipsum dolor sit amet, consectetur.
-                                </a>
-                            </li>
-                        </ul>
+                        <?php
+                                }
+                            }
+                        ?>
+                    </article>
+                    <!-- AREA A ESQUERDA ONDE FICAM AS NOTICIAS MAIS RECENTES DO SITE -->
+                    <div id="noticias-dir">
+                        <div id="topo-recentes">
+                            <h2>MAIS RECENTES</h2>
+                        </div>
+                        <div class="mais-recentes">           
+                            <!-- LISTA DE NOTICIAS MASI RECENTES          -->
+                            <ul>
+                                <li class="item-recentes">
+                                    <a href="#">
+                                        Pilotos têm desafio equivalente a prédio de 45 andares na Descida das Escadas de Santos
+                                    </a>
+                                </li>
+                                <li class="item-recentes">
+                                    <a href="#">
+                                        Lorem ipsum dolor sit amet, consectetur.
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- IMPORTANDO FOOTER DA PAGINA -->
+            <?php 
+                require_once('footer.html');
+            ?>
         </div>
-        <?php 
-            require_once('footer.html');
-        ?>
     </body>
 </html>

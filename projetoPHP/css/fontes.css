@@ -1,14 +1,20 @@
+/* ARQUIVOS DE FONTES UTILIZADAS NAS PAGINAS */
+
 @font-face{
     font-family: cabin;
     src:  url(../fontes/cabin/Cabin-Regular.ttf);
 }
 @font-face{
-    font-family: modern;
-    src:  url(../fontes/modern_sans/ModernSans-Light.otf);
+    font-family: dk;
+    src:  url(../fontes/dk_criss_cross/DK\ Criss\ Cross.ttf);
 }
 @font-face{
     font-family: 'bebas kai';
     src:  url(../fontes/bebas/BebasKai.ttf);
+}
+@font-face{
+    font-family: 'bebas neue';
+    src:  url(../fontes/bebas/BebasNeue-Regular.otf);
 }
 @font-face{
     font-family: light;
@@ -19,8 +25,8 @@
     src:  url(../fontes/megan_june/Megan\ June.otf);
 }
 @font-face{
-    font-family: chawp;
-    src:  url(../fontes/existence/ExiL-TT/Existence-Light.ttf);
+    font-family: existence;
+    src:  url(../fontes/existence/ExiL-OT/Existence-Light.otf);
 }
 @font-face{
     font-family: arrow;
@@ -31,7 +37,19 @@
     src:  url(../fontes/roboto/Roboto-Regular.ttf);
 }
 @font-face{
+    font-family: 'roboto condensed';
+    src:  url(../fontes/roboto/Roboto-Regular.ttf);
+}
+@font-face{
     font-family: steelfish;
     src:  url(../fontes/steelfish/steelfish\ rg.ttf);
+}
+@font-face{
+    font-family: modern;
+    src:  url(../fontes/core_2/Core.ttf);
+}
+@font-face{
+    font-family: liquid;
+    src:  url(../fontes/beer_money/beer\ money.ttf);
 }
 

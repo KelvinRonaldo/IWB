@@ -1,0 +1,57 @@
+<?php
+
+    $url = $_SERVER["REQUEST_URI"];
+    $pgConteudo = strpos($url, "cmsConteudo.php");
+    $pgNoticias = strpos($url, "mngNoticias.php");
+    $pgPromocoes = strpos($url, "mngPromocoes.php");
+    $pgLojas = strpos($url, "mngLojas.php");
+    $pgEventos = strpos($url, "mngEventos.php");
+    $pgSobre = strpos($url, "mngSobre.php");
+
+    $pgFaleConosco = strpos($url, "cmsFaleConosco.php");
+    $pgProdutos = strpos($url, "cmsProdutos.php");
+    $pgUsuarios = strpos($url, "cmsUsuarios.php");
+
+    if($pgConteudo != null){
+        $subtituloPg = "Administrar Conteúdo";
+    }elseif($pgNoticias != null){
+        $subtituloPg = "Gerenciar Notícias em Destaque";
+    }elseif($pgPromocoes != null){
+        $subtituloPg = "Gerenciar Promoções";
+    }elseif($pgLojas != null){
+        $subtituloPg = "Gerenciar Lojas";
+    }elseif($pgEventos != null){
+        $subtituloPg = "Gerenciar Eventos";
+    }elseif($pgSobre != null){
+        $subtituloPg = "Gerenciar Página Sobre a Loja";
+    }elseif($pgFaleConosco != null){
+        $subtituloPg = "Administrar Mensagens de Clientes";
+    }elseif($pgProdutos != null){
+        $subtituloPg = "Administrar Produtos";
+    }elseif($pgUsuarios != null){
+        $subtituloPg = "Administrar Usuário";
+    }else{
+        $subtituloPg = "Sistema de Gerenciamento do Site";
+    }
+
+
+?>
+            <header class="center flexbox">
+                <div id="cabecalho-titulo" class="flexbox">
+                    <div id="titulo-pagina">
+                        <h1>CMS</h1>
+                        <h3><?php echo $subtituloPg; ?></h3>
+                    </div>
+                </div>
+                <div id="cabecalho-logo">
+                    <figure>
+                        <!-- LINK PARA INICIO DO CMS -->
+                        <!-- <a href="#"> -->
+                            <div id="logo">
+                                <!-- LOGO DA LOJA -->
+                                <img src="../imgs/bikeicon.png" alt="LOGO" class="img-div" title="LOGO">
+                            </div>
+                        <!-- </a> -->
+                    </figure>
+                </div>
+            </header>

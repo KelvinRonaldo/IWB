@@ -1,39 +1,52 @@
-<header>
-    <div id="cabecalho" class="center">
-        <div id="cabecalho-esq">
-            <figure>
-                <a href="index2.php">
-                    <div id="logo">
-                        <img src="imgs/bikeicon.png" class="img-div" alt="LOGO" title="LOGO">
-                    </div>
-                </a>
-            </figure>
-            <nav id="menu">
-                <h3 id="titulo-menu">MENU<span id="seta-menu">Q</span></h3>
-                <ul id="caixa-menu">
-                    <li class="item-menu" onclick="window.location.href='noticias.php'">Notícias</li>
-                    <li class="item-menu" onclick="window.location.href='#'">Sobre</li>
-                    <li class="item-menu" onclick="window.location.href='#'">Promoções</li>
-                    <li class="item-menu" onclick="window.location.href='#'">Lojas</li>
-                    <li class="item-menu" onclick="window.location.href='#'">Eventos</li>
-                    <li class="item-menu" onclick="window.location.href='#'">Contato</li>
-                </ul>
-            </nav>
+     <!-- AREA DO HEADER(CABEÇALHO DA PAGINA) -->
+        <header>
+            <div id="cabecalho" class="center">
+                <!-- AREA DA ESQUEDA DO CABEÇALHO COM LOGO E MENU -->
+                <div id="cabecalho-esq">
+                    <!-- LOGO DA EMPRESA -->
+                    <figure>
+                        <a href="index.php">
+                            <div id="logo">
+                                <img src="imgs/bikeicon.png" class="img-div" alt="LOGO" title="LOGO">
+                            </div>
+                        </a>
+                    </figure>
+                    <!-- MENU DE NAVEGAÇÃO DO SITE -->
+                    <nav id="menu">
+                        <h3 id="titulo-menu">MENU<span id="seta-menu">Q</span></h3>
+                        <ul id="caixa-menu">
+                            <li class="item-menu" onclick="window.location.href='noticias.php'">Notícias</li>
+                            <li class="item-menu" onclick="window.location.href='promocoes.php'">Promoções</li>
+                            <li class="item-menu" onclick="window.location.href='lojas.php'">Lojas</li>
+                            <li class="item-menu" onclick="window.location.href='eventos.php'">Eventos</li>
+                            <li class="item-menu" onclick="window.location.href='contato.php'">Contato</li>
+                            <li class="item-menu" onclick="window.location.href='sobre.php'">Sobre</li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- AREA DA ESQUERDA DO CABEÇALHO -->
+                <div id="cabecalho-dir">
+                    <!-- FORMULARIO DE LOGIN DE USUARIO -->
+                    <form name="frm_login" action="login.php" method="post">
+                        <div class="text-login">
+                            <h6 id="usuario">Usuário:</h6>
+                            <!-- CAMPO DE DIGITAÇÃO DO NOME DE USUARIO -->
+                            <input type="text" name="txt_usuario" id="txt-usuario" required>
+                        </div>
+                        <div class="text-login">
+                            <h6 id="senha">Senha:</h6>
+                            <!-- CAMPO DE DIGITAÇÃO DA SENHA DO USUARIO -->
+                            <input type="password" name="txt_senha" id="txt-senha" required>
+                        </div>
+                        <div id="btn">
+                            <!-- BOTÃO DE LOGIN -->
+                            <input type="submit" name="btn-login" id="btn-login" value="Login">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <!-- DIV AUXILIAR QUE FICA ATRAS DO MENU -->
+        <div id="aux">
+            
         </div>
-        <div id="cabecalho-dir">
-            <form name="frm_login" action="#" method="POST">
-                <div class="text-login">
-                    <h6 id="usuario">Usuário:</h6>
-                    <input type="text" name="txt_usuario" id="txt-usuario">
-                </div>
-                <div class="text-login">
-                    <h6 id="senha">Senha:</h6>
-                    <input type="password" name="txt_senha" id="txt-senha">
-                </div>
-                <div id="btn">
-                    <input type="submit" name="btn-login" id="btn-login" value="Login">
-                </div>
-            </form>
-        </div>
-    </div>
-</header>

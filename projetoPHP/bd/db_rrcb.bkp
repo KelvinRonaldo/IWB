@@ -1,0 +1,86 @@
+-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
+--
+-- Host: localhost    Database: db_rrcb
+-- ------------------------------------------------------
+-- Server version	8.0.13
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ SET NAMES utf8mb4 ;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `tbl_assunto`
+--
+
+DROP TABLE IF EXISTS `tbl_assunto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `tbl_assunto` (
+  `cod_assunto` int(11) NOT NULL AUTO_INCREMENT,
+  `assunto` varchar(50) NOT NULL,
+  PRIMARY KEY (`cod_assunto`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_assunto`
+--
+
+LOCK TABLES `tbl_assunto` WRITE;
+/*!40000 ALTER TABLE `tbl_assunto` DISABLE KEYS */;
+INSERT INTO `tbl_assunto` VALUES (1,'info_produto'),(2,'sugestao_critica'),(3,'geral');
+/*!40000 ALTER TABLE `tbl_assunto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl_fale_conosco`
+--
+
+DROP TABLE IF EXISTS `tbl_fale_conosco`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `tbl_fale_conosco` (
+  `codigo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `celular` varchar(15) NOT NULL,
+  `telefone` varchar(15) DEFAULT NULL,
+  `sexo` char(1) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `profissao` varchar(100) NOT NULL,
+  `home_page` varchar(150) DEFAULT NULL,
+  `facebook` varchar(150) DEFAULT NULL,
+  `cod_assunto` int(11) NOT NULL,
+  `mensagem` text NOT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `cod_assunto` (`cod_assunto`),
+  CONSTRAINT `tbl_fale_conosco_ibfk_1` FOREIGN KEY (`cod_assunto`) REFERENCES `tbl_assunto` (`cod_assunto`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl_fale_conosco`
+--
+
+LOCK TABLES `tbl_fale_conosco` WRITE;
+/*!40000 ALTER TABLE `tbl_fale_conosco` DISABLE KEYS */;
+INSERT INTO `tbl_fale_conosco` VALUES (18,'Chrome','(11) 91111-1111','(11) 1111-1111','M','chrome@chrome.com','Chrome Browser','https://chrome.com/Chrome','https://fb.com/Chrome',3,'eu ou o chrome'),(19,'Chrome','(11) 91111-1111','(11) 1111-1111','M','chrome@chrome.com','Chrome Browser','https://chrome.com/Chrome','https://fb.com/Chrome',1,'eu sou chrome produto'),(20,'Chrome','(11) 91111-1111','(11) 1111-1111','M','chrome@chrome.com','Chrome Browser','https://chrome.com/Chrome','https://fb.com/Chrome',2,'sugestao'),(21,'Mozilla','(22) 92222-2222','(22) 2222-2222','F','mozila@mozilla.com.br','Mozilla Browser','https://mozilla.com.br','https://fb.com/Mozilla',1,'produto'),(22,'Mozilla','(22) 92222-2222','(22) 2222-2222','F','mozila@mozilla.com.br','Mozilla Browser','https://mozilla.com.br','https://fb.com/Mozilla',2,'critica'),(23,'Mozilla','(22) 92222-2222','(22) 2222-2222','F','mozila@mozilla.com.br','Mozilla Browser','https://mozilla.com.br','https://fb.com/Mozilla',3,'geral'),(24,'IE','(33)933333333','(33)33333333','M','ie@ie.com.gov.br','IE Browser','http://ie.com.gov.br/IE','http://fb.com/IE',1,'produto'),(25,'IE','(33)933333333','(33)33333333','F','ie@ie.com.gov.br','IE Browser','http://ie.com.gov.br/IE','http://fb.com/IE',2,'critica'),(26,'IE','(33)933333333','(33)33333333','M','ie@ie.com.gov.br','IE Browser','http://ie.com.gov.br/IE','http://fb.com/IE',3,'geral'),(27,'Opera','(44) 94444-4444','(44) 4444-4444','M','opera@opera.com','Opera Browser','http://opera.com.br.edu.gov.eu','https://fb.com/Opera',1,'produto'),(28,'Opera','(44) 94444-4444','(44) 4444-4444','F','opera@opera.com','Opera Browser','http://opera.com/Opera','https://fb.com/Opera',2,'critica'),(29,'Opera','(44) 94444-4444','(44) 4444-4444','M','opera@opera.com','Opera Browser','http://opera.com/Opera','https://fb.com/Opera',3,'geral'),(30,'Celular Samsung','(55) 95555-5555','(55) 5555-5555','M','samsung@samsung.com','Samsung Browser','https://sansung.com/Samsung','https://fb.com/Samsung',1,'Produto'),(31,'Celular Samsung','(55) 95555-5555','(55) 5555-5555','F','samsung@samsung.com','Samsung Browser','https://sansung.com/Samsung','https://fb.com/Samsung',2,'Critica'),(32,'Celular Samsung','(55) 95555-5555','(55) 5555-5555','M','samsung@samsung.com','Samsung Browser','https://sansung.com/Samsung','https://fb.com/Samsung',3,'Geral'),(33,'Motorola','(66) 96666-6666','(66) 6666-6666','F','motorola@moto.com','Motorola Browser','https://motorola.com/Motorola','https://fb.com/Motorola',1,'Produto'),(34,'Motorola','(66) 96666-6666','(66) 6666-6666','M','motorola@moto.com','Motorola Browser','https://motorola.com/Motorola','https://fb.com/Motorola',2,'Critica'),(35,'Motorola','(66) 96666-6666','(66) 6666-6666','F','motorola@moto.com','Motorola Browser','https://motorola.com/Motorola','https://fb.com/Motorola',3,'Geral');
+/*!40000 ALTER TABLE `tbl_fale_conosco` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-03-26  2:06:34
