@@ -4,6 +4,8 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/slider.css" media="screen">
         <link rel="stylesheet" href="css/fontes.css">
+        <script src="./js/menu_categorias.js"></script>
+        <script src="./js/filtrarPromocoes.js"></script>
         <title>PROMOÇÕES</title>
         <meta charset="utf-8">
         <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
@@ -80,13 +82,12 @@
                             require_once('./bd/conexao.php');
                             $conexao = conexaoMySql();
 
-                                $sql = "SELECT promo.percentual_desconto, promo.preco_desconto, promo.status AS status_promocao,
-                                        promo.numero_parcelas, promo.metodo_pagamento, promo.preco_parcelas,
-                                        produto.nome, produto.preco, produto.status AS status_promocao, produto.imagem
-                                        FROM tbl_promocao AS promo
-                                        INNER JOIN tbl_produto AS produto
-                                        ON promo.cod_produto = produto.cod_produto
-                                        WHERE promo.status = 'ativado' AND produto.status = 'ativado'";
+                                $sql = "SELECT promo.*, promo.status AS status_promocao,
+                                produto.*, produto.status AS status_promocao
+                                FROM tbl_promocao AS promo
+                                INNER JOIN tbl_produto AS produto
+                                ON promo.cod_produto = produto.cod_produto
+                                WHERE promo.status = 'ativado' AND produto.status = 'ativado'";
 
                                 $select = mysqli_query($conexao, $sql);
 
@@ -127,12 +128,12 @@
                                 </div>
                                 <!-- VALOR DO PRODUTO EM PROMOÇÃO COM O DESCONTO -->
                                 <div class="promocoes-com-desconto">
-                                    <p><span style="font-size: 22px; vertical-align:middle;">POR </span>R$<?php echo $precoDesconto ?></p>
+                                    <p><span class="por">POR </span>R$<?php echo $precoDesconto ?></p>
                                 </div>
                                 <!-- INFORMAÇÕES DE PAGAMENTO  -->
                                 <div class="tipo-pagamento">
                                 <?php
-                                    if($numeroParcelas != null) {
+                                    if(($numeroParcelas != null && $metodoPagamento != null) || $percentualDesconto != 100) {
                                 ?>
                                     <p>
                                         <span class="negrito"><?php echo $numeroParcelas . "x de R$" . $precoParcelas ?></span><?php echo " ".$metodoPagamento ?>

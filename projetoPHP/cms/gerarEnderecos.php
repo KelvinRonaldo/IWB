@@ -5,14 +5,15 @@
     // CONEXAO COM O BANCO
     require_once('../bd/conexao.php');
     $conexao = conexaoMySql();
+
+//    VARIAVEL QUE RECEBE O ENDERECO VINDO DA API COM UM SCRIPT JS
     $enderecoApi = $_GET['endereco'];
 
     $modo = $_GET['modo'];
     if($modo == 'select'){
-        // echo 'modo slct ';
         if(!empty($enderecoApi)){
-            // echo 'cep ok --> '.$_GET['cep'].' ';
         
+            //ARRAY QUE RECEBE O ENDERECO VINDO DO BANCO COM O VINDO DA API FUTURAMENTE
             $arrayEndereco = (array) null;
 
             $uf = $enderecoApi['uf']; // pegando uf do endereço do JSON
@@ -33,11 +34,13 @@
 
             if($select = mysqli_query($conexao, $sql)){        
                 if($rsEndereco = mysqli_fetch_array($select)){
+                    // RECUPERA DADOS PEGOS DO BANCO
                     $codEstado = $rsEndereco['cod_estado'];
                     $estado = $rsEndereco['estado'];
                     $codCidade = $rsEndereco['cod_cidade'];
                     $cidade = $rsEndereco['cidade'];
 
+//                    INSERE OS DADOS EM UM ARRAY
                     $arrayEndereco = array(
                         'nome_estado' => $estado,
                         'cod_estado' => $codEstado,
@@ -48,12 +51,13 @@
                         'cep' => $cep
                     );
                 }
+//                RETORN O ARRAY CONVERTIDO EM JSON PARA O SCRIPT JS
                 print_r(json_encode($arrayEndereco));
             }else{
-                echo 'nao deu';
+                echo 'BUSCA FALHOU';
             }
         }else{
-            echo 'cep nulo';
+            echo 'ENDERECO NULO';
         }
     }
 ?>

@@ -1,5 +1,5 @@
      <!-- AREA DO HEADER(CABEÇALHO DA PAGINA) -->
-        <header>
+        <header id="cabecalho-desktop">
             <div id="cabecalho" class="center">
                 <!-- AREA DA ESQUEDA DO CABEÇALHO COM LOGO E MENU -->
                 <div id="cabecalho-esq">
@@ -47,6 +47,83 @@
             </div>
         </header>
         <!-- DIV AUXILIAR QUE FICA ATRAS DO MENU -->
-        <div id="aux">
+        <div id="aux-desktop">
             
+        </div>
+
+        <header id="header-mobile">
+            <div id="cabecalho-mobile">
+                <!-- AREA DA ESQUEDA DO CABEÇALHO COM LOGO E MENU -->
+
+<!--                <div id="cabecalho-esq-mobile">-->
+
+                    <!-- MENU DE NAVEGAÇÃO DO SITE -->
+                <nav id="menu-mobile" class="flexbox">
+                    <figure id="abrir-menu-paginas">
+                        <img alt="Icone Menu" title="icone Menu" class="icon-menu-mobile" src="imgs/mobile/menu-icon.png">
+                    </figure>
+                    <ul id="caixa-menu-mobile" class="menu-mobile-close">
+                        <li class="item-menu-mobile-logo">
+                            <figure>
+                                <a href="index.php">
+                                    <div id="logo-mobile">
+                                        <img src="imgs/bikeicon.png" class="img-div" alt="LOGO" title="LOGO">
+                                    </div>
+                                </a>
+                            </figure>
+                        </li>
+                        <li class="item-menu-mobile" id="item-menu-noticia" onclick="setTimeout(()=>{window.location.href='index.php'}, 300)">Home</li>
+                        <li class="item-menu-mobile" id="item-menu-noticia" onclick="setTimeout(()=>{window.location.href='noticias.php'}, 300)">Notícias</li>
+                        <li class="item-menu-mobile" id="item-menu-promocoes" onclick="setTimeout(()=>{window.location.href='promocoes.php'}, 300)">Promoções</li>
+                        <li class="item-menu-mobile" id="item-menu-lojas" onclick="setTimeout(()=>{window.location.href='lojas.php'}, 300)">Lojas</li>
+                        <li class="item-menu-mobile" id="item-menu-eventos" onclick="setTimeout(()=>{window.location.href='eventos.php'}, 300)">Eventos</li>
+                        <li class="item-menu-mobile" id="item-menu-contato" onclick="setTimeout(()=>{window.location.href='contato.php'}, 300)">Contato</li>
+                        <li class="item-menu-mobile" id="item-menu-sobre" onclick="setTimeout(()=>{window.location.href='sobre.php'}, 300)">Sobre</li>
+                    </ul>
+                    <div id="container-menu">
+                        
+                    </div>
+                </nav>
+
+                    <!-- LOGO DA EMPRESA -->
+                <div id="caixa-logo-mobile">
+                    <figure>
+                        <a href="index.php">
+                            <div id="logo-mobile">
+                                <img src="imgs/bikeicon.png" class="img-div" alt="LOGO" title="LOGO">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+
+<!--                </div>-->
+
+                <!-- AREA DA ESQUERDA DO CABEÇALHO -->
+                <div id="caixa-login-mobile" class="flexbox">
+                    <figure>
+                        <img alt="Icone Login" title="icone Login" class="icon-login-mobile" src="imgs/mobile/user.png">
+                    </figure>
+    <!--                &lt;!&ndash; FORMULARIO DE LOGIN DE USUARIO &ndash;&gt;-->
+    <!--                <form name="frm_login" action="login.php" method="post">-->
+    <!--                    <div class="text-login-mobile">-->
+    <!--                        <h6 id="usuario-mobile">Usuário:</h6>-->
+    <!--                        &lt;!&ndash; CAMPO DE DIGITAÇÃO DO NOME DE USUARIO &ndash;&gt;-->
+    <!--                        <input type="text" name="txt_usuario" id="txt-usuario-mobile" required>-->
+    <!--                    </div>-->
+    <!--                    <div class="text-login-mobile">-->
+    <!--                        <h6 id="senha-mobile">Senha:</h6>-->
+    <!--                        &lt;!&ndash; CAMPO DE DIGITAÇÃO DA SENHA DO USUARIO &ndash;&gt;-->
+    <!--                        <input type="password" name="txt_senha" id="txt-senha-mobile" required>-->
+    <!--                    </div>-->
+    <!--                    <div id="btn-mobile">-->
+    <!--                        &lt;!&ndash; BOTÃO DE LOGIN &ndash;&gt;-->
+    <!--                        <input type="submit" name="btn-login" id="btn-login-mobile" value="Login">-->
+    <!--                    </div>-->
+    <!--                </form>-->
+                </div>
+            </div>
+        </header>
+        <!-- DIV AUXILIAR QUE FICA ATRAS DO MENU -->
+        <div id="aux-mobile">
+
         </div>

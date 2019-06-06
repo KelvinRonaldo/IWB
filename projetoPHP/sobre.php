@@ -42,7 +42,7 @@
                 <div id="conteudo-sobre">
                     <!-- AREA QUE CONTEM IMAGEM DA LOJA E TEXTO INFORMATIVO -->
                     <div id="container-sobre">
-                        <div id="img-sobre">
+                        <div id="img-sobre" class="flexbox">
                             <!-- IMAGEM DA LOJA -->
                             <figure>
                                 <img alt="Bicicletas" id="img-src-sobre" src="./arquivos/<?php echo(!empty($imagem) ? $imagem : 'naoDisponivel.jpg'); ?>">

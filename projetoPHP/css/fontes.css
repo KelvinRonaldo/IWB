@@ -52,4 +52,8 @@
     font-family: liquid;
     src:  url(../fontes/beer_money/beer\ money.ttf);
 }
+@font-face {
+    font-family: 'agency fb';
+    src: url(../fontes/agency_fb/agency_fb.ttf);
+}
 

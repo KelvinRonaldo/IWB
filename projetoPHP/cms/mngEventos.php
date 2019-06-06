@@ -13,41 +13,46 @@
     // echo time('2010-02-10');
     // echo '<br>'.date('d-M-Y' , '2010-02-10');
 
-    if(isset($_POST['btn_enviar_evento'])){
+    if(isset($_POST['btn_enviar_evento'])){// SE O BOTÃO DE ENVIAR O EVENTO FOR CLICADO, ENTRA NA CONDIÇÃO DE INSERIR UM EVENTO
 
+//        PEGANDO O ATRIBUTO ERRO DO ARQUIVO UPADO
         $errorImg = $_FILES['file_evento']['error'];
 
         if(isset($_POST['txt_titulo']) && isset($_POST['txt_descricao']) && isset($_POST['txt_data']) && isset($_POST['txt_logradouro'])
             && isset($_POST['txt_numero']) && isset($_POST['txt_bairro']) && isset($_POST['txt_cep']) && isset($_POST['txt_estado'])
-            && isset($_POST['txt_cidade'])) {
+            && isset($_POST['txt_cidade'])) { // DADOS OBRIGATÓRIOS PARA CADASTRO DE USUÁRIO
 
             if (!empty($_POST['txt_titulo']) && !empty($_POST['txt_descricao']) && !empty($_POST['txt_data']) && !empty($_POST['txt_logradouro'])
                 && !empty($_POST['txt_numero']) && !empty($_POST['txt_bairro']) && !empty($_POST['txt_cep']) && !empty($_POST['txt_estado'])
-                && !empty($_POST['txt_cidade']) && $errorImg == 0) {
+                && !empty($_POST['txt_cidade']) && $errorImg == 0) { // DADOS DE CADASTRO DE USUÁRIO NÃO PODE SER NULOS
 
-                $titulo = $_POST['txt_titulo'];
-                $promotor = $_POST['txt_promotor'];
-                $entrada = $_POST['txt_entrada'];
-                $campoData = explode("/", $_POST['txt_data']);
+                $titulo = trim($_POST['txt_titulo']);
+                $promotor = trim($_POST['txt_promotor']);
+                $entrada = trim($_POST['txt_entrada']);
+                $campoData = explode("/", trim($_POST['txt_data']));
                 $data = $campoData[2] . "-" . $campoData[1] . "-" . $campoData[0];
-                $descricao = $_POST['txt_descricao'];
-                $cep = $_POST['txt_cep'];
-                $estado = $_POST['txt_estado'];
-                $cidade = $_POST['txt_cidade'];
-                $logradouro = $_POST['txt_logradouro'];
-                $numero = $_POST['txt_numero'];
-                $bairro = $_POST['txt_bairro'];
-                $imagem = salvarArquivo($_FILES['file_evento'], 'inserir');
+                $descricao = trim($_POST['txt_descricao']);
+                $cep = trim($_POST['txt_cep']);
+                $estado = trim($_POST['txt_estado']);
+                $cidade = trim($_POST['txt_cidade']);
+                $logradouro = trim($_POST['txt_logradouro']);
+                $numero = trim($_POST['txt_numero']);
+                $bairro = trim($_POST['txt_bairro']);
+                $imagem = salvarArquivo($_FILES['file_evento'], 'inserir'); 
 
-                if($imagem != 'sizeError' && $imagem != 'extensionError'){
+                if($imagem != 'sizeError' && $imagem != 'extensionError'){ // SE NÃO OUVER NENHUM ERRO NO UPLOAD DA IMAGEM, EXECUTA UM SCRIPT SQL COM A INSERÇÃO DA IMAGEM INCLUIDO
+
+//                        SCRIPT SQL QUE INSERE OS DADOS RESGATADOS DA REQUISIÇÃO NO BANCO
                     $sql = "INSERT INTO tbl_endereco (logradouro, numero, bairro, cep, cod_cidade) 
-                            VALUES ('" . $logradouro . "', '" . $numero . "', '" . $bairro . "', '" . $cep . "', (SELECT c.cod_cidade FROM tbl_cidade AS c INNER JOIN tbl_estado AS e ON c.cod_estado = e.cod_estado WHERE c.cidade = '".$cidade."' AND e.estado = '".$estado."'));";
+                            VALUES ('" . addslashes($logradouro) . "', '" . addslashes($numero) . "', '" . addslashes($bairro) . "', '" . addslashes($cep) . "', (SELECT c.cod_cidade FROM tbl_cidade AS c INNER JOIN tbl_estado AS e ON c.cod_estado = e.cod_estado WHERE c.cidade = '".addslashes($cidade)."' AND e.estado = '".addslashes($estado)."'));";
                     if (mysqli_query($conexao, $sql)) {
 
+//                        PAGE O CODIGO DO ULTIMO DADO INSERIDO NO BANCO PARA SERVIR DE HAVE ESTRAGEIRA DA PROXIMA INSERÇÃO
                         $codEndereco = mysqli_insert_id($conexao);
 
+//                        SCRIPT SQL QUE INSERE OS DADOS RESGATADOS DA REQUISIÇÃO NO BANCO
                         $sql = "INSERT INTO tbl_evento (titulo_evento, descricao, data, host, entrada, imagem, cod_endereco) 
-                                VALUES ('" . $titulo . "', '" . $descricao . "', '" . $data . "', '" . $promotor . "', '" . $entrada . "', '".$imagem."', '" . $codEndereco . "')";
+                                VALUES ('" . addslashes($titulo) . "', '" . addslashes($descricao) . "', '" . addslashes($data) . "', '" . addslashes($promotor) . "', '" . addslashes($entrada) . "', '".addslashes($imagem)."', '" . $codEndereco . "')";
 
                         if(mysqli_query($conexao, $sql)){
                             header('location: mngEventos.php?foi=SIM');
@@ -68,47 +73,51 @@
         }else{
             echo("<script>alert('HÁ ALGO QUE NAO EXISTEM!')</script>");
         }
-    }elseif(isset($_POST['btn_atualizar_evento'])){
+    }elseif(isset($_POST['btn_atualizar_evento'])){// SE O BOTÃO DE ENVIAR EVENTO FOR CLICADO, ENTRA NA CONDIÇÃO DE ATUALIZAR O EVENTO
 
         if(isset($_POST['txt_titulo']) && isset($_POST['txt_descricao']) && isset($_POST['txt_data']) && isset($_POST['txt_logradouro'])
         && isset($_POST['txt_numero']) && isset($_POST['txt_bairro']) && isset($_POST['txt_cep']) && isset($_POST['txt_estado'])
-        && isset($_POST['txt_cidade'])) {
+        && isset($_POST['txt_cidade'])) {// DADOS OBRIGATÓRIOS PARA CADASTRO DO EVENTO
 
             if (!empty($_POST['txt_titulo']) && !empty($_POST['txt_descricao']) && !empty($_POST['txt_data']) && !empty($_POST['txt_logradouro'])
                 && !empty($_POST['txt_numero']) && !empty($_POST['txt_bairro']) && !empty($_POST['txt_cep']) && !empty($_POST['txt_estado'])
-                && !empty($_POST['txt_cidade'])) {
+                && !empty($_POST['txt_cidade'])) {// DADOS DE CADASTRO DO EVENTO NÃO PODE SER NULOS
 
-                $titulo = $_POST['txt_titulo'];
-                $promotor = $_POST['txt_promotor'];
-                $entrada = $_POST['txt_entrada'];
-                $campoData = explode("/", $_POST['txt_data']);
+                $titulo = trim($_POST['txt_titulo']);
+                $promotor = trim($_POST['txt_promotor']);
+                $entrada = trim($_POST['txt_entrada']);
+                $campoData = explode("/", trim($_POST['txt_data']));
                 $data = $campoData[2] . "-" . $campoData[1] . "-" . $campoData[0];
-                $descricao = $_POST['txt_descricao'];
-                $cep = $_POST['txt_cep'];
-                $estado = $_POST['txt_estado'];
-                $cidade = $_POST['txt_cidade'];
-                $logradouro = $_POST['txt_logradouro'];
-                $numero = $_POST['txt_numero'];
-                $bairro = $_POST['txt_bairro'];
+                $descricao = trim($_POST['txt_descricao']);
+                $cep = trim($_POST['txt_cep']);
+                $estado = trim($_POST['txt_estado']);
+                $cidade = trim($_POST['txt_cidade']);
+                $logradouro = ($_POST['txt_logradouro']);
+                $numero = trim($_POST['txt_numero']);
+                $bairro = trim($_POST['txt_bairro']);
 
-                if(isset($_FILES['file_evento']) && $_FILES['file_evento']['name'] != null) {
+                if(isset($_FILES['file_evento']) && $_FILES['file_evento']['name'] != null) {// SE NÃO OUVER NENHUM ERRO NO UPLOAD DA IMAGEM, EXECUTA UM SCRIPT SQL COM A ATUALIZAÇÃO DA IMAGEM INCLUIDO
                     $imagem = salvarArquivo($_FILES['file_evento'], 'atualizar');
                     if ($imagem != 'sizeError' && $imagem != 'extensionError') {
-                        $sqlUpdateEndereco = "UPDATE tbl_endereco SET logradouro = '" . $logradouro . "', numero = '" . $numero . "', bairro = '" . $bairro . "', cep = '" . $cep . "', cod_cidade = ".$_SESSION['cod_cidade']."
+
+//                        SCRIPTS SQL QUE ATUALIZA OS DADOS RESGATADOS DA REQUISIÇÃO NO BANCO
+                        $sqlUpdateEndereco = "UPDATE tbl_endereco SET logradouro = '" . addslashes($logradouro) . "', numero = '" . addslashes($numero) . "', bairro = '" . addslashes($bairro) . "', cep = '" . addslashes($cep) . "', cod_cidade = ".$_SESSION['cod_cidade']."
                                 WHERE cod_endereco = ".$_SESSION['cod_endereco'];
 
-                        $sqlUpdateEvento = "UPDATE tbl_evento SET titulo_evento = '" . $titulo . "', descricao = '" . $descricao . "', data = '" . $data . "', host = '" . $promotor . "', entrada = '" . $entrada . "', imagem = '" . $imagem . "', cod_endereco = '" . $_SESSION['cod_endereco'] . "'
+                        $sqlUpdateEvento = "UPDATE tbl_evento SET titulo_evento = '" . addslashes($titulo) . "', descricao = '" . addslashes($descricao) . "', data = '" . addslashes($data) . "', host = '" . addslashes($promotor) . "', entrada = '" . addslashes($entrada) . "', imagem = '" . addslashes($imagem) . "', cod_endereco = '" . $_SESSION['cod_endereco'] . "'
                                     WHERE cod_evento = ".$_SESSION['cod_evento'];
+
                     } elseif ($imagem == 'extensionError') {
                         echo("<script>alert('$imagem O TIPO DO ARQUIVO ESCOLHIDO É INVÁLIDO.')</script>");
                     } elseif ($imagem == 'sizeError') {
                         echo("<script>alert('O TAMANHO DO ARQUIVO ESCOLHIDO É INVÁLIDO.')</script>");
                     }
                 }else{
-                    $sqlUpdateEndereco = "UPDATE tbl_endereco SET logradouro = '" . $logradouro . "', numero = '" . $numero . "', bairro = '" . $bairro . "', cep = '" . $cep . "', cod_cidade = ".$_SESSION['cod_cidade']."
+//                        SCRIPTS SQL QUE ATUALIZA OS DADOS RESGATADOS DA REQUISIÇÃO NO BANCO
+                    $sqlUpdateEndereco = "UPDATE tbl_endereco SET logradouro = '" . addslashes($logradouro) . "', numero = '" . addslashes($numero) . "', bairro = '" . addslashes($bairro) . "', cep = '" .addslashes($cep) . "', cod_cidade = ".$_SESSION['cod_cidade']."
                                 WHERE cod_endereco = ".$_SESSION['cod_endereco'];
 
-                    $sqlUpdateEvento = "UPDATE tbl_evento SET titulo_evento = '" . $titulo . "', descricao = '" . $descricao . "', data = '" . $data . "', host = '" . $promotor . "', entrada = '" . $entrada . "', cod_endereco = '" . $_SESSION['cod_endereco'] . "'
+                    $sqlUpdateEvento = "UPDATE tbl_evento SET titulo_evento = '" . addslashes($titulo) . "', descricao = '" . addslashes($descricao) . "', data = '" . addslashes($data) . "', host = '" . addslashes($promotor) . "', entrada = '" . addslashes($entrada) . "', cod_endereco = '" . $_SESSION['cod_endereco'] . "'
                                     WHERE cod_evento = ".$_SESSION['cod_evento'];
                 }
 
@@ -122,6 +131,7 @@
                     echo $sqlUpdateEndereco;
                 }
 
+//                ZERA AS VIRIÁVEIS DE SESSÃO TEMPORÁRIAS
                 $_SESSION['cod_cidade'] = null;
                 $_SESSION['cod_endereco'] = null;
                 $_SESSION['cod_evento'] = null;
@@ -133,11 +143,13 @@
         }
     }
 
+//    SCRIPT DE EXCLUSÃO DE EVENTO DO BANCP
     if(isset($_GET['modo']) && $_GET['modo'] == 'excluir'){
         $codEvento = $_GET['codEvento'];
         $codEndereco = $_GET['codEndereco'];
         $imgEvento = $_GET['imgEvento'];
 
+//      SCRIPT SQL QUE DELETA DO BANCO
         $sql = "DELETE FROM tbl_evento WHERE cod_evento = ".$codEvento;
 
         if(mysqli_query($conexao, $sql)){
@@ -169,32 +181,33 @@
                     $('#container').fadeIn(400);
                 });
             });
+            // FUNÇÃO QUE PERMITE VISUALIZAR A MODAL DE EDIÇÃO DO EVENTO
             const viewModalAtualizarEvento = (codEvento, codEndereco) =>{
                 $.ajax({
                     type: "GET",
                     url: "./modais/atualizarEvento.php",
                     data: {codEvento: codEvento, codEndereco: codEndereco},
                     success: function(dados){
-                        // alert(`${codEvento} e ${codEndereco}`);
                         $('#modal-evento').html(dados);
                     }
                 });
             }
+            // FUNÇÃO QUE TROCA STATUS DO EVENTO
             const ativarDesativarEvento = (codEvento, codEndereco, status) =>{
                 $.ajax({
                     type: "GET",
                     url: "./status.php",
                     data: {pagina: 'eventos', codigo: codEvento, codEndereco: codEndereco, status: status},
                     complete: function (response) {
-                        alert(response.responseText);
                         location.reload();
                     },
                     error: function (response) {
-                        // alert(response.responseText);
+                        alert(response.responseText);
                     }
                 });
             }
 
+            // FUNÇÃO DE CONFIRMAÇÃO DE EXCLUSÃO DE EVENTO
             const confirmarExclusaoEvento = (tituloEvento) =>{
                 return confirm(`Deseja mesmo excluir ${tituloEvento}?`)
             }
@@ -228,7 +241,7 @@
                         <div id="form-add-eventos">                            
                             <div id="caixa-titulo" class="flexbox">
                                 <h3><label for="titulo-evento" >Título:</label></h3>
-                                <input maxlength="20" type="text" id="titulo-evento" name="txt_titulo"> <!-- CAMPO DO TITULO -->
+                                <input maxlength="30" type="text" id="titulo-evento" name="txt_titulo"> <!-- CAMPO DO TITULO -->
                             </div>
                             <div id="caixa-promotor" class="flexbox">
                                 <h3><label for="promotor-evento" >Promotor do Evento:</label></h3>
@@ -240,7 +253,7 @@
                             </div>
                             <div id="caixa-data" class="flexbox">
                                 <h3><label for="data-evento" >Data:</label></h3>
-                                <input type="text" id="data-evento" name="txt_data"> <!-- CAMPO DO DATA -->
+                                <input maxlength="10" placeholder="Ex.: 01/01/2019" type="text" id="data-evento" name="txt_data"> <!-- CAMPO DO DATA -->
                             </div>
                             <div id="caixa-imagem" class="flexbox">
                                 <h3><label for="imagem-evento" >Imagem do Evento:</label></h3>
@@ -248,7 +261,7 @@
                             </div>
                             <div id="caixa-descricao" class="flexbox">
                                 <h3><label for="descricao-evento" >Descrição:</label></h3>
-                                <textarea type="text" id="descricao-evento" name="txt_descricao"></textarea><!-- CAMPO DO DESCRICAO -->
+                                <textarea maxlength="60000" id="descricao-evento" name="txt_descricao"></textarea><!-- CAMPO DO DESCRICAO -->
                             </div>
                             <div id="caixa-cep" class="flexbox">
                                 <h3><label for="cep" >Cep:</label></h3>
@@ -268,19 +281,21 @@
                             </div>
                             <div id="caixa-numero">
                                 <h3><label for="numero" >Nº :</label></h3>
-                                <input type="text" id="numero" name="txt_numero"> <!-- CAMPO DO NUMERO -->
+                                <input maxlength="10" type="text" id="numero" name="txt_numero"> <!-- CAMPO DO NUMERO -->
                             </div>     
                             <div id="caixa-bairro" class="flexbox">
                                 <h3><label >Bairro:</label></h3>
                                 <input type="text" id="bairro" name="txt_bairro" readonly> <!-- CAMPO DO BAIRRO -->
                             </div>
-                            <div id="caixa-btn-evento" class="flexbox">
-                                <input type="submit" name="btn_enviar_evento" class="btn-confirmacao" id="btn-enviar-evento" value="ENVIAR"> <!-- CAMPO DO CEP -->
-                                <input type="button" class="btn-cancelar" id="btn-cancelar" value="CANCELAR"> <!-- CANCELAR INSERÇÃO -->
+                            <div id="caixa-btn-evento" class="flexbox"><!-- BOTOES DE ENVIO E CANCELAMENTO DO FORMUALRIO  -->
+                                <input type="submit" name="btn_enviar_evento" class="btn-confirmacao" id="btn-enviar-evento" value="ENVIAR">
+                                <input type="button" class="btn-cancelar" id="btn-cancelar" value="CANCELAR">
                             </div>
                         </div>                       
                     </form>
+                    <!-- BOTAO QUE MOSTRA FORMULARIO DE ADICAO DE EVENTO -->
                     <input type="button" id="btn-add-evento" class="btn-confirmacao" name="btn_add_evento" value="ADICIONAR">
+<!--                    AREA DE TABELA DE VISUALIZAÇÃO DE EVENTOS-->
                     <div id="container-table-eventos">
                         <div id="tabela-evento">
                             <table id="table-evento">
@@ -292,9 +307,11 @@
                                     <th class="title-status">Status</th>
                                 </tr>
                                 <?php
+//                                    SCRIPT SQL QUE TRAZ EVENTOS DO BANCO PARA VISUALIZAÇÃO
                                     $sql = "SELECT * FROM tbl_evento";
                                     $select = mysqli_query($conexao, $sql);
                                     while($rsEvento = mysqli_fetch_array($select)) {
+//                                        COLOCANDO DADOS TRAZIDOS DO BANCO EM VARIÁVEIS
                                         $codEvento = $rsEvento['cod_evento'];
                                         $codEndereco = $rsEvento['cod_endereco'];
                                         $tituloEvento = $rsEvento['titulo_evento'];
@@ -303,17 +320,20 @@
                                         $imagemEvento = $rsEvento['imagem'];
                                         $status = "'".$rsEvento['status']."'";
 
+//                                        CRIANDO VARIÁVEL QUE SERÁ OS ATRIBUTOS alt E title NA IMAGEM(BOTAO) DE TROCA DE STATUS
                                         $altTitle = $rsEvento['status'] == 'ativado' ? 'Desativar Registro '.$codEvento : 'Ativar Registro '.$codEvento;
                                         $img = $rsEvento['status'] == 'ativado' ? 'ativado.png': 'desativado.png';
                                 ?>
                                 <tr class="tables-registers">
                                     <td class="txt-titulo-evento"><?php echo $tituloEvento ?></td>
                                     <td class="txt-data"><?php echo $data ?></td>
+<!--                                    BOTAO DE EDIÇÃO DO EVENTO-->
                                     <td class="txt-editar">
                                         <figure>
                                             <img class="icon-edit visualizar" onclick="viewModalAtualizarEvento(<?php echo $codEvento.', '.$codEndereco ?>)" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codEvento ?>" title="<?php echo 'Editar Registro '.$codEvento ?>">
                                         </figure>
                                     </td>
+<!--                                    BOTAO DE EXCLUSAO DO EVENTO-->
                                     <td class="txt-excluir">
                                         <a href="?modo=excluir&codEvento=<?php echo $codEvento ?>&codEndereco=<?php echo $codEndereco ?>&imgEvento=<?php echo $imagemEvento ?>">
                                             <figure>
@@ -321,6 +341,7 @@
                                             </figure>
                                         </a>
                                     </td>
+<!--                                    BOTAO DE TROCA DE STATUS DO EVENTOS-->
                                     <td class="txt-status">
                                         <figure>
                                             <img onclick="ativarDesativarEvento(<?php echo($codEvento.', '.$codEndereco.', '.$status); ?>)" class="icon-status" src="./icons/<?php echo $img ?>" alt="<?php echo $altTitle ?>" title="<?php echo $altTitle ?>">
@@ -340,8 +361,9 @@
                 require_once('./footer.html');
             ?>
         </div>
-        <script src="./js/preencherEndereco.js"></script>
+        <script src="./js/preencherEndereco.js"></script><!-- IMPORT DO SCRIPT QUE TRAZ O ENDERECO DO CEP DIGITADO -->
         <script>
+            // SCRIPT QUE CONTROLA VISUALIZAÇÃO DO FORMULARIO DE CADASTRO DO EVENTO
             const btnAddEvento = document.getElementById("btn-add-evento");
             const btnCancelar = document.getElementById("btn-cancelar");
             const caixaAddEvento = document.getElementById("form-add-eventos");

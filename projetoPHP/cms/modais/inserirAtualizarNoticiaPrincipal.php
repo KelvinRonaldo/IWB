@@ -25,9 +25,9 @@
             $_SESSION['cod_noticia'] = $_POST['codigo'];
         
             // SCRIPT SQL QUE TRAZ A NOTICIA O QUAL FOI CLICADA NA TABELA
-            $sql = "SELECT * FROM tbl_noticia_principal AS np
-            INNER JOIN tbl_destaque_noticia_principal AS dnp
-            ON np.cod_destaque = dnp.cod_destaque
+            $sql = "SELECT * FROM tbl_noticia_principal AS noticias_principais
+            INNER JOIN tbl_destaque_noticia_principal AS destaque_noticia
+            ON noticias_principais.cod_destaque = destaque_noticia.cod_destaque
             WHERE cod_noticia = ".$_SESSION['cod_noticia'];
         
             $select = mysqli_query($conexao, $sql);
@@ -77,7 +77,7 @@
         </div>
         <div id="autor">
             <h3><label for="txt-autor">Autor:</label></h3> <!-- CAMPO DE AUTOR -->
-            <input required maxlength="45" id="txt-autor" type="text" name="txt_autor" value="<?php echo($autor); ?>">
+            <input maxlength="45" id="txt-autor" type="text" name="txt_autor" value="<?php echo($autor); ?>">
         </div>
         <div id="resumo">
             <h3><label for="txt-resumo">Resumo:</label></h3> <!-- CAMPO DE RESUMO -->
@@ -117,9 +117,18 @@
                 </select>
             </div>
         </div>
-        <div id="enviar-arquivo">
+        <div id="enviar-arquivo" class="show-img">
             <h3><label for="btn-arquivo">Imagem da Notícia:</label></h3> <!-- CAMPO DE IMAGEM -->
-            <input type="hidden" name="MAX_FILE_SIZE" value="5242880" />
+            <!-- <?php
+                if(!empty($imagem)){
+            ?>
+            <div class="view-img-modal-noticia">
+                <label>Imagem Atual:</label>
+                <figure>
+                    <img class="img-view" title="<?php echo($imagem); ?>" id="view" src="../arquivos/<?php echo($imagem); ?>">
+                </figure>
+            </div>
+            <?php } ?> -->
             <input type="file" id="btn-arquivo" name="foto_noticia" value="Escolher Arquivo">
         </div>
         <div id="enviar-principal"> <!-- CAMPO DE BOTAO E SUBMISSAO -->

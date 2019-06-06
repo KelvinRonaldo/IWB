@@ -1,3 +1,9 @@
+<?php
+    require_once("./bd/conexao.php");
+    $conexao = conexaoMySql();
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -6,8 +12,11 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/slider.css" media="screen">
         <link rel="stylesheet" href="css/fontes.css">
-        <script src="js/jssor.slider-27.5.0.min.js"></script>
-        <script src="js/slider.js"></script>
+        <script src="./js/jssor.slider-27.5.0.min.js"></script>
+        <script src="./js/slider.js"></script>
+        <script src="./cms/js/jquery-3.3.1.min.js"></script>
+        <script src="./js/menu_categorias.js"></script>
+        <script src="./js/filtrarProdutos.js"></script>
         <title>Road Runner Cross Bikes SA</title>
         <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
     </head>
@@ -16,7 +25,7 @@
         <div id="pagina">
             <!-- IMPORTANDO O HEADER -->
             <?php 
-                require_once('header.html');
+                require_once('./header.html');
             ?>
             <!-- AREA ONDE ESTÁ TODA ESTRUTURA DO SITE, EXCETO HEADER E FOOTER -->
             <div id="tudo" class="center">
@@ -25,6 +34,14 @@
                         require_once('slider.php');
                     ?>
                 </div>
+
+                <div id="imagem-home-mobile">
+                    <figure>
+                        <img id="img-home" src="imgs/009.jpg" alt="Imagem Principal Home" title="Imagem Principal Home">
+                    </figure>
+
+                </div>
+
                 <!-- AREA QUE SEGURA TODO CONTEUDO DA PAGINA -->
                 <div id="conteudo">
 
@@ -47,54 +64,66 @@
                         </a>
                     </div>
 
-                    <!-- MENU À ESQUERDA DA PAGINA -->
-                    <ul id="menu-esq">
+                    <div id="abrir-menu" class="flexbox">
+                        <figure>
+                            <img class="icon-filter" src="./imgs/mobile/filtro.png">
+                        </figure>
+                    </div>
+
                         <!-- ITEM DO MENU -->
-                        <li class="item-menu-esq">
-                            <a href="#">
-                                <h3>Item de Menu</h3>
-                            </a>
-                        </li>
-                        <li class="item-menu-esq">
-                            <a href="#">
-                                <h3>Item de Menu</h3>
-                            </a>
-                        </li>
-                    </ul>
+                    <div id="container-categoria-menu" class="container-categoria-menu">
+                    <!-- MENU À ESQUERDA DA PAGINA -->
+                        <div id="menu-esq" class="menu-categoria-close">
+                            <?php
+                                $sqlCategoria = "SELECT * FROM tbl_categoria WHERE status = 'ativado'";
+                                $selectCategoria = mysqli_query($conexao, $sqlCategoria);
+
+                                while($rsCategorias = mysqli_fetch_array($selectCategoria)){
+                                $codCategoria = $rsCategorias['cod_categoria'];
+                                $categoria = $rsCategorias['categoria'];
+                            ?>
+                            <div class="item-menu-esq">
+                                <h3 onclick="buscarPorProdutosFiltros(<?= $codCategoria?>, 0)"><?php echo $categoria; ?></h3>
+                                <div class="icon-subcategorias">
+                                    <!-- <p>+</p> -->
+                                    <figure>
+                                        <img src="./imgs/plus.png" class="icon-show-categories">
+                                    </figure>
+                                </div>
+
+                                <ul class="caixa-subitem-menu-esq esconder">
+                                    <?php
+                                        $sqlSubcategoria = "SELECT distinct s.subcategoria,s.cod_subcategoria
+                                        FROM tbl_categoria AS c
+                                        INNER JOIN tbl_produto_subcategoria_categoria AS tpsc
+                                        ON c.cod_categoria = tpsc.cod_categoria
+                                        INNER JOIN tbl_subcategoria AS s
+                                        ON tpsc.cod_subcategoria = s.cod_subcategoria
+                                        WHERE c.status = 'ativado' AND s.status = 'ativado'
+                                        AND c.cod_categoria = ".$codCategoria;
+
+                                        $selectSubcategoria = mysqli_query($conexao, $sqlSubcategoria);
+
+                                        while($rsSubcategorias = mysqli_fetch_array($selectSubcategoria)){
+                                        $codSubategoria = $rsSubcategorias['cod_subcategoria'];
+                                        $subcategoria = $rsSubcategorias['subcategoria'];
+                                    ?>
+                                    <li class="subitem-menu-esq">
+                                        <h3 class="subitem-menu-esq-h3" onclick="buscarPorProdutosFiltros(<?= $codCategoria.', '.$codSubategoria; ?>)"><?= $subcategoria?></h3>
+                                    </li>
+                                    <?php
+                                        }
+                                    ?>
+                                </ul>
+                            </div>
+                            <?php
+                                }
+                            ?>                            
+                        </div>
+                    </div>
                     
                     <!-- AREA ONDE ESTÃO OS PRODUTOS DA LOJA -->
                     <div id="produtos">
-                        <?php
-                            for($cont = 0; $cont < 15; $cont++){
-                        ?>
-                        <!-- AREA INDIVIDUAL QUE SEGURA AS INFORMAÇÃOES DE CADA PRODUTO -->
-                        <div class="produto">
-                            <!-- IMAGEM DO PRODUTO -->
-                            <figure>
-                                <div class="produto-img center">
-                                    <img src="imgs/biketemp.jpg" class="img-div" alt="#" title="#">
-                                </div>
-                            </figure>
-                            <!-- NOME DO PRODUTO -->
-                            <div class="nome-texts">
-                                <p class="produto-nome">Bicicleta koan Mahuna - Aro 29" - Alumínio - 27V </p>
-                            </div>
-                            <!-- DESCRIÇÃO DO PRODUTO -->
-                            <div class="descricao-texts">
-                                <p class="produto-descricao">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nesciunt mollitia obcaecati facilis, dolorumnW.
-                                </p>
-                            </div>
-                            <!-- PREÇO DO PRODUTO -->
-                            <div class="preco-texts">
-                                <p class="produto-preco">R$259,90</p>
-                            </div>
-                            <!-- LINK PARA ACESSAR OS DETALHES DO PRODUTO -->
-                            <a class="detalhes" href="#">Detalhes</a>
-                        </div>
-                        <?php
-                            }
-                        ?>
                     </div>
                 </div>
             </div>

@@ -56,19 +56,19 @@
         <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        <!-- AREA QUE SEGURADO TODA A PAGINA -->
+        <!-- AREA QUE SEGURADO TODA A PAGINA-->
         <div id="pagina">
-            <!-- IMPORTANDO HEADER DA PAGINA -->
+            <!-- IMPORTANDO HEADER DA PAGINA-->
             <?php 
                 require_once('header.html');
             ?>
-            <!-- AREA ONDE ESTÁ TODA ESTRUTURA DO SITE, EXCETO HEADER E FOOTER -->
+            <!-- AREA ONDE ESTÁ TODA ESTRUTURA DO SITE, EXCETO HEADER E FOOTER-->
             <div id="tudo" class="center">
                 <!-- AREA COM TITULO DA PAGINA -->
                 <div id="titulo-pagina">
                     <h1>NOTÍCIAS EM DESTAQUE</h1>
                 </div>
-                <!-- AREA ONDE ESTÃO AS NOTICIAS PRINCIPAIS -->
+                <!-- AREA ONDE ESTÃO AS NOTICIAS PRINCIPAIS-->
                 <article id="noticias-principais">
                     <!-- AREA DAS REDES SOCIAIS -->
                     <div id="redes-sociais-noticias">
@@ -89,7 +89,7 @@
                         </a>
                     </div>
 
-                    <!-- NOTICIAS PRINCIPAIS A ESQUERDA -->
+                    <!-- NOTICIAS PRINCIPAIS A ESQUERDA-->
                     <div id="principais-esq">
                         <!-- AREA DA PRIMEIRA NOTICIA PRINCIPAL -->
                         <div id="noticia-principal1">
@@ -105,7 +105,7 @@
                     </div>
                     <!-- NOTICIAS PRINCIPAIS A DIREITA -->
                     <div id="principais-dir">
-                        <!-- AREA DA SEGUNDA NOTICIA PRINCIPAL -->
+                        <!-- AREA DA SEGUNDA NOTICIA PRINCIPAL-->
                         <div id="noticia-principal2">
                             <div id="conteudo-principal2" style="background-image: url(./arquivos/<?php echo($imgNvl2 == null ? $imgIndisponivel : $imgNvl2); ?>);">
                                 <div id="texto-principal2">
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- AREA DA TERCEIRA NOTICIA PRINCIPAL -->
+                        <!-- AREA DA TERCEIRA NOTICIA PRINCIPAL-->
                         <div id="noticia-principal3">
                             <div id="conteudo-principal3" style="background-image: url(./arquivos/<?php echo($imgNvl3 == null ? $imgIndisponivel : $imgNvl3); ?>);">
                                 <div id="texto-principal3">
@@ -126,13 +126,13 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </article>
 
-                <!-- AREA DO DO CONTEUDO  DA PAGINA -->
+                <!-- AREA DO DO CONTEUDO  DA PAGINA-->
                 <div id="conteudo">
-                    <!-- NOTICIAS A ESQUERDA DO SITE  -->
+                    <!-- NOTICIAS A ESQUERDA DO SITE -->
                     <article id="noticias-esq">
                         <?php
                             $sql = "SELECT * FROM tbl_noticia";
@@ -148,7 +148,7 @@
                                     $dataDb = explode("-", $rsNoticia['data']);
                                     $data = $dataDb[2]."/".$dataDb[1]."/".$dataDb[0];
                         ?>
-                        <!-- AREA QUE SEGURA AS INFORMAÇÕES DA NOTICIA -->
+                        <!-- AREA QUE SEGURA AS INFORMAÇÕES DA NOTICIA-->
                         <div class="container-noticias">
                             <!-- IMAGEM RELACIONADA A NOTICIA -->
                             <div class="img-noticias" style="background-image: url(./arquivos/<?php echo($imagem); ?>);">                            
@@ -164,7 +164,7 @@
                                         <h2><?php echo($tituloNoticia); ?></h2>
                                     </a>
                                 </div>
-                                <!-- PEQUENO TEXTO QUE RESUME A NOTICIA -->
+                                <!-- PEQUENO TEXTO QUE RESUME A NOTICIA-->
                                 <div class="resumo-noticias">
                                     <p> <?php echo($resumo); ?> </p>
                                 </div>
@@ -175,13 +175,13 @@
                             }
                         ?>
                     </article>
-                    <!-- AREA A ESQUERDA ONDE FICAM AS NOTICIAS MAIS RECENTES DO SITE -->
+                    <!-- AREA A ESQUERDA ONDE FICAM AS NOTICIAS MAIS RECENTES DO SITE-->
                     <div id="noticias-dir">
                         <div id="topo-recentes">
                             <h2>MAIS RECENTES</h2>
                         </div>
                         <div class="mais-recentes">           
-                            <!-- LISTA DE NOTICIAS MASI RECENTES          -->
+                            <!-- LISTA DE NOTICIAS MASI RECENTES  -->       
                             <ul>
                                 <li class="item-recentes">
                                     <a href="#">
@@ -190,14 +190,14 @@
                                 </li>
                                 <li class="item-recentes">
                                     <a href="#">
-                                        Lorem ipsum dolor sit amet, consectetur.
+                                        Quando você clica em Design e escolhe um novo tema, as imagens, gráficos e elementos gráficos SmartArt são alterados para corresponder ao novo tema. 
                                     </a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
             <!-- IMPORTANDO FOOTER DA PAGINA -->
             <?php 
                 require_once('footer.html');

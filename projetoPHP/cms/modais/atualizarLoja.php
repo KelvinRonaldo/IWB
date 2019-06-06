@@ -43,7 +43,7 @@
         <!-- <input hidden type="text" name="txt_cod_endereco" value="<?php echo(!empty($codEndereco) ? $codEndereco : ''); ?>"> -->
         <div id="caixa-cep" class="flexbox">
             <h3><label for="cep" >Cep:</label></h3>
-            <input type="text" id="cep" name="txt_cep" value="<?php echo(!empty($cep) ? $cep : ''); ?>"> <!-- CAMPO DO CEP -->
+            <input maxlength="9" type="text" id="cep" name="txt_cep" value="<?php echo(!empty($cep) ? $cep : ''); ?>"> <!-- CAMPO DO CEP -->
         </div>
         <div id="caixa-estado" class="flexbox">
             <h3><label >Estado:</label></h3>
@@ -59,10 +59,10 @@
         </div>
         <div id="caixa-numero">
             <h3><label for="numero" >Nº :</label></h3>
-            <input type="text" id="numero" name="txt_numero" value="<?php echo(!empty($numero) ? $numero : ''); ?>"> <!-- CAMPO DO NUMERO -->
+            <input maxlength="10" type="text" id="numero" name="txt_numero" value="<?php echo(!empty($numero) ? $numero : ''); ?>"> <!-- CAMPO DO NUMERO -->
         </div>     
         <div id="caixa-bairro" class="flexbox">
-            <h3><label >Bairro:</label></h3>
+            <h3><label>Bairro:</label></h3>
             <input type="text" id="bairro" name="txt_bairro" readonly value="<?php echo(!empty($bairro) ? $bairro : ''); ?>"> <!-- CAMPO DO BAIRRO -->
         </div>
         <div id="caixa-btn-loja" class="flexbox">

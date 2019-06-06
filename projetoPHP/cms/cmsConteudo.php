@@ -2,6 +2,8 @@
 
     require_once ('./verificarUsuario.php'); // VERIFICAR SE USUARIO ESTA LOGADO
 
+//    VERIFICAR SE O USUARIO LOGADO TEM PERMISSÃO PARA ACESSAR ESTA PÁGINA
+    if($_SESSION['adm_conteudo'] == 'ativado'){
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -100,3 +102,13 @@
         </div>
     </body>
 </html>
+<?php
+    }else{
+        $userName = $_SESSION['user_name'];
+        echo
+        "<script>
+            alert('Usuário $userName não tem permissão de acesso à esta página.');
+            window.history.back();
+        </script>";
+    }
+?>

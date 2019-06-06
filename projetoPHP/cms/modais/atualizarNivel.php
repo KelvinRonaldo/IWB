@@ -24,7 +24,7 @@
         $admFaleConosco = $rsNivel['adm_fale_conosco'] == 'ativado' ? 'checked' : '';
         $admProdutos = $rsNivel['adm_produto'] == 'ativado' ? 'checked' : '';
         $admUsuarios = $rsNivel['adm_usuario'] == 'ativado' ? 'checked' : '';
-        $_SESSION['cod_nivel_usuario'] = $codNivelUsuario;
+        $_SESSION['cod_nivel_usuario_atual'] = $codNivelUsuario;
     }
 
 ?>
@@ -33,7 +33,7 @@
 <script>
     $(document).ready(function(){
         $('#fechar-modal-nivel').click(function(){
-            $('#container').fadeOut(300);
+            $('#container-nivel').fadeOut(300);
         });
     });
 </script>
@@ -45,7 +45,7 @@
     <div id="container-edit-nivel">
         <div id="nome-nivel" class="flexbox">
             <h3><label>Nome Nível:</label></h3>
-            <input type="text" id="txt-nome-nivel" name="txt_nome_nivel" value="<?php echo $nomeNivel ?>">
+            <input maxlength="30" type="text" id="txt-nome-nivel" name="txt_nome_nivel" value="<?php echo $nomeNivel ?>">
         </div>
         <h3><label>PERMISSÕES:</label></h3>
         <hr>

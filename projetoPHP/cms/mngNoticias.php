@@ -18,21 +18,21 @@
             if(!empty($_POST['txt_titulo']) && !empty($_POST['txt_autor']) && !empty($_POST['txt_resumo']) && $erroImg == 0){
                 echo 'preenchidos';
 
-                $titulo = $_POST['txt_titulo'];
-                $autor = $_POST['txt_autor'];
+                $titulo = trim($_POST['txt_titulo']);
+                $autor = trim($_POST['txt_autor']);
                 if(!empty($_POST['txt_data'])){
-                    $dataTxt = explode("/", $_POST['txt_data']);
+                    $dataTxt = explode("/", trim($_POST['txt_data']));
                     $data = $dataTxt[2]."-".$dataTxt[1]."-".$dataTxt[0];
                 }else{
                     $data = date('Y-m-d', time());
                 }
-                $resumo = $_POST['txt_resumo'];
+                $resumo = trim($_POST['txt_resumo']);
 
                 $imagem = salvarArquivo($_FILES['foto_noticia'], 'inserir');
 
                 if($imagem != 'sizeError' && $imagem != 'extensionError'){
                     $sql = "INSERT INTO tbl_noticia (titulo_noticia, autor, data, resumo, imagem, status)
-                            VALUES ('".$titulo."','".$autor."','".$data."','".$resumo."','".$imagem."','desativado')";
+                            VALUES ('".addslashes($titulo)."','".addslashes($autor)."','".addslashes($data)."','".addslashes($resumo)."','".addslashes($imagem)."','desativado')";
 
                     if(mysqli_query($conexao, $sql)){
                         echo $imagem;
@@ -59,22 +59,22 @@
 
             if(!empty($_POST['txt_titulo']) && !empty($_POST['txt_autor']) && !empty($_POST['txt_resumo'])){
 
-                $titulo = $_POST['txt_titulo'];
-                $autor = $_POST['txt_autor'];
+                $titulo = trim($_POST['txt_titulo']);
+                $autor = trim($_POST['txt_autor']);
                 if(!empty($_POST['txt_data'])){
-                    $dataTxt = explode("/", $_POST['txt_data']);
+                    $dataTxt = explode("/", trim($_POST['txt_data']));
                     $data = $dataTxt[2]."-".$dataTxt[1]."-".$dataTxt[0];
                 }else{
                     $data = date('Y-m-d', time());
                 }
-                $resumo = $_POST['txt_resumo'];
+                $resumo = trim($_POST['txt_resumo']);
 
                 if($_FILES['foto_noticia']['name'] != null){
                     $imagem = salvarArquivo($_FILES['foto_noticia'], 'atualizar');
 
                     if($imagem != 'sizeError' && $imagem != 'extensionError'){
                         $sqlUp = "UPDATE tbl_noticia
-                        SET titulo_noticia = '".$titulo."', autor = '".$autor."', data = '".$data."', imagem = '".$imagem."', resumo = '".$resumo."'
+                        SET titulo_noticia = '".addslashes($titulo)."', autor = '".addslashes($autor)."', data = '".addslashes($data)."', imagem = '".addslashes($imagem)."', resumo = '".addslashes($resumo)."'
                         WHERE cod_noticia = ".$_SESSION['cod_noticia'];
                     }elseif($imagem == 'extensionError'){
                         echo("<script>alert('O TIPO DO ARQUIVO ESCOLHIDO É INVÁLIDO.')</script>");
@@ -83,7 +83,7 @@
                     }
                 }else{
                     $sqlUp = "UPDATE tbl_noticia
-                    SET titulo_noticia = '".$titulo."', autor = '".$autor."', data = '".$data."', resumo = '".$resumo."'
+                    SET titulo_noticia = '".addslashes($titulo)."', autor = '".addslashes($autor)."', data = '".addslashes($data)."', resumo = '".addslashes($resumo)."'
                     WHERE cod_noticia = ".$_SESSION['cod_noticia'];
                 }
                 
@@ -104,29 +104,29 @@
     // INSERÇÃO DE 'NOTICIA PRINCIPAL' NO BANCO
     if(isset($_POST['btn_enviar_principais'])){
         
-        if(isset($_POST['txt_titulo']) && isset($_POST['txt_autor']) && isset($_POST['txt_resumo']) && isset($_POST['cmb_destaque'])){
+        if(isset($_POST['txt_titulo']) && isset($_POST['txt_resumo']) && isset($_POST['cmb_destaque'])){
             
             $erroImg = $_FILES['foto_noticia']['error'];
 
-            if(!empty($_POST['txt_titulo']) && !empty($_POST['txt_autor']) && !empty($_POST['txt_resumo']) && !empty($_POST['cmb_destaque']) && $erroImg == 0){
+            if(!empty($_POST['txt_titulo']) && !empty($_POST['txt_resumo']) && !empty($_POST['cmb_destaque']) && $erroImg == 0){
 
                 
-                $titulo = $_POST['txt_titulo'];
-                $autor = $_POST['txt_autor'];
+                $titulo = trim($_POST['txt_titulo']);
+                $autor = trim($_POST['txt_autor']);
                 if(!empty($_POST['txt_data'])){
-                    $dataTxt = explode("/", $_POST['txt_data']);
+                    $dataTxt = explode("/", trim($_POST['txt_data']));
                     $data = $dataTxt[2]."-".$dataTxt[1]."-".$dataTxt[0];
                 }else{
                     $data = date('Y-m-d', time());
                 }
-                $resumo = $_POST['txt_resumo'];
+                $resumo = trim($_POST['txt_resumo']);
                 $destaque = $_POST['cmb_destaque'];
 
                 $imagem = salvarArquivo($_FILES['foto_noticia'], 'inserir');
 
                 if($imagem != 'sizeError' && $imagem != 'extensionError'){
                     $sql = "INSERT INTO tbl_noticia_principal (titulo_noticia, autor, data, resumo, imagem, status, cod_destaque)
-                    VALUES ('".$titulo."','".$autor."','".$data."','".$resumo."','".$imagem."', 'desativado', ".$destaque.")";
+                    VALUES ('".addslashes($titulo)."','".addslashes($autor)."','".addslashes($data)."','".addslashes($resumo)."','".addslashes($imagem)."', 'desativado', ".$destaque.")";
 
                     if(mysqli_query($conexao, $sql)){
                         header('location: mngNoticias.php');
@@ -147,26 +147,26 @@
         }
     }elseif(isset($_POST['btn_atualizar_principais'])){// ATUALIZAÇÃO DE 'NOTICIA PRINCIPAL' NO BANCO
         
-        if(isset($_POST['txt_titulo']) && isset($_POST['txt_autor']) && isset($_POST['txt_resumo']) && isset($_POST['cmb_destaque'])){
+        if(isset($_POST['txt_titulo']) && isset($_POST['txt_resumo']) && isset($_POST['cmb_destaque'])){
 
-            if(!empty($_POST['txt_titulo']) && !empty($_POST['txt_autor']) && !empty($_POST['txt_resumo']) && !empty($_POST['cmb_destaque'])){
+            if(!empty($_POST['txt_titulo']) && !empty($_POST['txt_resumo']) && !empty($_POST['cmb_destaque'])){
                 
-                $titulo = $_POST['txt_titulo'];
-                $autor = $_POST['txt_autor'];
+                $titulo = trim($_POST['txt_titulo']);
+                $autor = trim($_POST['txt_autor']);
                 if(!empty($_POST['txt_data'])){
-                    $dataTxt = explode("/", $_POST['txt_data']);
+                    $dataTxt = explode("/", trim($_POST['txt_data']));
                     $data = $dataTxt[2]."-".$dataTxt[1]."-".$dataTxt[0];
                 }else{
                     $data = date('Y-m-d', time());
                 }
-                $resumo = $_POST['txt_resumo'];
-                $destaque = $_POST['cmb_destaque']; 
+                $resumo = trim($_POST['txt_resumo']);
+                $destaque = trim($_POST['cmb_destaque']); 
                 
                 if($_FILES['foto_noticia']['name'] != null){
                     $imagem = salvarArquivo($_FILES['foto_noticia'], 'atualizar');
                     if($imagem != "extensionError" && $imagem != "sizeError"){
                         $sqlUp = "UPDATE tbl_noticia_principal
-                        SET titulo_noticia = '".$titulo."', autor = '".$autor."', data = '".$data."', resumo = '".$resumo."', imagem = '".$imagem."',cod_destaque = '".$destaque."'
+                        SET titulo_noticia = '".addslashes($titulo)."', autor = '".addslashes($autor)."', data = '".addslashes($data)."', resumo = '".addslashes($resumo)."', imagem = '".addslashes($imagem)."',cod_destaque = '".$destaque."', status = 'desativado'
                         WHERE cod_noticia = ".$_SESSION['cod_noticia'];
 
                     }elseif($imagem == 'extensionError'){
@@ -176,7 +176,7 @@
                     }
                 }else{
                     $sqlUp = "UPDATE tbl_noticia_principal
-                    SET titulo_noticia = '".$titulo."', autor = '".$autor."', data = '".$data."', resumo = '".$resumo."', cod_destaque = '".$destaque."'
+                    SET titulo_noticia = '".addslashes($titulo)."', autor = '".addslashes($autor)."', data = '".addslashes($data)."', resumo = '".addslashes($resumo)."', cod_destaque = '".$destaque."', status = 'desativado'
                     WHERE cod_noticia = ".$_SESSION['cod_noticia'];
                 }
 
@@ -270,28 +270,26 @@
                         data: {modo: modo, codigo: codNoticia},
                         success: function(dados){
                             $('#modal-noticia').html(dados);
-                        },
-                        erro: function(){
-                            alert('Erro!');
                         }
                     });
                 }
             }
             // FUNÇÃO QUE ATIVA OU DESATIVA NOTICIAS
-            function ativarDesativarNoticia(tipo, status, codigo, destaque) {
+            function ativarDesativarNoticia(tipo, status, codigo, codDestaque) {
+                console.log(tipo+"\n"+status+"\n"+codigo+"\n"+codDestaque);
                 $.ajax({
                     url:'./status.php',
-                    data: {pagina: 'noticias', noticia: tipo, status: status, codigo:codigo, nvl_destaque: destaque},
+                    data: {pagina: 'noticias', noticia: tipo, status: status, codigo:codigo, nvl_destaque: codDestaque},
                     complete: function (response) {
-                        alert(response.responseText);
+                        console.log(response.responseText);
                         location.reload();
                     },
                     error: function () {
                         alert('Erro');
                     }
-                });  
+                });
 
-                return false;
+                // return false;
             }
             // FUNÇÃO QUE CONFIRMA  A EXCLUSÃO DE UMA NOTICIA GERAL
             const confirmarExclusaoGeral = (titulo) => {
@@ -365,9 +363,8 @@
                                     $tipoNoticia = "'".'geral'."'";
                                     $imagemNoticia = $rsNoticia['imagem'];
 
-                                    $alt = $rsNoticia['status'] == 'ativado' ? 'Ativar' : 'Desativar';
-                                    $title = $rsNoticia['status']== 'ativado' ? 'Ativar' : 'Desativar';
-                                    $img = $rsNoticia['status']== 'ativado' ? 'ativado.png' : 'desativado.png';
+                                    $altTitleGeral = $rsNoticia['status'] == 'ativado' ? 'Desativar Noticia Geral '.$codNoticia : 'Ativar Notícia Geral '.$codNoticia;
+                                    $imgStatusGeral = $rsNoticia['status']== 'ativado' ? 'ativado.png' : 'desativado.png';
                             ?>
                             <tr class="tables-registers">
                                 <td class="txt-titulo"><?php echo($rsNoticia['titulo_noticia']); ?></td>
@@ -389,7 +386,7 @@
                                 <td class="txt-status">
                                     <figure>
                                         <!-- BOTAO QUE ATIVA OU DESATIVA NOTICIA -->
-                                        <img onclick="ativarDesativarNoticia('geral', <?php echo($status.', '.$codNoticia.', 0');?>)" class="icon-status" alt="<?php echo($alt); ?> Registro" Registro" title="<?php echo($title); ?> Registro" src="icons/<?php echo($img); ?>">
+                                        <img onclick="ativarDesativarNoticia('geral', <?php echo($status.', '.$codNoticia.', 0');?>)" class="icon-status" alt="<?php echo($altTitleGeral); ?>" title="<?php echo($altTitleGeral); ?>" src="icons/<?php echo($imgStatusGeral); ?>">
                                     </figure>
                                 </td>
                             </tr>
@@ -442,8 +439,8 @@
                     <div id="tabela-principais">
                         <table id="table-principais">
                             <tr class="table-titles">
-                                <th class="title-titulo">Título</th>
-                                <th class="title-autor">Autor</th>
+                                <th class="title-titulo-principal">Título da Notícia</th>
+                                <th class="title-img">Imagem</th>
                                 <th class="title-nivel">Nível</th>
                                 <th class="title-editar">Editar</th>
                                 <th class="title-excluir">Excluir</th>
@@ -454,42 +451,50 @@
                                 // O PARÂMETRO WHERE DO SQL PARA QUE O SELECT DO SQL O RECEBA, E FAÇA UMA COMPARAÇÃO DE = COM O CÓDIGO SELECIONADO
                                 if(isset($_GET['codDtq']) && $_GET['codDtq'] != 0){
                                     $codUrlDestaque = $_GET['codDtq'];
-                                    $where = "WHERE np.cod_destaque = ".$codUrlDestaque;
+                                    $where = "WHERE noticias_principais.cod_destaque = ".$codUrlDestaque;
                                 }else{
                                     // SE UM NIVEL DE DESTAQUE NÃO FOI SELECIONADO, UMA VARIÁVEL RECEBE 0 E OUTRA E RECEBE O
                                     // PARÂMETRO WHERE DO SQL PARA QUE DEPOIS, O SELECT SQL O RECEBA E FAÇA UMA COMPARAÇÃO DE 
                                     // > COM O CODIGO QUE É 0 PARA QUE TRAGA TODOS OS REGISTRO EXISTENTES DO BANCO
                                     $codUrlDestaque = 0;
-                                    $where = "WHERE np.cod_destaque > ".$codUrlDestaque;
+                                    $where = "WHERE noticias_principais.cod_destaque > ".$codUrlDestaque;
                                 }
                                 
-                                // SCRIPT SLQ QUE TRAZ DO BANCO A LISTA DE NOTICIAS GERAIS ADICIONADAS
-                                $sql = "SELECT np.cod_noticia, np.titulo_noticia,
-                                np.status, np.resumo, np.cod_destaque,
-                                np.autor, np.cod_destaque, np.imagem, dnp.destaque
-                                FROM tbl_noticia_principal AS np
-                                INNER JOIN tbl_destaque_noticia_principal AS dnp 
-                                ON np.cod_destaque = dnp.cod_destaque ".$where;
-                                
+                                // SCRIPT SLQ QUE TRAZ DO BANCO A LISTA DE NOTICIAS PRINCICPAIS ADICIONADAS
+                                $sql = "SELECT noticias_principais.cod_noticia, noticias_principais.titulo_noticia,
+                                noticias_principais.status, noticias_principais.resumo, noticias_principais.cod_destaque,
+                                noticias_principais.autor, noticias_principais.cod_destaque, noticias_principais.imagem, destaque_principais.destaque
+                                FROM tbl_noticia_principal AS noticias_principais
+                                INNER JOIN tbl_destaque_noticia_principal AS destaque_principais 
+                                ON noticias_principais.cod_destaque = destaque_principais.cod_destaque ".$where;
+//                                echo $sql;
                                 $select = mysqli_query($conexao, $sql);
                                 
-                                while($rsNoticia = mysqli_fetch_array($select)){
-                                    $titulo = $rsNoticia['titulo_noticia'];
-                                    $status = "'".$rsNoticia['status']."'";
-                                    $autor = $rsNoticia['autor'];
-                                    $codNoticia = $rsNoticia['cod_noticia'];
-                                    $destaque = "'".$rsNoticia['destaque']."'";
-                                    $codDestaque = $rsNoticia['cod_destaque'];
+                                while($rsNoticiaPrincipal = mysqli_fetch_array($select)){
+                                    $titulo = $rsNoticiaPrincipal['titulo_noticia'];
+                                    $status = "'".$rsNoticiaPrincipal['status']."'";
+                                    $autor = $rsNoticiaPrincipal['autor'];
+                                    $codNoticia = $rsNoticiaPrincipal['cod_noticia'];
+                                    $destaque = "'".$rsNoticiaPrincipal['destaque']."'";
+                                    $codDestaque = $rsNoticiaPrincipal['cod_destaque'];
                                     $tipoNoticia = "'".'principal'."'";
-                                    $imagemNoticia = $rsNoticia['imagem'];
+                                    $imagemNoticia = $rsNoticiaPrincipal['imagem'];
 
-                                    $alt = $rsNoticia['status'] == 'ativado' ? 'Desativar' : 'Ativar';
-                                    $title = $rsNoticia['status'] == 'ativado' ? 'Desativar' : 'Ativar';
-                                    $img = $rsNoticia['status'] == 'ativado' ? 'ativado.png' : 'desativado.png';
+                                    $altTitlePrincipal = $rsNoticiaPrincipal['status'] == 'ativado' ? 'Desativar Noticia Principal '.$codNoticia : 'Ativar Notícia Principal '.$codNoticia;
+                                    $imgPrincipal = $rsNoticiaPrincipal['status'] == 'ativado' ? 'ativado.png' : 'desativado.png';
                             ?>
                             <tr class="tables-registers">
-                                <td class="txt-titulo"><?php echo($titulo); ?></td>
-                                <td class="txt-autor"><?php echo($autor); ?></td>
+                                <td class="txt-titulo-principal"><?php echo($titulo); ?></td>
+                                <td class="txt-img show-img">
+                                    <figure>
+                                        <img class="icon-img" src="icons/img.png">
+                                    </figure>
+                                    <div class="view-img">
+                                        <figure>
+                                            <img class="img-view" title="<?php echo($imagemNoticia); ?>" src="../arquivos/<?php echo($imagemNoticia); ?>">
+                                        </figure>
+                                    </div>
+                                </td>
                                 <td class="txt-nivel">
                                     <figure>
                                         <img class="icon-lvl" alt="Notícia de <?php echo($destaque); ?>" title="Notícia de <?php echo($destaque); ?>" src="icons/nvl<?php echo($codDestaque); ?>.png">
@@ -512,7 +517,7 @@
                                 <td class="txt-status">
                                     <figure>
                                         <!-- BOTAO QUE ATIVA OU DESATIVA NOTICIA -->
-                                        <img onclick="ativarDesativarNoticia('principal', <?php echo($status.', '.$codNoticia.', '.$destaque);?>)" class="icon-status" alt="<?php echo($alt); ?> Registro" title="<?php echo($title); ?> Registro" src="icons/<?php echo($img); ?>">
+                                        <img onclick="ativarDesativarNoticia('principal', <?php echo($status.', '.$codNoticia.', '.$codDestaque);?>)" class="icon-status" alt="<?php echo($altTitlePrincipal); ?>" title="<?php echo($altTitlePrincipal); ?>" src="icons/<?php echo($imgPrincipal); ?>">
                                     </figure>
                                 </td>
                             </tr>
