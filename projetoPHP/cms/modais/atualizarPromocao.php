@@ -85,7 +85,7 @@
         <div id="descricao-pagamento">
             <div id="numero-parcelas" class="flexbox">
                 <h3><label>Nº de parcelas:</label></h3>
-                <input type="text" id="txt-numero-parcelas" name="txt_numero_parcelas" value="<?php echo $numeroParcelas ?>">
+                <input maxlength="3" type="text" id="txt-numero-parcelas" name="txt_numero_parcelas" value="<?php echo $numeroParcelas ?>">
             </div>
             <div id="metodo-pagamento" class="flexbox">
                 <h3><label>Método de Pagamento:</label></h3>

@@ -32,12 +32,21 @@
                 <div id="conteudo-eventos">
                     <?php
 
-                        $sql = "SELECT ev.cod_evento, ev.titulo_evento, ev.descricao, ev.data, ev.host, ev.entrada, ev.status, ev.imagem,
-                        e.logradouro, e.numero, e.bairro, e.cep, c.cidade, es.uf
-                        FROM tbl_evento AS ev INNER JOIN tbl_endereco AS e ON ev.cod_endereco = e .cod_endereco
-                        INNER JOIN tbl_cidade AS c ON e.cod_cidade = c.cod_cidade
-                        INNER JOIN tbl_estado AS es ON c.cod_estado = es.cod_estado
-                        WHERE ev.status = 'ativado';";
+                        $sql = "SELECT tabEvent.cod_evento, tabEvent.titulo_evento, tabEvent.host, 
+                        tabEvent.entrada, tabEvent.descricao, tabEvent.data, tabEvent.imagem,
+                        tabEvent.status, tabEvent.cod_endereco, 
+                        tabAddress.logradouro, tabAddress.numero,
+                        tabAddress.bairro, tabAddress.cep,
+                        tabCity.cidade, tabCity.cod_cidade, 
+                        tabState.estado, tabState.cod_estado, tabState.uf
+                        FROM tbl_evento AS tabEvent
+                        INNER JOIN tbl_endereco AS tabAddress
+                        ON tabEvent.cod_endereco = tabAddress.cod_endereco
+                        INNER JOIN tbl_cidade AS tabCity
+                        ON tabAddress.cod_cidade = tabCity.cod_cidade
+                        INNER JOIN tbl_estado AS tabState
+                        ON tabCity.cod_estado = tabState.cod_estado
+                        WHERE tabEvent.status = 'ativado'";
 
                         $select = mysqli_query($conexao, $sql);
 
@@ -65,7 +74,7 @@
                     <div class="container-evento">
                         <!-- AREA COM IMAGEM E TEXTO(TITULO E DESCRICAO) DO EVENTO-->
                         <div class="img-txt-evento">
-                            <div class="img-evento">
+                            <div class="img-evento flexbox">
                                 <!-- IMAGEM DO EVENTO -->
                                 <figure>
                                     <img class="img-src-evento" alt="Evento X" title="Evento X" src="./arquivos/<?php echo(isset($imagem)? $imagem : 'naoDisponivel.jpg'); ?>">

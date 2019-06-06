@@ -59,5 +59,6 @@ rangePercentual.addEventListener('input', mostrarPercentual);
 rangePercentual.addEventListener('input', calcular);
 rangePercentual.addEventListener('input', descreverPagamento);
 sltProduto.addEventListener('change', showPreco);
+sltProduto.addEventListener('change', enableDisableRange);
 enableDisableRange();
 descreverPagamento();

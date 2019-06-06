@@ -76,7 +76,7 @@
     <div id="form-modal-eventos">
         <div id="caixa-titulo" class="flexbox">
             <h3><label for="titulo-evento" >Título:</label></h3>
-            <input maxlength="20" type="text" id="titulo-evento" name="txt_titulo" value="<?php echo $titulo ?>"> <!-- CAMPO DO TITULO -->
+            <input maxlength="30" type="text" id="titulo-evento" name="txt_titulo" value="<?php echo $titulo ?>"> <!-- CAMPO DO TITULO -->
         </div>
         <div id="caixa-promotor" class="flexbox">
             <h3><label for="promotor-evento" >Promotor do Evento:</label></h3>
@@ -88,7 +88,7 @@
         </div>
         <div id="caixa-data" class="flexbox">
             <h3><label for="data-evento" >Data:</label></h3>
-            <input type="text" id="data-evento" name="txt_data" value="<?php echo $data ?>"> <!-- CAMPO DO DATA -->
+            <input maxlength="10" placeholder="Ex.: 01/01/2019" type="text" id="data-evento" name="txt_data" value="<?php echo $data ?>"> <!-- CAMPO DO DATA -->
         </div>
         <div id="caixa-imagem" class="flexbox">
             <h3><label for="imagem-evento" >Imagem do Evento:</label></h3>
@@ -96,7 +96,7 @@
         </div>
         <div id="caixa-descricao" class="flexbox">
             <h3><label for="descricao-evento" >Descrição:</label></h3>
-            <textarea type="text" id="descricao-evento" name="txt_descricao"><?php echo $descricao ?></textarea><!-- CAMPO DO DESCRICAO -->
+            <textarea maxlength="60000" id="descricao-evento" name="txt_descricao"><?php echo $descricao ?></textarea><!-- CAMPO DO DESCRICAO -->
         </div>
         <div id="caixa-cep" class="flexbox">
             <h3><label for="cep" >Cep:</label></h3>
@@ -116,7 +116,7 @@
         </div>
         <div id="caixa-numero">
             <h3><label for="numero" >Nº :</label></h3>
-            <input type="text" id="numero" name="txt_numero" value="<?php echo $numero ?>"> <!-- CAMPO DO NUMERO -->
+            <input maxlength="10" type="text" id="numero" name="txt_numero" value="<?php echo $numero ?>"> <!-- CAMPO DO NUMERO -->
         </div>
         <div id="caixa-bairro" class="flexbox">
             <h3><label >Bairro:</label></h3>

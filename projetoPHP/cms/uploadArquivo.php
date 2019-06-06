@@ -65,11 +65,11 @@
                 $foto = $nomeArquivoCrypt.$extensaoArquivo;
 
                 move_uploaded_file($arquivoTmp, $diretorio.$foto);
-                if($modo == 'atualizar'){
+                if($modo == 'atualizar'){// SE O MODO FOR ATUALIZAR, APAGA A IMAGEM, ANTIGA DO REGISTRO
                     unlink('../arquivos/'.$_SESSION['img']);
                 }
 
-                return $foto;
+                return $foto;//RETORNA O NOME DA FOTO PARA QUE SEJA COLOCADSO NO BANCO
                 
             }else{
                 // Erro Tamanho do arquivo inválido

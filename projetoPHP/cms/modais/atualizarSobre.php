@@ -40,7 +40,7 @@
     <div id="container-modal-sobre" class="flexbox">
         <div id="titulo-sobre" class="flexbox">
             <h3><label for="txt-titulo-sobre">Título da Página Sobre:</label></h3>
-            <input type="text" name="txt_titulo_sobre" id="txt-titulo-sobre" value="<?php echo $tituloSobre; ?>">
+            <input maxlength="25" type="text" name="txt_titulo_sobre" id="txt-titulo-sobre" value="<?php echo $tituloSobre; ?>">
         </div>
         <div id="imagem-sobre" class="flexbox">
             <h3><label for="txt-sobre">Imagem da Página Sobre:</label></h3>
@@ -48,11 +48,11 @@
         </div>
         <div id="assinatura-sobre" class="flexbox">
             <h3><label for="txt-sobre">Assinatura:</label></h3>
-            <input type="text" id="txt-assinatura" name="txt_assinatura" value="<?php echo $assinatura; ?>">
+            <input maxlength="50" type="text" id="txt-assinatura" name="txt_assinatura" value="<?php echo $assinatura; ?>">
         </div>
         <div id="texto-sobre" class="flexbox">
             <h3><label for="txt-sobre">Sobre A Road Runner:</label></h3>
-            <textarea type="text" id="txt-sobre" name="txt_sobre"><?php echo $textoSobre; ?></textarea>
+            <textarea maxlength="60000" id="txt-sobre" name="txt_sobre"><?php echo $textoSobre; ?></textarea>
         </div>
         <div id="caixa-btn-sobre" class="flexbox">
             <input type="submit" name="btn_atualizar_sobre" class="btn-confirmacao" value="ATUALIZAR"> <!-- CAMPO DO CEP -->

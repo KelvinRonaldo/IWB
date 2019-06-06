@@ -12,6 +12,7 @@
     $pgProdutos = strpos($url, "cmsProdutos.php");
     $pgUsuarios = strpos($url, "cmsUsuarios.php");
 
+    //VERIFICA QUAL A PAGINA ATUAL PARA MUDAR TITULO DA PAGINA DO CMS
     if($pgConteudo != null){
         $subtituloPg = "Administrar Conteúdo";
     }elseif($pgNoticias != null){
@@ -43,15 +44,15 @@
                         <h3><?php echo $subtituloPg; ?></h3>
                     </div>
                 </div>
-                <div id="cabecalho-logo">
-                    <figure>
-                        <!-- LINK PARA INICIO DO CMS -->
-                        <!-- <a href="#"> -->
+                <a href="./index.php">
+                    <div id="cabecalho-logo">
+                    <!-- LINK PARA INICIO DO CMS -->
+                        <figure>
                             <div id="logo">
                                 <!-- LOGO DA LOJA -->
-                                <img src="../imgs/bikeicon.png" alt="LOGO" class="img-div" title="LOGO">
+                                <img alt="LOGO" title="LOGO" id="img-logo" src="../imgs/bikeicon.png">
                             </div>
-                        <!-- </a> -->
-                    </figure>
-                </div>
+                        </figure>
+                    </div>
+                </a>
             </header>

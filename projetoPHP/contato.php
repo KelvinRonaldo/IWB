@@ -28,8 +28,12 @@
         $assunto = trim($_POST['txt_assunto']);
         $mensagem = trim($_POST['txt_msg']);
 
-        $sql = "INSERT INTO tbl_fale_conosco (nome, celular, telefone, sexo, email, profissao, home_page, facebook, cod_assunto, mensagem)
-            VALUES ('".$nome."','".$celular."','".$telefone."','".$sexo."','".$email."','".$profissao."','".$homePage."','".$facebook."',".$assunto.",'".$mensagem."')";
+    
+
+        $sql = "INSERT INTO tbl_fale_conosco (nome, celular, telefone, sexo, email, profissao, home_page, facebook, mensagem, cod_assunto)
+            VALUES ('".strip_tags(addslashes($nome))."','".strip_tags(addslashes($celular))."','".strip_tags(addslashes($telefone))."','".strip_tags(addslashes($sexo))."',
+            '".strip_tags(addslashes($email))."','".strip_tags(addslashes($profissao))."','".strip_tags(addslashes($homePage))."',
+            '".strip_tags(addslashes($facebook))."','".strip_tags(addslashes($mensagem))."',".$assunto.")";
 
         if(mysqli_query($conexao, $sql)){
             header('location: contato.php');
@@ -83,7 +87,7 @@
                                 <!-- CAMPO DE DIGITAÇÃO DO CELULAR DO USUARIO -->
                                 <div id="contato-celular">
                                     <h3><label for="txt-celular-contato">celular:</label><span class="obrigatorio">*</span></h3>
-                                    <input maxlength="15" type="tel" placeholder="Ex.: (XX) 00000-0000" name="txt_celular" id="txt-celular-contato" required oninvalid="setCustomValidity('Respeite o formato do campo(espaço e traço opcionais).')" onchange="try{setCustomValidity('')}catch(e){}">
+                                    <input maxlength="15" type="tel" placeholder="Ex.: (XX) 90000-0000" name="txt_celular" id="txt-celular-contato" required oninvalid="setCustomValidity('Respeite o formato do campo(espaço e traço opcionais).')" onchange="try{setCustomValidity('')}catch(e){}">
                                 </div>
                                 <!-- CAMPO DE DIGITAÇÃO DO TELEFONE DO USUARIO -->
                                 <div id="contato-telefone">
