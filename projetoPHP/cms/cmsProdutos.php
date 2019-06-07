@@ -9,7 +9,7 @@
     require_once('../bd/conexao.php');
     $conexao = conexaoMySql();
 
-    if(isset($_POST['modoCategoria']) && $_POST['modoCategoria'] == 'editar'){
+    if(isset($_POST['modoCategoria']) && $_GET['modoCategoria'] == 'editar'){
         $btnEnviarCategoria = "ATUALIZAR";
         $_SESSION['cod_categoria'] = $_POST['codigoCategoria'];
     }else{
@@ -45,7 +45,7 @@
     if(isset($_POST['modoSub']) && $_POST['modoSub'] == 'editar'){
         $btnEnviarSubcategoria = "ATUALIZAR";
         $_SESSION['cod_subcategoria'] = $_POST['codSub'];
-        $_SESSION['cod_relacionamento'] = $_POST['codRelacao'];
+        $_SESSION['cod_relacionamento'] = $_GET['codRelacao'];
 
     }else{
         $btnEnviarSubcategoria = "ENVIAR";
@@ -65,7 +65,7 @@
                     $sql = "INSERT INTO tbl_categoria_subcategoria (cod_categoria, cod_subcategoria)
                             VALUES ('".$codCategoriaSub."', '".$codSubcategoria."')";
                     if(mysqli_query($conexao, $sql)){
-                        header("location: cmsProdutos.php");
+                        header("location: cmsProdutos.php?subcategorias");
                     }else{
                         echo ("relacionamento".$sql);
                         echo "<br>".mysqli_error($conexao);
@@ -104,10 +104,11 @@
         }
     }
 
-    if(isset($_POST['modoProduto']) && $_POST['modoProduto'] == 'editar'){
+    if(isset($_GET['modoProduto']) && $_GET['modoProduto'] == 'editar'){
         $btnEnviarProduto = "ATUALIZAR";
-        $_SESSION['cod_produto'] = $_POST['codProduto'];
-
+        $_SESSION['cod_produto'] = $_GET['codProduto'];
+        $_SESSION['img'] = $_GET['imgProduto'];
+        echo $_SESSION['img'];
     }else{
         $btnEnviarProduto = "ENVIAR";
     }
@@ -115,52 +116,71 @@
     if(isset($_POST['btn_add_produto'])){
         if((isset($_POST['txt_nome_produto']) && !empty($_POST['txt_nome_produto'])) &&
             (isset($_POST['txt_descricao_produto']) && $_POST['txt_descricao_produto'] != null) && 
-            (isset($_POST['txt_preco_produto']) && $_POST['txt_preco_produto'] != null) &&
-            $_FILES['file_produto']['error'] == 0){
+            (isset($_POST['txt_preco_produto']) && $_POST['txt_preco_produto'] != null)){
 
-            echo(".............".$_FILES['file_produto']['error']);
+            echo("............. -->".$_POST['btn_add_produto']."<br>");
             require_once('./uploadArquivo.php');
 
             $produto = $_POST['txt_nome_produto'];
             $descricaoProduto = $_POST['txt_descricao_produto'];
             $precoProduto = str_replace(",", ".", $_POST['txt_preco_produto']);
-            $imagem = salvarArquivo($_FILES['file_produto'], 'inserir');
 
             if($_POST['btn_add_produto'] == 'ENVIAR'){
-                if($imagem != 'sizeError' && $imagem != 'extensionError'){
-                    $sql = "INSERT INTO tbl_produto (nome, descricao, preco, imagem)
-                    VALUES ('".$produto."', '".$descricaoProduto."', ".$precoProduto.", '".$imagem."')";
-
-                    if(mysqli_query($conexao, $sql)){
-                        header('location: cmsProdutos.php');
-                    }else{
-                        echo 'não inserido<br>'.$sql;
-                    }
-
-                }elseif($imagem == 'extensionError'){
-                    echo("<script>alert('O TIPO DO ARQUIVO ESCOLHIDO É INVÁLIDO.')</script>");
-                }elseif($imagem == 'sizeError'){
-                    echo("<script>alert('O TAMANHO DO ARQUIVO ESCOLHIDO É INVÁLIDO.')</script>");
-                }
-            }elseif($_POST['btn_add_produto'] == 'ATUALIZAR'){
-                $sql = "UPDATE tbl_produto SET produto = '".strip_tags(addslashes($produto))."' WHERE cod_produto = ".$_SESSION['cod_produto'];
-                
-                if(mysqli_query($conexao, $sql)){
-                    $sql = "UPDATE tbl_produto_subcategoria_categoria SET cod_categoria = '".$codCategoriaProduto."', cod_subcategoria = '".$codSubcategoriaProduto."', cod_produto = '".$_SESSION['cod_produto']."'
-                            WHERE cod_categoria_subcategoria = ".$_SESSION['cod_relacionamento'];
-                    if(mysqli_query($conexao, $sql)){
-                        header("location: cmsProdutos.php?produtos");
-                    }else{
-                        echo ("relacionamento".$sql);
+                if($_FILES['file_produto']['error'] == 0){
+                    $imagem = salvarArquivo($_FILES['file_produto'], 'inserir');
+        
+                    if($imagem != 'sizeError' && $imagem != 'extensionError'){
+                        $sql = "INSERT INTO tbl_produto (nome, descricao, imagem, preco)
+                        VALUES ('".strip_tags(addslashes($produto))."', '".strip_tags(addslashes($descricaoProduto))."', '".$imagem."', ".strip_tags(addslashes($precoProduto)).")";
+    
+                        if(mysqli_query($conexao, $sql)){
+                            header('location: cmsProdutos.php?produtos');
+                        }else{
+                            echo 'não inserido<br>'.$sql;
+                        }
+    
+                    }elseif($imagem == 'extensionError'){
+                        echo("<script>alert('O TIPO DO ARQUIVO ESCOLHIDO É INVÁLIDO 1.')</script>");
+                    }elseif($imagem == 'sizeError'){
+                        echo("<script>alert('O TAMANHO DO ARQUIVO ESCOLHIDO É INVÁLIDO 1.')</script>");
                     }
                 }else{
-                    echo ("sub".$sql);
+                    echo(
+                    "<script>
+                        alert('Não é possível inserir produto sem imagem.');
+                    </script>");
                 }
-            }
-            $_SESSION['cod_subcategoria'] = null;
-            $_SESSION['cod_categoria_sub'] = null;
-            $_SESSION['cod_relacionamento'] = null;
+            }elseif($_POST['btn_add_produto'] == 'ATUALIZAR'){
+                echo "--->>>".$_SESSION['img']."<<<---";
+                var_dump($_FILES['file_produto']);
+                
+                if($_FILES['file_produto']['error'] == 0){
+                    $imagem = salvarArquivo($_FILES['file_produto'], 'atualizar');
+        
+                    if($imagem != 'sizeError' && $imagem != 'extensionError'){
+                        $sql = "UPDATE tbl_produto SET nome = '".strip_tags(addslashes($produto))."', descricao = '".strip_tags(addslashes($descricaoProduto))."',
+                        imagem = '".$imagem."', preco = ".strip_tags(addslashes($precoProduto))." WHERE cod_produto = ".$_SESSION['cod_produto'];
+    
+                    }elseif($imagem == 'extensionError'){
+                        echo("<script>alert('O TIPO DO ARQUIVO ESCOLHIDO É INVÁLIDO 2.')</script>");
+                    }elseif($imagem == 'sizeError'){
+                        echo("<script>alert('O TAMANHO DO ARQUIVO ESCOLHIDO É INVÁLIDO 2.')</script>");
+                    }
+                }else{
+                    $sql = "UPDATE tbl_produto SET nome = '".strip_tags(addslashes($produto))."', descricao = '".strip_tags(addslashes($descricaoProduto))."', 
+                    preco = ".strip_tags(addslashes($precoProduto))." WHERE cod_produto = ".$_SESSION['cod_produto'];
+                }
+                
+                    
+                if(mysqli_query($conexao, $sql)){
+                    header('location: cmsProdutos.php?produtos');
+                }else{
+                    echo 'não inserido<br>'.$sql;
+                }
 
+            }
+            $_SESSION['cod_produto'] = null;
+            $_SESSION['img'] = null;
         }else{
             echo(
             "<script>
@@ -169,6 +189,46 @@
         }
     }
 
+    if(isset($_GET['modoRelacao']) && $_GET['modoRelacao'] == 'editar'){
+        $btnEnviarCategoria = "ATUALIZAR";
+        $_SESSION['cod_relacao_produto'] = $_GET['codRelacaoProduto'];
+    }else{
+        $btnEnviarCategoria = "ENVIAR";
+    }
+
+    if(isset($_GET['btn_add_categoria'])){
+        if(isset($_GET['txt_nome_categoria']) && !empty($_GET['txt_nome_categoria'])){
+            $codCategoria = $_GET['txt_nome_categoria'];
+            $codSubcategoria = $_GET['txt_nome_categoria'];
+            $codProduto = $_GET['txt_nome_categoria'];
+
+            if($_GET['btn_add_categoria'] == 'ENVIAR'){
+                $sql = "INSERT INTO tbl_produto_subcategoria_categoria (cod_categoria, cod_subcategoria, cod_produto)
+                VALUES ('".$codCategoria."', '".$codSubcategoria."', '".$codProduto."')";
+
+            }elseif($_GET['btn_add_categoria'] == 'ATUALIZAR'){
+                $sql = "UPDATE tbl_produto_subcategoria_categoria SET cod_categoria = '".$codCategoria."',
+                cod_subcategoria = '".$codSubcategoria."', cod_produto = '".$codProduto."' WHERE cod_produto_subcategoria_categoria = ".$_SESSION['cod_relacao_produto'];
+            }
+
+            if(mysqli_query($conexao, $sql)){
+                header("location: cmsProdutos.php?relacoes");
+            }else{
+                echo ($sql);
+                echo "<br>".mysqli_error($conexao);
+            }
+            $_SESSION['cod_produto_relacao'] = null;
+            $_SESSION['cod_categoria_relacao'] = null;
+            $_SESSION['cod_subcategoria_relacao'] = null;
+            $_SESSION['cod_relacao_produto'] = null;
+        }else{
+            echo(
+            "<script>
+                alert('Campo do nome da categoria NÃO pode ser vazio');
+            </script>");
+        }
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -414,12 +474,12 @@
                         <form enctype="multipart/form-data" name="frm_produto" method="POST" action="cmsProdutos.php?produtos">
                             <div id="nome-produto">
                                 <h3><label>Nome Produto:</label></h3>
-                                <input maxlength="50" id="txt-nome-produto" class="inputs-produto" name="txt_nome_produto">
+                                <input maxlength="50" id="txt-nome-produto" class="inputs-produto" name="txt_nome_produto" value="<?php echo(isset($_GET['nomeProduto'])?$_GET['nomeProduto']:'') ?>">
                             </div>
                             <div id="preco-img-produto">
                                 <div id="preco-produto">
                                     <h3><label>Preço:</label></h3>
-                                    <input maxlength="20" id="txt-preco-produto" class="inputs-produto" name="txt_preco_produto">
+                                    <input maxlength="20" id="txt-preco-produto" class="inputs-produto" name="txt_preco_produto" value="<?php echo(isset($_GET['preco'])?$_GET['preco']:'') ?>">
                                 </div>
                                 <div id="img-produto">
                                     <h3><label>Imagem:</label></h3>
@@ -428,10 +488,10 @@
                             </div>
                             <div id="descricao-produto">
                                 <h3><label>Descrição:</label></h3>
-                                <textarea maxlength="105" id="txt-descricao-produto" class="inputs-produto" name="txt_descricao_produto"></textarea>
+                                <textarea maxlength="105" id="txt-descricao-produto" class="inputs-produto" name="txt_descricao_produto"><?php echo(isset($_GET['descricao'])?$_GET['descricao']:'') ?></textarea>
                             </div>
                             <div id="enviar-produto" class="flexbox"> <!-- CAMPO DE BOTAO DE SUBMISSAO -->
-                                <input type="submit" class="btn-confirmacao" name="btn_add_produto" value="<?= $btnEnviarProduto ?>">
+                                <input type="submit" class="btn-confirmacao" name="btn_add_produto" value="<?php echo $btnEnviarProduto ?>">
                             </div>
                         </form>
                         <div id="tabela-produtos" class="flexbox">
@@ -450,6 +510,9 @@
 
                                         $codProduto = $rsProduto['cod_produto'];
                                         $tituloProduto = $rsProduto['nome'];
+                                        $precoProduto = $rsProduto['preco'];
+                                        $descricaoProduto = $rsProduto['descricao'];
+                                        $imagemProduto = $rsProduto['imagem'];
                                         
                                         $statusProduto = $rsProduto['status'] == "ativado" ? "'desativado'" : "'ativado'";
 
@@ -460,7 +523,7 @@
                                     <td class="txt-titulo-produto"><?php echo $tituloProduto ?></td>
                                     <!-- BOTAO DE EDITAR -->
                                     <td class="txt-editar">
-                                        <a href="?modoProduto=editar&codProduto=<?= $codProduto ?>&nomeProduto=<?= $tituloProduto ?>">
+                                        <a href="?modoProduto=editar&codProduto=<?= $codProduto ?>&nomeProduto=<?= $tituloProduto ?>&preco=<?= $precoProduto?>&descricao=<?= $descricaoProduto?>&imgProduto=<?= $imagemProduto ?>">
                                             <figure>
                                                 <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codProduto ?>" title="<?php echo 'Editar Registro '.$codProduto ?>">
                                             </figure>
@@ -479,17 +542,13 @@
                         </div>
                     </div>
 
-                    <!-- <div id="container-relacoes">
-                        <form name="frm-relacoes" method="POST" action="cmsProdutos.php">
-                            <div id="nome-produto">
-                                <h3><label>Nome Produto:</label></h3>
-                                <input id="txt-nome-produto" class="inputs-produto" name="txt_nome_produto">
-                            </div>
-                            <div id="categoria-img-produto">
-                                <div id="categoria-produto">
+                    <div id="container-relacoes" class="flexbox">
+                        <form name="frm-relacoes" method="GET" action="cmsProdutos.php">
+                            <div id="categoria-subcategoria-produto" class="flexbox">
+                                <div id="relacao-categoria-produto">
                                     <h3><label>Categoria:</label></h3>
-                                    <select id="slt-nome-categoria-produto" class="inputs-produto" name="slt_nome_categoria_produto" >
-                                        <?php
+                                    <select id="slt-categoria-produto" class="inputs-produto" name="slt_categoria_produto" >
+                                        <!-- <?php
                                             $codCategoriaProduto = isset($_POST['codCategoriaProduto'])?$_POST['codCategoriaProduto']:0;
                                             $categoriaProduto = isset($_POST['nomeCategoriaProduto'])?$_POST['nomeCategoriaProduto']:0;
                                             if($codCategoriaProduto != 0){
@@ -501,54 +560,73 @@
                                         <option value="">Escolha uma Categoria</option>
                                         <?php
                                             }
-                                        ?>
+                                        ?>-->
                                         <?php
-                                            echo $codCategoriaProduto;
+                                            // echo $codCategoriaProduto;
                                             // SCRIPT SQL QUE TRAZ TODOS SOBRE DO BANCO
-                                            $sql = "SELECT * FROM tbl_categoria WHERE cod_categoria <> ".$codCategoriaProduto." ORDER BY cod_categoria DESC";
+                                            $sql = "SELECT * FROM tbl_categoria"; // WHERE cod_categoria <> ".$codCategoriaProduto." ORDER BY cod_categoria DESC";
                                             $select = mysqli_query($conexao, $sql);
-                                            while($rsCategoriaProduto = mysqli_fetch_array($select)) {
+                                            while($rsCategoria = mysqli_fetch_array($select)) {
                                                 // RESGATNO DADOS DO BANCO
-                                                $codCategoriaProduto = $rsCategoriaProduto['cod_categoria'];
-                                                $categoriaProduto = $rsCategoriaProduto['categoria'];
+                                                $codCategoria = $rsCategoria['cod_categoria'];
+                                                $nomeCategoria = $rsCategoria['categoria'];
                                         ?>
-                                            <option value="<?= $codCategoriaProduto ?>"><?= $categoriaProduto ?></option>
+                                            <option value="<?= $codCategoria ?>"><?= $nomeCategoria ?></option>
                                         <?php
                                             }
                                         ?>
                                     </select>
                                 </div>
-                                <div id="img-produto">
-                                    <h3><label>Imagem:</label></h3>
-                                    <input type="file" id="file-produto" class="inputs-produto" name="file_produto">
+                                <div id="relacao-subcategoria-produto">
+                                    <h3><label>Subcategoria:</label></h3>
+                                    <select disabled id="slt-subcategoria-produto" class="inputs-produto" name="slt_subcategoria_produto">
+                                        <!-- <?php
+                                            // echo $codProduto;
+                                            // // SCRIPT SQL QUE TRAZ TODOS SOBRE DO BANCO
+                                            // $sql = "SELECT * FROM tbl_subcategoria";// WHERE cod_categoria  ".$codProduto." ORDER BY cod_categoria DESC";
+                                            // $select = mysqli_query($conexao, $sql);
+                                            // while($rsSubcategoria = mysqli_fetch_array($select)) {
+                                            //     // RESGATNO DADOS DO BANCO
+                                            //     $codSubcategoria = $rsSubcategoria['cod_subcategoria'];
+                                            //     $nomeSubcategoria = $rsSubcategoria['subcategoria'];
+                                        ?>
+                                            <option value="<?= $codSubcategoria ?>"><?= $nomeSubcategoria ?></option>
+                                        <?php
+                                            // }
+                                        ?> -->
+                                    </select>
+                                </div>
+                                <div id="relacao-produto">
+                                    <h3><label>Produto:</label></h3>
+                                    <select id="slt-produto" class="inputs-produto" name="slt_produto">
+                                        <?php
+                                            echo $codProduto;
+                                            // SCRIPT SQL QUE TRAZ TODOS SOBRE DO BANCO
+                                            $sql = "SELECT * FROM tbl_produto";// WHERE cod_categoria  ".$codProduto." ORDER BY cod_categoria DESC";
+                                            $select = mysqli_query($conexao, $sql);
+                                            while($rsProduto = mysqli_fetch_array($select)) {
+                                                // RESGATNO DADOS DO BANCO
+                                                $codProduto = $rsProduto['cod_produto'];
+                                                $nomeProduto = $rsProduto['nome'];
+                                        ?>
+                                            <option value="<?= $codProduto ?>"><?= $nomeProduto ?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
-                            <div id="subcategorias-descricao-produto">
-                                <div id="subcategorias-produto">
-                                    <h3><label>Subcategorias:</label></h3>
-                                    <div id="chks-subcategorias"></div>
-                                </div>
-                                <div id="descricao-produto">
-                                    <h3><label>Descrição:</label></h3>
-                                    <textarea id="txt-descricao-produto" class="inputs-produto" name="txt_descricao_produto"></textarea>
-                                </div>
-                            </div>
-                            <div id="preco-produto">
-                                <h3><label>Preço:</label></h3>
-                                <input id="txt-preco-produto" class="inputs-produto" name="txt_preco_produto">
-                            </div>
-                            <div id="enviar-produto" class="flexbox"> 
-                                <input type="submit" class="btn-confirmacao" name="btn_add_produto" value="<?= $btnEnviarProduto ?>">
+                            <div id="enviar-relacao" class="flexbox"> 
+                                <input type="submit" class="btn-confirmacao" name="btn_add_relacao" value="<?= $btnEnviarProduto ?>">
                             </div>
                         </form>
-                        <div id="tabela-produtos" class="flexbox">
-                            <table id="table-produtos">
+                        <div id="tabela-relacoes" class="flexbox">
+                            <table id="table-relacoes">
                                 <tr class="table-titles">
-                                    <th class="title-produto">Produto</th>
-                                    <th class="title-categoria-produto">Categoria</th>
-                                    <th class="title-subcategoria-produto">Subcategoria</th>
+                                    <th class="title-produto-relacao">Produto</th>
+                                    <th class="title-categoria-relacao">Categoria</th>
+                                    <th class="title-subcategoria-relacao">Subcategoria</th>
                                     <th class="title-editar">Editar</th>
-                                    <th class="title-status">Status</th>
                                 </tr>
                                 <?php
                                     // SCRIPT SQL QUE TRAZ TODOS SOBRE DO BANCO
@@ -559,47 +637,39 @@
                                     ON tpsc.cod_subcategoria = s.cod_subcategoria
                                     INNER JOIN tbl_categoria AS c
                                     ON tpsc.cod_categoria = c.cod_categoria
-                                    ORDER BY c.cod_categoria DESC";
+                                    ORDER BY p.nome DESC";
+
+                                    echo(
+                                        "<script>console.log(`$sql`);</script>"
+                                    );
+
 
                                     $select = mysqli_query($conexao, $sql);
-                                    while($rsProduto = mysqli_fetch_array($select)) {
+                                    while($rsRelacoes = mysqli_fetch_array($select)) {
                                         // RESGATNO DADOS DO BANCO
 
-                                        $codProduto = $rsProduto['cod_produto'];
-                                        $tituloProduto = $rsProduto['nome'];
+                                        $codProdutoRelacao = $rsRelacoes['cod_produto'];
+                                        $tituloProdutoRelacao = $rsRelacoes['nome'];
 
+                                        $codCategoriaRelacao = $rsRelacoes['cod_categoria'];
+                                        $tituloCategoriaRelacao = $rsRelacoes['categoria'];
 
-                                        $codCategoriaProduto = $rsProduto['cod_categoria'];
-                                        $tituloCategoriaProduto = $rsProduto['categoria'];
-
-                                        $codSubcategoriaProduto = $rsProduto['cod_subcategoria'];
-                                        $tituloSubcategoriaProduto = $rsProduto['subcategoria'];
+                                        $codSubcategoriaRelacao = $rsRelacoes['cod_subcategoria'];
+                                        $tituloSubcategoriaRelacao = $rsRelacoes['subcategoria'];
                                         
-                                        $codProdutoCategoriaSub = $rsProduto['cod_produto_subcategoria_categoria'];
+                                        $codRelacao = $rsRelacoes['cod_produto_subcategoria_categoria'];
 
-                                        $statusProduto = $rsProduto['status'] == "ativado" ? "'desativado'" : "'ativado'";
-
-                                        $altTitleProduto = $rsProduto['status'] == 'ativado' ? 'Desativar Registro '.$codSubcategoria : 'Ativar Registro '.$codSubcategoria;
-                                        $imgProduto = $rsProduto['status'] == 'ativado' ? 'ativado.png': 'desativado.png';
                                 ?>
                                 <tr class="tables-registers">
-                                    <td class="txt-titulo-produto"><?php echo $tituloProduto ?></td>
-                                    <td class="txt-titulo-categoria-produto"><?php echo $tituloCategoriaProduto ?></td>
-                                    <td class="txt-titulo-subcategoria-produto"><?php echo $tituloSubcategoriaProduto ?></td>
+                                    <td class="txt-produto-relacao"><?php echo $tituloProdutoRelacao ?></td>
+                                    <td class="txt-categoria-relacao"><?php echo $tituloCategoriaRelacao ?></td>
+                                    <td class="txt-subcategoria-relacao"><?php echo $tituloSubcategoriaRelacao ?></td>
                                     <td class="txt-editar">
-                                        <a href="?modoProduto=editar&codProduto=<?= $codProduto ?>&nomeProduto=<?= $tituloProduto ?>
-                                        &codCategoriaProduto=<?= $codCategoriaProduto ?>&nomeCategoriaProduto=<?= $tituloCategoriaProduto ?>
-                                        &codSubcategoriaProduto=<?= $codSubcategoriaProduto ?>&nomeSubcategoriaProduto=<?= $tituloSubcategoriaProduto ?>
-                                        &codRelacaoProduto=<?= $codProdutoCategoriaSub ?>">
+                                        <a href="?modoRelacao=editar&codRelacaoProduto=<?= $codRelacao ?>">
                                             <figure>
-                                                <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codProduto ?>" title="<?php echo 'Editar Registro '.$codProduto ?>">
+                                                <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codProdutoRelacao ?>" title="<?php echo 'Editar Registro '.$codProdutoRelacao ?>">
                                             </figure>
                                         </a>
-                                    </td>
-                                    <td class="txt-status">
-                                        <figure>
-                                            <img onclick="ativarDesativarProduto(<?php echo($codProduto.', '.$statusProduto); ?>)" class="icon-status" src="./icons/<?php echo $imgProduto ?>" alt="<?php echo $altTitleProduto ?>" title="<?php echo $altTitleProduto ?>">
-                                        </figure>
                                     </td>
                                 </tr>
                                 <?php
@@ -607,7 +677,7 @@
                                 ?>
                             </table>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <!-- IMPORTANDO ARQUIVO COM FOOTER DA PAGINA -->

@@ -19,7 +19,7 @@
     function salvarArquivo($imagem, $modo){
 
         //TIPOS DE ARQUIVOS PERMITIDOS NO UPLOAD DE IMAGEM
-        $arquivosPermitidos = array(".jpg", ".jpeg", ".png");
+        $arquivosPermitidos = array(".jpg", ".jpeg", ".png", ".JPG", ".JPEG", ".PNG");
 
         // DIRETORIO ONDE SERÃO ENVIADOS OS ARQUIVOS
         $diretorio = "../arquivos/";
