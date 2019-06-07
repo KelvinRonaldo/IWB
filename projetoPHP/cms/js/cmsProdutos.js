@@ -45,25 +45,34 @@ $(document).ready(function(){
         let abrirContainerCategorias = variaveis.filter(campos => campos == "categorias");
         let abrirContainerSubcategorias = variaveis.filter(campos => campos == "subcategorias");
         let abrirContainerProdutos = variaveis.filter(campos => campos == "produtos");
+        let abrirContainerRelacoes = variaveis.filter(campos => campos == "relacoes");
 
         console.log(`${abrirContainerCategorias},.${abrirContainerSubcategorias},.${abrirContainerProdutos}`);
         if(abrirContainerCategorias != ""){
             abreContainer('categorias');
             fechaContainer('subcategorias');
             fechaContainer('produto');
+            fechaContainer('relacoes');
         }else if(abrirContainerSubcategorias != ""){
             fechaContainer('categorias');
             abreContainer('subcategorias');
             fechaContainer('produto');
+            fechaContainer('relacoes');
         }else if(abrirContainerProdutos != ""){
             fechaContainer('categorias');
             fechaContainer('subcategorias');
             abreContainer('produto');
+            fechaContainer('relacoes');
+        }else if(abrirContainerRelacoes != ""){
+            fechaContainer('categorias');
+            fechaContainer('subcategorias');
+            fechaContainer('produto');
+            abreContainer('relacoes');
         }
     }
 
-    $("#slt-nome-categoria-produto").on("change", function(){
-        let codCategoriaProduto = $("#slt-nome-categoria-produto option:selected").val();
+    $("#slt-categoria-produto").on("change", function(){
+        let codCategoriaProduto = $("#slt-categoria-produto option:selected").val();
         $.ajax({
             type: "GET",
             url: "./getSubcategoriasProduto.php",
@@ -82,20 +91,21 @@ $(document).ready(function(){
     const preencherSelectSubcategorias = (jsonSubcategorias) =>{
         let subcategoria = 0;
         let codSubcategoria = 0;
-        $("#chks-subcategorias").empty();
+        $("#slt-subcategoria-produto").empty();
+        $("#slt-subcategoria-produto").prop("disabled", false);
         for(let i = 0; i < jsonSubcategorias.length; i++){
             subcategoria = jsonSubcategorias[i].subcategoria;
             codSubcategoria = jsonSubcategorias[i].codSubcategoria;
-            $("#chks-subcategorias").append(
-                `<input type="checkbox" id="chk-${subcategoria}" name="chk_sub_produto[]" value="${codSubcategoria}"><label for="chk-${subcategoria}">${subcategoria}</label><br>`);
+            $("#slt-subcategoria-produto").append(
+                `<option value="${codSubcategoria}">${subcategoria}</option>`);
         }
     }
 
 
     fechaContainer('categorias');
     fechaContainer('subcategorias');
-    // fechaContainer('produtos');
-    fechaContainer('relacoes');
+    fechaContainer('produtos');
+    // fechaContainer('relacoes');
     getUrlVars();
 
 });
