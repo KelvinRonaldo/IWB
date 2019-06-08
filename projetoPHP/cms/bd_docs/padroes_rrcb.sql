@@ -34,7 +34,6 @@ SELECT * FROM tbl_nivel_usuario;
 SELECT * FROM tbl_usuario;
 SELECT * FROM tbl_destaque_noticia_principal;
 SELECT * FROM tbl_produto;
-
 SELECT * FROM tbl_promocao;
 SELECT * FROM tbl_produto_subcategoria_categoria;
 SELECT * FROM tbl_categoria_subcategoria;
@@ -81,6 +80,15 @@ ON c.cod_categoria = cs.cod_categoria
 INNER JOIN tbl_subcategoria AS s
 ON cs.cod_subcategoria = s.cod_subcategoria
 WHERE c.cod_categoria = 1;
+
+
+SELECT distinct c.cod_categoria, c.categoria
+FROM tbl_categoria AS c
+INNER JOIN tbl_produto_subcategoria_categoria AS tpsc
+ON c.cod_categoria = tpsc.cod_categoria
+INNER JOIN tbl_subcategoria AS s
+ON tpsc.cod_subcategoria = s.cod_subcategoria
+WHERE tpsc.cod_categoria <> 2 ;
 
 SELECT s.subcategoria, s.cod_subcategoria,
 c.cod_categoria, group_concat(' ',c.categoria) AS categorias
