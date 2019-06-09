@@ -12,15 +12,37 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <link rel="stylesheet" href="css/slider.css" media="screen">
         <link rel="stylesheet" href="css/fontes.css">
-        <script src="./js/jssor.slider-27.5.0.min.js"></script>
-        <script src="./js/slider.js"></script>
-        <script src="./cms/js/jquery-3.3.1.min.js"></script>
-        <script src="./js/menu_categorias.js"></script>
-        <script src="./js/filtrarProdutos.js"></script>
+        <script src="cms/js/jquery-3.3.1.min.js"></script>
+        <script src="js/jssor.slider-27.5.0.min.js"></script>
+        <script src="js/slider.js"></script>
+        <script src="js/menu_categorias.js"></script>
+        <script src="js/filtrarProdutos.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('.visualizar').click(function(){
+                    $('#container').fadeIn(300);
+                });
+            });
+            const viewProduto = (codProduto) =>{
+                $.ajax({
+                    type: "GET",
+                    url: "modais/viewProduto.php",
+                    data: {codProduto: codProduto},
+                    success: function(dados){
+                        $("#modal-index").html(dados);
+                    }
+                });
+            }
+        </script>
         <title>Road Runner Cross Bikes SA</title>
         <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
     </head>
     <body>
+        <div id="container">
+            <div id="modal-index" class="center">
+
+            </div>
+        </div>
         <!-- AREA QUE SEGURADO TODA A PAGINA -->
         <div id="pagina">
             <!-- IMPORTANDO O HEADER -->
@@ -70,57 +92,8 @@
                         </figure>
                     </div>
 
-                        <!-- ITEM DO MENU -->
-                    <div id="container-categoria-menu" class="container-categoria-menu">
-                    <!-- MENU À ESQUERDA DA PAGINA -->
-                        <div id="menu-esq" class="menu-categoria-close">
-                            <?php
-                                $sqlCategoria = "SELECT * FROM tbl_categoria WHERE status = 'ativado'";
-                                $selectCategoria = mysqli_query($conexao, $sqlCategoria);
-
-                                while($rsCategorias = mysqli_fetch_array($selectCategoria)){
-                                $codCategoria = $rsCategorias['cod_categoria'];
-                                $categoria = $rsCategorias['categoria'];
-                            ?>
-                            <div class="item-menu-esq">
-                                <h3 onclick="buscarPorProdutosFiltros(<?= $codCategoria?>, 0)"><?php echo $categoria; ?></h3>
-                                <div class="icon-subcategorias">
-                                    <!-- <p>+</p> -->
-                                    <figure>
-                                        <img src="./imgs/plus.png" class="icon-show-categories">
-                                    </figure>
-                                </div>
-
-                                <ul class="caixa-subitem-menu-esq esconder">
-                                    <?php
-                                        $sqlSubcategoria = "SELECT distinct s.subcategoria,s.cod_subcategoria
-                                        FROM tbl_categoria AS c
-                                        INNER JOIN tbl_produto_subcategoria_categoria AS tpsc
-                                        ON c.cod_categoria = tpsc.cod_categoria
-                                        INNER JOIN tbl_subcategoria AS s
-                                        ON tpsc.cod_subcategoria = s.cod_subcategoria
-                                        WHERE c.status = 'ativado' AND s.status = 'ativado'
-                                        AND c.cod_categoria = ".$codCategoria;
-
-                                        $selectSubcategoria = mysqli_query($conexao, $sqlSubcategoria);
-
-                                        while($rsSubcategorias = mysqli_fetch_array($selectSubcategoria)){
-                                        $codSubategoria = $rsSubcategorias['cod_subcategoria'];
-                                        $subcategoria = $rsSubcategorias['subcategoria'];
-                                    ?>
-                                    <li class="subitem-menu-esq">
-                                        <h3 class="subitem-menu-esq-h3" onclick="buscarPorProdutosFiltros(<?= $codCategoria.', '.$codSubategoria; ?>)"><?= $subcategoria?></h3>
-                                    </li>
-                                    <?php
-                                        }
-                                    ?>
-                                </ul>
-                            </div>
-                            <?php
-                                }
-                            ?>                            
-                        </div>
-                    </div>
+                    
+                    <?php require_once("menuCategorias.php") ?>
                     
                     <!-- AREA ONDE ESTÃO OS PRODUTOS DA LOJA -->
                     <div id="produtos">

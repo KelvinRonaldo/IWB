@@ -127,13 +127,8 @@
             //DESATIVA TODAS AS PROMOÇÕES DE UMA MESMO PRODUTO PARA QUE FIQUE SÓ UM ATIVO
             $sql = "UPDATE tbl_promocao SET status = 'desativado' WHERE cod_produto = ".$codProduto;
 
-            // if(mysqli_query($conexao, $sql)){
-            //     $sql = "UPDATE tbl_produto SET status = 'ativado' WHERE cod_produto = ".$codProduto;
-
-            //     if(mysqli_query($conexao, $sql)){
-            //         echo("PROMOCAO MODIFICADO\n");
-            //     }
-            // }
+            mysqli_query($conexao, $sql);
+            
         }elseif($pagina == 'nivel_usuario') {//ATIVA E DESATIVA NIVEL DE USUARIO
             if ($_GET['codigo'] != $_SESSION['cod_nivel_usuario'] && $_GET['codigo'] != 1) {
                 $tabela = 'tbl_nivel_usuario';

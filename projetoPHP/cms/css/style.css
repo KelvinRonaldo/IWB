@@ -1989,7 +1989,7 @@ header{
     min-height: 0px;
     height: auto;
     overflow: hidden;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
@@ -2058,7 +2058,7 @@ header{
     min-height: 0px;
     height: auto;
     overflow: hidden;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
@@ -2159,7 +2159,7 @@ header{
     min-height: 0px;
     height: auto;
     overflow: hidden;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
@@ -2257,7 +2257,7 @@ header{
 #table-produtos{
     border-spacing: 3px;
 }
-.title-produto{
+.title-produtos{
     min-width: 400px;
     max-width: 600px;
     font-family: megan;
@@ -2291,7 +2291,7 @@ header{
     min-height: 0px;
     height: auto;
     overflow: hidden;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;

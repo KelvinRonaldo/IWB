@@ -56,4 +56,8 @@
     font-family: 'agency fb';
     src: url(../fontes/agency_fb/agency_fb.ttf);
 }
+@font-face {
+    font-family: 'agency fb light';
+    src: url(../fontes/agency_fb/AgencyFBLight.ttf);
+}
 

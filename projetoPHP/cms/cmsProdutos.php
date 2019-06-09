@@ -9,9 +9,9 @@
     require_once('../bd/conexao.php');
     $conexao = conexaoMySql();
 
-    if(isset($_POST['modoCategoria']) && $_GET['modoCategoria'] == 'editar'){
+    if(isset($_GET['modoCategoria']) && $_GET['modoCategoria'] == 'editar'){
         $btnEnviarCategoria = "ATUALIZAR";
-        $_SESSION['cod_categoria'] = $_POST['codigoCategoria'];
+        $_SESSION['cod_categoria'] = $_GET['codigoCategoria'];
     }else{
         $btnEnviarCategoria = "ENVIAR";
     }
@@ -42,9 +42,9 @@
         }
     }
     
-    if(isset($_POST['modoSub']) && $_POST['modoSub'] == 'editar'){
+    if(isset($_GET['modoSub']) && $_GET['modoSub'] == 'editar'){
         $btnEnviarSubcategoria = "ATUALIZAR";
-        $_SESSION['cod_subcategoria'] = $_POST['codSub'];
+        $_SESSION['cod_subcategoria'] = $_GET['codSub'];
         $_SESSION['cod_relacionamento'] = $_GET['codRelacao'];
 
     }else{
@@ -108,7 +108,6 @@
         $btnEnviarProduto = "ATUALIZAR";
         $_SESSION['cod_produto'] = $_GET['codProduto'];
         $_SESSION['img'] = $_GET['imgProduto'];
-        echo $_SESSION['img'];
     }else{
         $btnEnviarProduto = "ENVIAR";
     }
@@ -151,9 +150,6 @@
                     </script>");
                 }
             }elseif($_POST['btn_add_produto'] == 'ATUALIZAR'){
-                echo "--->>>".$_SESSION['img']."<<<---";
-                var_dump($_FILES['file_produto']);
-                
                 if($_FILES['file_produto']['error'] == 0){
                     $imagem = salvarArquivo($_FILES['file_produto'], 'atualizar');
         
@@ -190,25 +186,33 @@
     }
 
     if(isset($_GET['modoRelacao']) && $_GET['modoRelacao'] == 'editar'){
-        $btnEnviarCategoria = "ATUALIZAR";
+        $btnEnviarRelacao = "ATUALIZAR";
         $_SESSION['cod_relacao_produto'] = $_GET['codRelacaoProduto'];
+
+        $_SESSION['cod_categoria_relacao'] = $_GET['codCategoriaRelacao'];
+        $_SESSION['categoria_relacao'] = $_GET['categoriaRelacao'];
+
+        $_SESSION['cod_produto_relacao'] = $_GET['codProdutoRelacao'];
+        $_SESSION['produto_relacao'] = $_GET['produtoRelacao'];
     }else{
-        $btnEnviarCategoria = "ENVIAR";
+        $btnEnviarRelacao = "ENVIAR";
     }
 
-    if(isset($_GET['btn_add_categoria'])){
-        if(isset($_GET['txt_nome_categoria']) && !empty($_GET['txt_nome_categoria'])){
-            $codCategoria = $_GET['txt_nome_categoria'];
-            $codSubcategoria = $_GET['txt_nome_categoria'];
-            $codProduto = $_GET['txt_nome_categoria'];
+    if(isset($_GET['btn_add_relacao'])){
+        if(isset($_GET['slt_categoria_produto']) && isset($_GET['slt_subcategoria_produto']) && isset($_GET['slt_produto'])){
+            $codCategoria = $_GET['slt_categoria_produto'];
+            $codSubcategoria = $_GET['slt_subcategoria_produto'];
+            $codProduto = $_GET['slt_produto'];
 
-            if($_GET['btn_add_categoria'] == 'ENVIAR'){
+            if($_GET['btn_add_relacao'] == 'ENVIAR'){
                 $sql = "INSERT INTO tbl_produto_subcategoria_categoria (cod_categoria, cod_subcategoria, cod_produto)
                 VALUES ('".$codCategoria."', '".$codSubcategoria."', '".$codProduto."')";
 
-            }elseif($_GET['btn_add_categoria'] == 'ATUALIZAR'){
-                $sql = "UPDATE tbl_produto_subcategoria_categoria SET cod_categoria = '".$codCategoria."',
-                cod_subcategoria = '".$codSubcategoria."', cod_produto = '".$codProduto."' WHERE cod_produto_subcategoria_categoria = ".$_SESSION['cod_relacao_produto'];
+            }elseif($_GET['btn_add_relacao'] == 'ATUALIZAR'){
+                $sql = "UPDATE tbl_produto_subcategoria_categoria
+                SET cod_categoria = '".$codCategoria."',
+                cod_subcategoria = '".$codSubcategoria."', cod_produto = '".$codProduto."'
+                WHERE cod_produto_subcategoria_categoria = ".$_SESSION['cod_relacao_produto'];
             }
 
             if(mysqli_query($conexao, $sql)){
@@ -217,14 +221,13 @@
                 echo ($sql);
                 echo "<br>".mysqli_error($conexao);
             }
-            $_SESSION['cod_produto_relacao'] = null;
-            $_SESSION['cod_categoria_relacao'] = null;
-            $_SESSION['cod_subcategoria_relacao'] = null;
             $_SESSION['cod_relacao_produto'] = null;
+            $_SESSION['cod_categoria_relacao'] = null;
+            $_SESSION['categoria_relacao'] = null;
         }else{
             echo(
             "<script>
-                alert('Campo do nome da categoria NÃO pode ser vazio');
+                alert('Categoria, Subcategoria e Produto devem ser selecionados!');
             </script>");
         }
     }
@@ -319,7 +322,7 @@
                         <form name="frm-categoria" method="POST" action="cmsProdutos.php?categorias">
                             <div id="nome-categoria">
                                 <h3><label>Nome Categoria:</label></h3>
-                                <input id="txt-nome-categoria" value="<?php echo(isset($_POST['nomeCategoria'])?$_POST['nomeCategoria']:''); ?>" class="inputs-produto" name="txt_nome_categoria" alt="Nome da Categoria" title="Nome da Categoria">
+                                <input id="txt-nome-categoria" value="<?php echo(isset($_GET['nomeCategoria'])?$_GET['nomeCategoria']:''); ?>" class="inputs-produto" name="txt_nome_categoria" alt="Nome da Categoria" title="Nome da Categoria">
                             </div>
                             <div id="enviar-categoria" class="flexbox"> <!-- CAMPO DE BOTAO DE SUBMISSAO -->
                                 <input type="submit" class="btn-confirmacao" name="btn_add_categoria" value="<?= $btnEnviarCategoria ?>">
@@ -351,7 +354,7 @@
                                     <td class="txt-titulo-categoria"><?php echo $tituloCategoria ?></td>
                                     <!-- BOTAO DE EDITAR -->
                                     <td class="txt-editar">
-                                        <a href="?modo=editar&codigoCategoria=<?= $codCategoria ?>&nomeCategoria=<?= $tituloCategoria ?>">
+                                        <a href="?modoCategoria=editar&codigoCategoria=<?= $codCategoria ?>&nomeCategoria=<?= $tituloCategoria ?>&categorias">
                                             <figure>
                                                 <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codCategoria ?>" title="<?php echo 'Editar Registro '.$codCategoria ?>">
                                             </figure>
@@ -374,14 +377,14 @@
                         <form name="frm-subcategoria" method="POST" action="cmsProdutos.php?subcategorias">
                             <div id="nome-subcategoria">
                                 <h3><label>Nome Subategoria:</label></h3>
-                                <input id="txt-nome-subcategoria" value="<?php echo(isset($_POST['nomeSub'])?$_POST['nomeSub']:''); ?>" class="inputs-produto" name="txt_nome_subcategoria" alt="Nome da Subcategoria" title="Nome da Subcategoria">
+                                <input id="txt-nome-subcategoria" value="<?php echo(isset($_GET['nomeSub'])?$_GET['nomeSub']:''); ?>" class="inputs-produto" name="txt_nome_subcategoria" alt="Nome da Subcategoria" title="Nome da Subcategoria">
                             </div>
                             <div id="nome-categoria-sub">
                                 <h3><label>Subcategoria:</label></h3>
                                 <select id="slt-nome-categoria-sub" class="inputs-produto" name="slt_nome_categoria_sub" alt="Categoria da Subcategoria" title="Categoria da Subcategoria">
                                 <?php
-                                    $codCategoriaSub = isset($_POST['codCategoriaSub'])?$_POST['codCategoriaSub']:0;
-                                    $categoriaSub = isset($_POST['nomeCategoriaSub'])?$_POST['nomeCategoriaSub']:0;
+                                    $codCategoriaSub = isset($_GET['codCategoriaSub'])?$_GET['codCategoriaSub']:0;
+                                    $categoriaSub = isset($_GET['nomeCategoriaSub'])?$_GET['nomeCategoriaSub']:0;
                                     if($codCategoriaSub != 0){
                                 ?>
                                 <option value="<?php echo $codCategoriaSub ?>"><?php echo $categoriaSub ?></option>
@@ -428,7 +431,7 @@
                                     ON c.cod_categoria = cs.cod_categoria
                                     INNER JOIN tbl_subcategoria AS s
                                     ON cs.cod_subcategoria = s.cod_subcategoria
-                                    ORDER BY c.cod_categoria DESC";
+                                    ORDER BY s.cod_subcategoria DESC";
 
                                     $select = mysqli_query($conexao, $sql);
                                     while($rsSubcategoria = mysqli_fetch_array($select)) {
@@ -438,7 +441,7 @@
 
                                         $codCategoriaSub = $rsSubcategoria['cod_categoria'];
                                         $tituloCategoriaSub = $rsSubcategoria['categoria'];
-                                        
+                                        echo("<script>console.log('$tituloCategoriaSub');</script>");
                                         $codCategoriaSubcategoria = $rsSubcategoria['cod_categoria_subcategoria'];
 
                                         $statusSubcategoria = $rsSubcategoria['status'] == "ativado" ? "'desativado'" : "'ativado'";
@@ -451,7 +454,7 @@
                                     <td class="txt-titulo-categoria-sub"><?php echo $tituloCategoriaSub ?></td>
                                     <!-- BOTAO DE EDITAR -->
                                     <td class="txt-editar">
-                                        <a href="?modoSub=editar&codSub=<?= $codSubcategoria ?>&nomeSub=<?= $tituloSubcategoria ?>&codCategoriaSub=<?= $codCategoriaSub ?>&nomeCategoriaSub=<?= $categoriaSub ?>&codRelacao=<?= $codCategoriaSubcategoria ?>">
+                                        <a href="?modoSub=editar&codSub=<?= $codSubcategoria ?>&nomeSub=<?= $tituloSubcategoria ?>&codCategoriaSub=<?= $codCategoriaSub ?>&nomeCategoriaSub=<?= $tituloCategoriaSub ?>&codRelacao=<?= $codCategoriaSubcategoria ?>&subcategorias">
                                             <figure>
                                                 <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codSubcategoria ?>" title="<?php echo 'Editar Registro '.$codSubcategoria ?>">
                                             </figure>
@@ -497,7 +500,7 @@
                         <div id="tabela-produtos" class="flexbox">
                             <table id="table-produtos">
                                 <tr class="table-titles">
-                                    <th class="title-produto">Produto</th>
+                                    <th class="title-produtos">Produto</th>
                                     <th class="title-editar">Editar</th>
                                     <th class="title-status">Status</th>
                                 </tr>
@@ -523,7 +526,7 @@
                                     <td class="txt-titulo-produto"><?php echo $tituloProduto ?></td>
                                     <!-- BOTAO DE EDITAR -->
                                     <td class="txt-editar">
-                                        <a href="?modoProduto=editar&codProduto=<?= $codProduto ?>&nomeProduto=<?= $tituloProduto ?>&preco=<?= $precoProduto?>&descricao=<?= $descricaoProduto?>&imgProduto=<?= $imagemProduto ?>">
+                                        <a href="?modoProduto=editar&codProduto=<?= $codProduto ?>&nomeProduto=<?= $tituloProduto ?>&preco=<?= $precoProduto?>&descricao=<?= $descricaoProduto?>&imgProduto=<?= $imagemProduto ?>&produtos">
                                             <figure>
                                                 <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codProduto ?>" title="<?php echo 'Editar Registro '.$codProduto ?>">
                                             </figure>
@@ -545,64 +548,30 @@
                     <div id="container-relacoes" class="flexbox">
                         <form name="frm-relacoes" method="GET" action="cmsProdutos.php">
                             <div id="categoria-subcategoria-produto" class="flexbox">
-                                <div id="relacao-categoria-produto">
-                                    <h3><label>Categoria:</label></h3>
-                                    <select id="slt-categoria-produto" class="inputs-produto" name="slt_categoria_produto" >
-                                        <!-- <?php
-                                            $codCategoriaProduto = isset($_POST['codCategoriaProduto'])?$_POST['codCategoriaProduto']:0;
-                                            $categoriaProduto = isset($_POST['nomeCategoriaProduto'])?$_POST['nomeCategoriaProduto']:0;
-                                            if($codCategoriaProduto != 0){
-                                        ?>
-                                        <option value="<?php echo $codCategoriaProduto ?>"><?php echo $categoriaProduto?></option>
-                                        <?php
-                                            }else{
-                                        ?>
-                                        <option value="">Escolha uma Categoria</option>
-                                        <?php
-                                            }
-                                        ?>-->
-                                        <?php
-                                            // echo $codCategoriaProduto;
-                                            // SCRIPT SQL QUE TRAZ TODOS SOBRE DO BANCO
-                                            $sql = "SELECT * FROM tbl_categoria"; // WHERE cod_categoria <> ".$codCategoriaProduto." ORDER BY cod_categoria DESC";
-                                            $select = mysqli_query($conexao, $sql);
-                                            while($rsCategoria = mysqli_fetch_array($select)) {
-                                                // RESGATNO DADOS DO BANCO
-                                                $codCategoria = $rsCategoria['cod_categoria'];
-                                                $nomeCategoria = $rsCategoria['categoria'];
-                                        ?>
-                                            <option value="<?= $codCategoria ?>"><?= $nomeCategoria ?></option>
-                                        <?php
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div id="relacao-subcategoria-produto">
-                                    <h3><label>Subcategoria:</label></h3>
-                                    <select disabled id="slt-subcategoria-produto" class="inputs-produto" name="slt_subcategoria_produto">
-                                        <!-- <?php
-                                            // echo $codProduto;
-                                            // // SCRIPT SQL QUE TRAZ TODOS SOBRE DO BANCO
-                                            // $sql = "SELECT * FROM tbl_subcategoria";// WHERE cod_categoria  ".$codProduto." ORDER BY cod_categoria DESC";
-                                            // $select = mysqli_query($conexao, $sql);
-                                            // while($rsSubcategoria = mysqli_fetch_array($select)) {
-                                            //     // RESGATNO DADOS DO BANCO
-                                            //     $codSubcategoria = $rsSubcategoria['cod_subcategoria'];
-                                            //     $nomeSubcategoria = $rsSubcategoria['subcategoria'];
-                                        ?>
-                                            <option value="<?= $codSubcategoria ?>"><?= $nomeSubcategoria ?></option>
-                                        <?php
-                                            // }
-                                        ?> -->
-                                    </select>
-                                </div>
                                 <div id="relacao-produto">
                                     <h3><label>Produto:</label></h3>
                                     <select id="slt-produto" class="inputs-produto" name="slt_produto">
+                                    <!-- $_SESSION['cod_produto_relacao']
+                                    $_SESSION['produto_relacao'] -->
+                                        <?php
+                                            if($_SESSION['cod_produto_relacao'] == null){
+                                                $_SESSION['cod_produto_relacao'] = 0;
+                                            }
+
+                                            if($_SESSION['cod_produto_relacao'] != 0 || !isset($_SESSION['cod_produto_relacao'])){
+                                        ?>
+                                        <option value="<?php echo $_SESSION['cod_produto_relacao'] ?>"><?php echo $_SESSION['produto_relacao'] ?></option>
+                                        <?php
+                                            }else{
+                                        ?>
+                                        <option value="">Escolha uma Produto</option>
+                                        <?php
+                                            }
+                                        ?>
                                         <?php
                                             echo $codProduto;
                                             // SCRIPT SQL QUE TRAZ TODOS SOBRE DO BANCO
-                                            $sql = "SELECT * FROM tbl_produto";// WHERE cod_categoria  ".$codProduto." ORDER BY cod_categoria DESC";
+                                            $sql = "SELECT * FROM tbl_produto WHERE cod_produto <> ".$_SESSION['cod_produto_relacao'];
                                             $select = mysqli_query($conexao, $sql);
                                             while($rsProduto = mysqli_fetch_array($select)) {
                                                 // RESGATNO DADOS DO BANCO
@@ -615,9 +584,51 @@
                                         ?>
                                     </select>
                                 </div>
+                                <div id="relacao-categoria-produto">
+                                    <h3><label>Categoria:</label></h3>
+                                    <select id="slt-categoria-produto" class="inputs-produto" name="slt_categoria_produto" >
+                                        <?php
+                                            if($_SESSION['cod_categoria_relacao'] == null){
+                                                $_SESSION['cod_categoria_relacao'] = 0;
+                                            }
+
+                                            if($_SESSION['cod_categoria_relacao'] != 0 || !isset($_SESSION['cod_categoria_relacao'])){
+                                        ?>
+                                        <option value="<?php echo $_SESSION['cod_categoria_relacao'] ?>"><?php echo $_SESSION['categoria_relacao'] ?></option>
+                                        <?php
+                                            }else{
+                                        ?>
+                                        <option value="">Escolha uma Categoria</option>
+                                        <?php
+                                            }
+                                        ?>
+                                        <?php
+                                            // SCRIPT SQL QUE TRAZ TODOS SOBRE DO BANCO
+                                            $sql = "SELECT * FROM tbl_categoria WHERE cod_categoria <> ".$_SESSION['cod_categoria_relacao']." ORDER BY categoria";
+                                            echo $sql;
+                                            $select = mysqli_query($conexao, $sql);
+                                            while($rsCategoria = mysqli_fetch_array($select)) {
+                                                // RESGATNO DADOS DO BANCO
+                                                $codCategoria = $rsCategoria['cod_categoria'];
+                                                $nomeCategoria = $rsCategoria['categoria'];
+                                        ?>
+                                            <option value="<?= $codCategoria ?>"><?= $nomeCategoria ?></option>
+                                        <?php
+                                            }
+                                            $_SESSION['cod_categoria_relacao'] = null;
+                                            $_SESSION['categoria_relacao'] = null;
+                                        ?>
+                                    </select>
+                                </div>
+                                <div id="relacao-subcategoria-produto">
+                                    <h3><label>Subcategoria:</label></h3>
+                                    <select disabled id="slt-subcategoria-produto" class="inputs-produto" name="slt_subcategoria_produto">
+                                        <option value="">Escolha uma Subcategoria</option>
+                                    </select>
+                                </div>
                             </div>
                             <div id="enviar-relacao" class="flexbox"> 
-                                <input type="submit" class="btn-confirmacao" name="btn_add_relacao" value="<?= $btnEnviarProduto ?>">
+                                <input type="submit" class="btn-confirmacao" name="btn_add_relacao" value="<?= $btnEnviarRelacao ?>">
                             </div>
                         </form>
                         <div id="tabela-relacoes" class="flexbox">
@@ -637,11 +648,7 @@
                                     ON tpsc.cod_subcategoria = s.cod_subcategoria
                                     INNER JOIN tbl_categoria AS c
                                     ON tpsc.cod_categoria = c.cod_categoria
-                                    ORDER BY p.nome DESC";
-
-                                    echo(
-                                        "<script>console.log(`$sql`);</script>"
-                                    );
+                                    ORDER BY tpsc.cod_produto_subcategoria_categoria DESC";
 
 
                                     $select = mysqli_query($conexao, $sql);
@@ -665,7 +672,7 @@
                                     <td class="txt-categoria-relacao"><?php echo $tituloCategoriaRelacao ?></td>
                                     <td class="txt-subcategoria-relacao"><?php echo $tituloSubcategoriaRelacao ?></td>
                                     <td class="txt-editar">
-                                        <a href="?modoRelacao=editar&codRelacaoProduto=<?= $codRelacao ?>">
+                                        <a href="?modoRelacao=editar&codRelacaoProduto=<?= $codRelacao ?>&codCategoriaRelacao=<?= $codCategoriaRelacao?>&categoriaRelacao=<?= $tituloCategoriaRelacao ?>&codSubCatRelacao=<?= $codSubcategoriaRelacao ?>&codProdutoRelacao=<?= $codProdutoRelacao ?>&produtoRelacao=<?=$tituloProdutoRelacao ?>&relacoes">
                                             <figure>
                                                 <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codProdutoRelacao ?>" title="<?php echo 'Editar Registro '.$codProdutoRelacao ?>">
                                             </figure>

@@ -34,7 +34,6 @@ SELECT * FROM tbl_nivel_usuario;
 SELECT * FROM tbl_usuario;
 SELECT * FROM tbl_destaque_noticia_principal;
 SELECT * FROM tbl_produto;
-
 SELECT * FROM tbl_promocao;
 SELECT * FROM tbl_produto_subcategoria_categoria;
 SELECT * FROM tbl_categoria_subcategoria;
@@ -60,8 +59,39 @@ INNER JOIN tbl_subcategoria AS s
 ON tpsc.cod_subcategoria = s.cod_subcategoria
 INNER JOIN tbl_categoria AS c
 ON tpsc.cod_categoria = c.cod_categoria;
-WHERE c.cod_categoria = 1 AND s.cod_subcategoria = 6
+WHERE c.cod_categoria = 1 AND s.cod_subcategoria = 7
 AND c.status = 'ativado' AND s.status = 'ativado';
+
+SELECT p.*, pr.*, c.*, s.*
+FROM tbl_promocao AS pr
+RIGHT JOIN tbl_produto AS p
+ON pr.cod_produto = p.cod_produto
+INNER JOIN tbl_produto_subcategoria_categoria AS tpsc
+ON p.cod_produto = tpsc.cod_produto
+INNER JOIN tbl_subcategoria AS s
+ON tpsc.cod_subcategoria = s.cod_subcategoria
+INNER JOIN tbl_categoria AS c
+ON tpsc.cod_categoria = c.cod_categoria
+WHERE p.cod_produto = 6;
+
+SELECT DISTINCT p.nome, p.preco, p.cod_produto, p.imagem,
+pr.cod_promocao, pr.percentual_desconto,
+pr.preco_desconto, pr.status AS status_promocao, 
+pr.numero_parcelas, pr.metodo_pagamento, pr.preco_parcelas,
+c.cod_categoria
+FROM tbl_promocao AS pr
+INNER JOIN tbl_produto AS p
+ON pr.cod_produto = p.cod_produto
+INNER JOIN tbl_produto_subcategoria_categoria AS tpsc
+ON p.cod_produto = tpsc.cod_produto
+INNER JOIN tbl_subcategoria AS s
+ON tpsc.cod_subcategoria = s.cod_subcategoria
+INNER JOIN tbl_categoria AS c
+ON tpsc.cod_categoria = c.cod_categoria
+WHERE p.status = 'ativado' 
+AND s.status = 'ativado' 
+AND c.status = 'ativado' 
+AND pr.status = 'ativado';
 
 #SUBCATEGORIAS DE UM CATEGORIA PARA MENU DO INICIO
 SELECT distinct s.subcategoria,s.cod_subcategoria
@@ -81,6 +111,15 @@ ON c.cod_categoria = cs.cod_categoria
 INNER JOIN tbl_subcategoria AS s
 ON cs.cod_subcategoria = s.cod_subcategoria
 WHERE c.cod_categoria = 1;
+
+
+SELECT distinct c.cod_categoria, c.categoria
+FROM tbl_categoria AS c
+INNER JOIN tbl_produto_subcategoria_categoria AS tpsc
+ON c.cod_categoria = tpsc.cod_categoria
+INNER JOIN tbl_subcategoria AS s
+ON tpsc.cod_subcategoria = s.cod_subcategoria
+WHERE tpsc.cod_categoria <> 2 ;
 
 SELECT s.subcategoria, s.cod_subcategoria,
 c.cod_categoria, group_concat(' ',c.categoria) AS categorias
@@ -172,7 +211,6 @@ INSERT INTO tbl_produto_subcategoria_categoria (cod_subcategoria, cod_categoria,
 INSERT INTO tbl_produto_subcategoria_categoria (cod_subcategoria, cod_categoria, cod_produto) VALUES (5, 1, 11);
 INSERT INTO tbl_produto_subcategoria_categoria (cod_subcategoria, cod_categoria, cod_produto) VALUES (6, 2, 12);
 INSERT INTO tbl_produto_subcategoria_categoria (cod_subcategoria, cod_categoria, cod_produto) VALUES (7, 1, 13);
-INSERT INTO tbl_produto_subcategoria_categoria (cod_subcategoria, cod_categoria, cod_produto) VALUES (7, 3, 13);
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
