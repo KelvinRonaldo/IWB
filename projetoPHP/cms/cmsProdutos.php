@@ -9,9 +9,9 @@
     require_once('../bd/conexao.php');
     $conexao = conexaoMySql();
 
-    if(isset($_POST['modoCategoria']) && $_GET['modoCategoria'] == 'editar'){
+    if(isset($_GET['modoCategoria']) && $_GET['modoCategoria'] == 'editar'){
         $btnEnviarCategoria = "ATUALIZAR";
-        $_SESSION['cod_categoria'] = $_POST['codigoCategoria'];
+        $_SESSION['cod_categoria'] = $_GET['codigoCategoria'];
     }else{
         $btnEnviarCategoria = "ENVIAR";
     }
@@ -42,9 +42,9 @@
         }
     }
     
-    if(isset($_POST['modoSub']) && $_POST['modoSub'] == 'editar'){
+    if(isset($_GET['modoSub']) && $_GET['modoSub'] == 'editar'){
         $btnEnviarSubcategoria = "ATUALIZAR";
-        $_SESSION['cod_subcategoria'] = $_POST['codSub'];
+        $_SESSION['cod_subcategoria'] = $_GET['codSub'];
         $_SESSION['cod_relacionamento'] = $_GET['codRelacao'];
 
     }else{
@@ -322,7 +322,7 @@
                         <form name="frm-categoria" method="POST" action="cmsProdutos.php?categorias">
                             <div id="nome-categoria">
                                 <h3><label>Nome Categoria:</label></h3>
-                                <input id="txt-nome-categoria" value="<?php echo(isset($_POST['nomeCategoria'])?$_POST['nomeCategoria']:''); ?>" class="inputs-produto" name="txt_nome_categoria" alt="Nome da Categoria" title="Nome da Categoria">
+                                <input id="txt-nome-categoria" value="<?php echo(isset($_GET['nomeCategoria'])?$_GET['nomeCategoria']:''); ?>" class="inputs-produto" name="txt_nome_categoria" alt="Nome da Categoria" title="Nome da Categoria">
                             </div>
                             <div id="enviar-categoria" class="flexbox"> <!-- CAMPO DE BOTAO DE SUBMISSAO -->
                                 <input type="submit" class="btn-confirmacao" name="btn_add_categoria" value="<?= $btnEnviarCategoria ?>">
@@ -354,7 +354,7 @@
                                     <td class="txt-titulo-categoria"><?php echo $tituloCategoria ?></td>
                                     <!-- BOTAO DE EDITAR -->
                                     <td class="txt-editar">
-                                        <a href="?modo=editar&codigoCategoria=<?= $codCategoria ?>&nomeCategoria=<?= $tituloCategoria ?>">
+                                        <a href="?modoCategoria=editar&codigoCategoria=<?= $codCategoria ?>&nomeCategoria=<?= $tituloCategoria ?>&categorias">
                                             <figure>
                                                 <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codCategoria ?>" title="<?php echo 'Editar Registro '.$codCategoria ?>">
                                             </figure>
@@ -377,14 +377,14 @@
                         <form name="frm-subcategoria" method="POST" action="cmsProdutos.php?subcategorias">
                             <div id="nome-subcategoria">
                                 <h3><label>Nome Subategoria:</label></h3>
-                                <input id="txt-nome-subcategoria" value="<?php echo(isset($_POST['nomeSub'])?$_POST['nomeSub']:''); ?>" class="inputs-produto" name="txt_nome_subcategoria" alt="Nome da Subcategoria" title="Nome da Subcategoria">
+                                <input id="txt-nome-subcategoria" value="<?php echo(isset($_GET['nomeSub'])?$_GET['nomeSub']:''); ?>" class="inputs-produto" name="txt_nome_subcategoria" alt="Nome da Subcategoria" title="Nome da Subcategoria">
                             </div>
                             <div id="nome-categoria-sub">
                                 <h3><label>Subcategoria:</label></h3>
                                 <select id="slt-nome-categoria-sub" class="inputs-produto" name="slt_nome_categoria_sub" alt="Categoria da Subcategoria" title="Categoria da Subcategoria">
                                 <?php
-                                    $codCategoriaSub = isset($_POST['codCategoriaSub'])?$_POST['codCategoriaSub']:0;
-                                    $categoriaSub = isset($_POST['nomeCategoriaSub'])?$_POST['nomeCategoriaSub']:0;
+                                    $codCategoriaSub = isset($_GET['codCategoriaSub'])?$_GET['codCategoriaSub']:0;
+                                    $categoriaSub = isset($_GET['nomeCategoriaSub'])?$_GET['nomeCategoriaSub']:0;
                                     if($codCategoriaSub != 0){
                                 ?>
                                 <option value="<?php echo $codCategoriaSub ?>"><?php echo $categoriaSub ?></option>
@@ -431,7 +431,7 @@
                                     ON c.cod_categoria = cs.cod_categoria
                                     INNER JOIN tbl_subcategoria AS s
                                     ON cs.cod_subcategoria = s.cod_subcategoria
-                                    ORDER BY c.cod_categoria DESC";
+                                    ORDER BY s.cod_subcategoria DESC";
 
                                     $select = mysqli_query($conexao, $sql);
                                     while($rsSubcategoria = mysqli_fetch_array($select)) {
@@ -441,7 +441,7 @@
 
                                         $codCategoriaSub = $rsSubcategoria['cod_categoria'];
                                         $tituloCategoriaSub = $rsSubcategoria['categoria'];
-                                        
+                                        echo("<script>console.log('$tituloCategoriaSub');</script>");
                                         $codCategoriaSubcategoria = $rsSubcategoria['cod_categoria_subcategoria'];
 
                                         $statusSubcategoria = $rsSubcategoria['status'] == "ativado" ? "'desativado'" : "'ativado'";
@@ -454,7 +454,7 @@
                                     <td class="txt-titulo-categoria-sub"><?php echo $tituloCategoriaSub ?></td>
                                     <!-- BOTAO DE EDITAR -->
                                     <td class="txt-editar">
-                                        <a href="?modoSub=editar&codSub=<?= $codSubcategoria ?>&nomeSub=<?= $tituloSubcategoria ?>&codCategoriaSub=<?= $codCategoriaSub ?>&nomeCategoriaSub=<?= $categoriaSub ?>&codRelacao=<?= $codCategoriaSubcategoria ?>">
+                                        <a href="?modoSub=editar&codSub=<?= $codSubcategoria ?>&nomeSub=<?= $tituloSubcategoria ?>&codCategoriaSub=<?= $codCategoriaSub ?>&nomeCategoriaSub=<?= $tituloCategoriaSub ?>&codRelacao=<?= $codCategoriaSubcategoria ?>&subcategorias">
                                             <figure>
                                                 <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codSubcategoria ?>" title="<?php echo 'Editar Registro '.$codSubcategoria ?>">
                                             </figure>
@@ -500,7 +500,7 @@
                         <div id="tabela-produtos" class="flexbox">
                             <table id="table-produtos">
                                 <tr class="table-titles">
-                                    <th class="title-produto">Produto</th>
+                                    <th class="title-produtos">Produto</th>
                                     <th class="title-editar">Editar</th>
                                     <th class="title-status">Status</th>
                                 </tr>
@@ -526,7 +526,7 @@
                                     <td class="txt-titulo-produto"><?php echo $tituloProduto ?></td>
                                     <!-- BOTAO DE EDITAR -->
                                     <td class="txt-editar">
-                                        <a href="?modoProduto=editar&codProduto=<?= $codProduto ?>&nomeProduto=<?= $tituloProduto ?>&preco=<?= $precoProduto?>&descricao=<?= $descricaoProduto?>&imgProduto=<?= $imagemProduto ?>">
+                                        <a href="?modoProduto=editar&codProduto=<?= $codProduto ?>&nomeProduto=<?= $tituloProduto ?>&preco=<?= $precoProduto?>&descricao=<?= $descricaoProduto?>&imgProduto=<?= $imagemProduto ?>&produtos">
                                             <figure>
                                                 <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codProduto ?>" title="<?php echo 'Editar Registro '.$codProduto ?>">
                                             </figure>
@@ -648,7 +648,7 @@
                                     ON tpsc.cod_subcategoria = s.cod_subcategoria
                                     INNER JOIN tbl_categoria AS c
                                     ON tpsc.cod_categoria = c.cod_categoria
-                                    ORDER BY p.nome DESC";
+                                    ORDER BY tpsc.cod_produto_subcategoria_categoria DESC";
 
 
                                     $select = mysqli_query($conexao, $sql);
@@ -672,7 +672,7 @@
                                     <td class="txt-categoria-relacao"><?php echo $tituloCategoriaRelacao ?></td>
                                     <td class="txt-subcategoria-relacao"><?php echo $tituloSubcategoriaRelacao ?></td>
                                     <td class="txt-editar">
-                                        <a href="?modoRelacao=editar&codRelacaoProduto=<?= $codRelacao ?>&codCategoriaRelacao=<?= $codCategoriaRelacao?>&categoriaRelacao=<?= $tituloCategoriaRelacao ?>&codSubCatRelacao=<?= $codSubcategoriaRelacao ?>&codProdutoRelacao=<?= $codProdutoRelacao ?>&produtoRelacao=<?=$tituloProdutoRelacao ?>">
+                                        <a href="?modoRelacao=editar&codRelacaoProduto=<?= $codRelacao ?>&codCategoriaRelacao=<?= $codCategoriaRelacao?>&categoriaRelacao=<?= $tituloCategoriaRelacao ?>&codSubCatRelacao=<?= $codSubcategoriaRelacao ?>&codProdutoRelacao=<?= $codProdutoRelacao ?>&produtoRelacao=<?=$tituloProdutoRelacao ?>&relacoes">
                                             <figure>
                                                 <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codProdutoRelacao ?>" title="<?php echo 'Editar Registro '.$codProdutoRelacao ?>">
                                             </figure>

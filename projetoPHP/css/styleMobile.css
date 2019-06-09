@@ -1,10 +1,14 @@
 
 @media screen and (max-device-width: 800px), screen and (max-width: 999px){
     /* -----HEADER----- */
+    :active {
+        outline: none;
+        text-decoration: none
+    }
+
     :focus{
         background: none;
     }
-
     #header-mobile{
         width: 100%;
         height: 200px;
@@ -231,7 +235,7 @@
     
     #conteudo{
         width: 100%;
-        min-height: 700px;
+        min-height: 1800px;
         height: auto;
         overflow: hidden;
         background-color: #f5ef9fcc;
@@ -247,7 +251,7 @@
     #conteudo-contato,
     #conteudo-sobre{
         width: 100%;
-        min-height: 700px;
+        min-height: 1800px;
         height: auto;
         overflow: hidden;
         background-color: #f5ef9fcc;
@@ -260,31 +264,6 @@
 
 
 
-
-
-    /* -----REDES SOCIAS----- */
-    #redes-sociais{
-        display: none;
-    }
-    #redes-sociais-noticias{
-        display: none;
-    }
-    /*
-    #redes-sociais-promocoes{
-        width: 70px;
-        height: 280px;
-        position: fixed;
-        margin-top: 120px;
-        margin-left: 1350px;
-        z-index: 998;
-    }
-    .divs-redes{
-        width: 70px;
-        height: 70px;
-        margin-bottom: 20px;
-        cursor: pointer;
-    } */
-    /* -----REDES SOCIAS----- */
 
 
 
@@ -358,6 +337,43 @@
         box-sizing: border-box;
         padding-top: 50px;
     }
+    .item-menu-esq-clean{
+        width: 100%;
+        min-height: 120px;
+        height: auto;
+        overflow: hidden;
+        background-color: #03032ee7;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        transition: 0.25s;
+        -webkit-transition: 0.25s;
+        -moz-transition: 0.25s;
+        cursor: pointer;
+        padding-left: 15px;
+
+        font-family: 'agency fb';
+        font-size: 60px;
+        color: #fcfcfc;
+        letter-spacing: 1px;
+
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .item-menu-esq-clean:hover{
+        background-color: #0a0a55e7;
+        -webkit-transition: 0.25s;
+        -moz-transition: 0.25s;
+        transition: 0.25s;
+    }
+    .icon-clean-categories{
+        width: 55px;
+        height: 55px;
+    }
+
     .item-menu-esq{
         width: 100%;
         min-height: 180px;
@@ -376,8 +392,8 @@
         -moz-transition: 0.25s;
         cursor: pointer;
 
-        font-family: cabin;
-        font-size: 55px;
+        font-family: 'agency fb';
+        font-size: 60px;
         color: #081064;
         letter-spacing: 1px;
 
@@ -1594,7 +1610,7 @@
     #conteudo-sobre{
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         padding-top: 20px;
         padding-bottom: 20px;
     }
@@ -1679,12 +1695,39 @@
         width: 100%;
         height: 600px;
         background-color: rgb(23, 33, 59);
+        flex-wrap: wrap;
     }
     #center-footerL1{
-        width: 100%;
-        height: 600px;
+        width: 85%;
+        height: 100%;
         background-color: rgb(23, 33, 59);
     }
+
+    /* -----REDES SOCIAS----- */
+    #redes-sociais-mobile{
+        width: 15%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    #redes-sociais{
+        display: none;
+    }
+    #redes-sociais-noticias{
+        display: none;    }
+
+    #redes-sociais-promocoes{
+        display: none;
+    }
+    
+    .divs-redes{
+        width: 100px;
+        cursor: pointer;
+    } 
+    /* -----REDES SOCIAS----- */
+
 
     #horario, #contatos, #endereco{
         height: 200px;
@@ -1697,13 +1740,13 @@
     }
 
     #horario{
-        width: inherit;
+        width: 90%;
     }
     #contatos{
-        width: inherit;
+        width: 90%;
     }
     #endereco{
-        width: inherit;
+        width: 90%;
     }
 
     #horario-icon, #contatos-icon, #endereco-icon{

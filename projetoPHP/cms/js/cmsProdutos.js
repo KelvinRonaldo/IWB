@@ -37,13 +37,13 @@ $(document).ready(function(){
     fechaContainer('produtos');
     fechaContainer('relacoes');
     
-    let abrirContainerCategorias = 0;
-    let abrirContainerSubcategorias = 0;
-    let abrirContainerProdutos = 0;
-    let abrirContainerRelacoes = 0;
-    let editarRelacoes = 0;
-    let codSubcategoriaRelacao = 0;
-    let codProdutoRelacao = 0;
+    let abrirContainerCategorias = "";
+    let abrirContainerSubcategorias = "";
+    let abrirContainerProdutos = "";
+    let abrirContainerRelacoes = "";
+    let editarRelacoes = "";
+    let codSubcategoriaRelacao = "";
+    let codProdutoRelacao = "";
 
     function getUrlVars(){
         let variaveis = [];
@@ -82,34 +82,33 @@ $(document).ready(function(){
         }else{
             codProdutoRelacao = 0;
         }
-        console.log(codProdutoRelacao);
+        // console.log(codProdutoRelacao);
 
     }
-
-    if(abrirContainerCategorias != ""){
-        abreContainer('categorias');
-        fechaContainer('subcategorias');
-        fechaContainer('produto');
-        fechaContainer('relacoes');
-    }else if(abrirContainerSubcategorias != ""){
-        fechaContainer('categorias');
-        abreContainer('subcategorias');
-        fechaContainer('produto');
-        fechaContainer('relacoes');
-    }else if(abrirContainerProdutos != ""){
-        fechaContainer('categorias');
-        fechaContainer('subcategorias');
-        abreContainer('produto');
-        fechaContainer('relacoes');
-    }else if(abrirContainerRelacoes != ""){
-        fechaContainer('categorias');
-        fechaContainer('subcategorias');
-        fechaContainer('produto');
-        abreContainer('relacoes');
-    }
-
 
     getUrlVars();
+
+    if(abrirContainerCategorias == "categorias"){
+        abreContainer('categorias');
+        fechaContainer('subcategorias');
+        fechaContainer('produtos');
+        fechaContainer('relacoes');
+    }else if(abrirContainerSubcategorias == "subcategorias"){
+        fechaContainer('categorias');
+        abreContainer('subcategorias');
+        fechaContainer('produtos');
+        fechaContainer('relacoes');
+    }else if(abrirContainerProdutos == "produtos"){
+        fechaContainer('categorias');
+        fechaContainer('subcategorias');
+        abreContainer('produtos');
+        fechaContainer('relacoes');
+    }else if(abrirContainerRelacoes == "relacoes"){
+        fechaContainer('categorias');
+        fechaContainer('subcategorias');
+        fechaContainer('produtos');
+        abreContainer('relacoes');
+    }
 
     const preencherSelectSubcategorias = (jsonSubcategorias) =>{
         let subcategoria = 0;
@@ -135,7 +134,7 @@ $(document).ready(function(){
             complete: function(response){
                 let jsonSubcategorias = JSON.parse(response.responseText);
                 preencherSelectSubcategorias(jsonSubcategorias);
-                console.log(jsonSubcategorias);
+                // console.log(jsonSubcategorias);
             },
             error: function(){
 

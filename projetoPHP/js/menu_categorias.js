@@ -54,6 +54,9 @@ $(document).ready(function(){
         $(".item-menu-esq").find('h3').click(function(){
             fecharContainerMenuCategorias();
         });
+        $(".item-menu-esq-clean").find('h3').click(function(){
+            fecharContainerMenuCategorias();
+        });
     
         
         const fecharContainerMenuCategorias = () =>{

@@ -7,7 +7,7 @@
         background-color: #16213bf4;
         background-color: rgba(22, 33, 59, 0.99);
         position: fixed;
-        z-index: 999;
+        z-index: 998;
     }
     #header-mobile{
         display: none;
@@ -295,6 +295,10 @@
         margin-bottom: 20px;
         cursor: pointer;
     }
+    #redes-sociais-mobile{
+        display: none;
+    }
+    
     /* -----REDES SOCIAS----- */
 
 
@@ -326,6 +330,43 @@
         /* display: flex; */
         /* flex-wrap: wrap; */
     }
+    .item-menu-esq-clean{
+        width: inherit;
+        min-height: 50px;
+        height: auto;
+        overflow: hidden;
+        background-color: #03032ee7;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        transition: 0.25s;
+        -webkit-transition: 0.25s;
+        -moz-transition: 0.25s;
+        cursor: pointer;
+        padding-left: 10px;
+
+        font-family: 'agency fb light';
+        font-size: 23px;
+        color: #fcfcfc;
+        letter-spacing: 1px;
+
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .item-menu-esq-clean:hover{
+        background-color: #0a0a55e7;
+        -webkit-transition: 0.25s;
+        -moz-transition: 0.25s;
+        transition: 0.25s;
+    }
+    .icon-clean-categories{
+        width: 30px;
+        height: 30px;
+    }
+
     .item-menu-esq{
         width: inherit;
         min-height: 80px;
@@ -368,10 +409,6 @@
         box-sizing: border-box;
         padding-top: 5px;
         cursor: pointer;
-
-        font-family: cabin;
-        font-size: 40px;
-        color: #e47d1d;
     }
     .icon-subcategorias p{
         margin-top: 10px;
@@ -412,7 +449,7 @@
         background-color: rgba(246, 128, 30, 0.212);
         /* display: none; */
 
-        font-family: 'agency fb';
+        font-family: 'agency fb light';
         font-size: 19px;
         color: #090a4d;
     }
@@ -574,6 +611,132 @@
         text-decoration: underline;
         font-size: 15px;
     }
+
+    /* >>modal<< */
+    #container{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: fixed;
+        z-index: 999;
+        display: none;
+    }
+    #modal-index{
+        width: 900px;
+        height: 650px;
+        margin-top: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        background-color: rgb(255, 255, 255);
+        border-radius: 30px;
+    }
+    #fechar-modal-index{
+        width: 70px;
+        height: 70px;
+        position: relative;
+        margin-left: 900px;
+        margin-top: -55px;
+    }    
+    .icon-close{
+        width: 70px;
+        height: 70px;
+        cursor: pointer;
+    }
+    #container-modal-produto{
+        width: inherit;
+        height: 550px;
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        background-color: rgba(24, 18, 18, 0.041);
+        margin-top: -85px;
+    }
+    #titulo-produto{
+        width: 900px;
+        height: 60px;
+        background-color: indigo;
+
+        font-family: "cabin";
+        color: #03032e;
+        font-size: 25px;
+        text-align: center;
+    }
+    #conteudo-view-produto{
+        width: 750px;
+        height: 350px;
+        background-color: #45da20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #img-view-produto{
+        width: 350px;
+        background-color: rgb(255, 0, 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+    }
+    #src-view-produto{
+        max-width: 350px;
+        max-height: 350px;
+    }
+    #info-view-produto{
+        width: 300px;
+        height: 350px;
+        background-color: salmon;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        font-family: 'agency fb';
+    }
+    #preco-view-produto,
+    #descricao-view-produto,
+    #categoria-view-produto,
+    #subcategoria-view-produto{
+        margin-bottom: 15px;
+    }
+    #preco-view-produto{
+        width: inherit;
+        height: 50px;
+        background-color: rosybrown;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        font-size: 25px;
+    }
+    #descricao-view-produto{
+        width: inherit;
+        min-height: 10px;
+        max-height: 120px;
+        background-color: rgb(188, 174, 143);
+
+        text-align: justify;
+        font-size: 25px;
+    }
+    #categoria-view-produto{
+        width: inherit;
+        height: 40px;
+        background-color: rgb(49, 129, 204);
+        
+        font-size: 27px;
+    }
+    #subcategoria-view-produto{
+        width: inherit;
+        height: 40px;
+        background-color: rgb(155, 64, 64);
+        
+        font-size: 27px;
+    }
+    /* >>modal<< */
     /* -----HOME----- */
 
 
@@ -978,6 +1141,11 @@
     .item-recentes:hover{
         text-decoration: underline;
     }
+.icon-close{
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+}
     /* -----NOTÍCIAS----- */
 
 
@@ -985,14 +1153,14 @@
 
     /* -----PROMOÇÕES----- */
     #promocoes-esq{
-        width: 300px;
+        width: 200px;
         min-height: inherit;
         height: auto;
         overflow: hidden;
         float: left;
     }
     #promocoes-dir{
-        width: 1000px;
+        width: 1100px;
         min-height: inherit;
         height: auto;
         overflow: hidden;
@@ -1001,7 +1169,7 @@
         border-left: solid 3px rgb(23, 33, 59, 0.99);
         box-sizing: border-box;
         box-sizing: border-box;
-        padding-left: 3px;
+        padding-left: 8px;
         padding-top: 3px;
         padding-bottom: 3px;
         float: left;
@@ -1059,7 +1227,7 @@
 
 
     .promocoes{
-        width: 320px;
+        width: 350px;
         height: 440px;
         background-color: #fffffffa;
         background-color: hsla(0, 0%, 100%, 0.98);
@@ -1115,7 +1283,7 @@
     .promocoes-nome, .promocoes-inicial,
     .promocoes-com-desconto,
     .tipo-pagamento{
-        width: 320px;
+        width: 350px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1210,7 +1378,7 @@
         font-size: 15px;
     }
     .caixa-btn-comprar{
-        width: 316px;
+        width: 346px;
         height: 45px;
         background-color: #f8f3edd9;
         background-color: hsla(33, 44%, 95%, 0.85);
