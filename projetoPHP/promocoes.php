@@ -54,7 +54,7 @@
                     </div>
                     <div id="abrir-menu" class="flexbox">
                         <figure>
-                            <img class="icon-filter" src="./imgs/mobile/filtro.png">
+                            <img class="icon-filter" src="imgs/mobile/filtro.png">
                         </figure>
                     </div>
                     <?php require_once("menuCategorias.php") ?>

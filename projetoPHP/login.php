@@ -2,7 +2,7 @@
 
     session_start(); // INICANDO A SESSÃO
 
-    require_once('./bd/conexao.php');//CONEXAO COM O BANCO
+    require_once('bd/conexao.php');//CONEXAO COM O BANCO
     $conexao = conexaoMySql();
 
     if(!isset($_POST['logout'])){//SE A VARIAVEL LOGOUT NÃO EXISTIR NA REQUISIÇÃO, EXECUTA O SCRIPT QUE VERIFICA O LOGIN

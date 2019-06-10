@@ -26,8 +26,8 @@ $(document).ready(function(){
 
             if($("#menu-esq").attr('class') == "menu-categoria-close"){
 
-                $("#menu-esq").removeClass("menu-categoria-close");
-                $("#menu-esq").addClass("menu-categoria-open");
+                // $("#menu-esq").removeClass("menu-categoria-close");
+                // $("#menu-esq").addClass("menu-categoria-open");
                 $("#container-categoria-menu").css({"opacity":1});
                 $("#container-categoria-menu").css({"visibility":"visible"});
                 $("#container-categoria-menu").css({"transition":".2s ease-in"});

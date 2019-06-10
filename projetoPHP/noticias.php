@@ -16,7 +16,7 @@
     $imgIndisponivel = "naoDisponivel.jpg";
 
 
-    require_once('./bd/conexao.php');
+    require_once('bd/conexao.php');
     $conexao = conexaoMySql();
 
     $sql = "SELECT * FROM tbl_noticia_principal";
@@ -126,7 +126,7 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>-->
+                        </div>
                     </div>
                 </article>
 
@@ -135,18 +135,17 @@
                     <!-- NOTICIAS A ESQUERDA DO SITE -->
                     <article id="noticias-esq">
                         <?php
-                            $sql = "SELECT * FROM tbl_noticia";
+                            $sql = "SELECT * FROM tbl_noticia WHERE status = 'ativado'";
                             $select = mysqli_query($conexao, $sql);
 
                             while($rsNoticia = mysqli_fetch_array($select)){
-                                if($rsNoticia['status'] == 'ativado'){
-                                    $tituloNoticia = $rsNoticia['titulo_noticia'];
-                                    $resumo = $rsNoticia['resumo'];
-                                    $autor = $rsNoticia['autor'];
-                                    $imagem = $rsNoticia['imagem'];
-                                
-                                    $dataDb = explode("-", $rsNoticia['data']);
-                                    $data = $dataDb[2]."/".$dataDb[1]."/".$dataDb[0];
+                                $tituloNoticia = $rsNoticia['titulo_noticia'];
+                                $resumo = $rsNoticia['resumo'];
+                                $autor = $rsNoticia['autor'];
+                                $imagem = $rsNoticia['imagem'];
+                            
+                                $dataDb = explode("-", $rsNoticia['data']);
+                                $data = $dataDb[2]."/".$dataDb[1]."/".$dataDb[0];
                         ?>
                         <!-- AREA QUE SEGURA AS INFORMAÇÕES DA NOTICIA-->
                         <div class="container-noticias">
@@ -171,7 +170,6 @@
                             </div>
                         </div>
                         <?php
-                                }
                             }
                         ?>
                     </article>
@@ -183,16 +181,22 @@
                         <div class="mais-recentes">           
                             <!-- LISTA DE NOTICIAS MASI RECENTES  -->       
                             <ul>
+                                <?php
+                                    $sqlRecentes = "SELECT titulo_noticia FROM tbl_noticia
+                                    WHERE status = 'ativado' ORDER BY cod_noticia DESC LIMIT 10";
+                                    $selectRecentes = mysqli_query($conexao, $sqlRecentes);
+
+                                    while($rsNoticiaRecentes = mysqli_fetch_array($selectRecentes)){
+                                        $tituloNoticiaRecentes = $rsNoticiaRecentes['titulo_noticia'];
+                                ?>
                                 <li class="item-recentes">
                                     <a href="#">
-                                        Pilotos têm desafio equivalente a prédio de 45 andares na Descida das Escadas de Santos
+                                        <?= $tituloNoticiaRecentes ?>
                                     </a>
                                 </li>
-                                <li class="item-recentes">
-                                    <a href="#">
-                                        Quando você clica em Design e escolhe um novo tema, as imagens, gráficos e elementos gráficos SmartArt são alterados para corresponder ao novo tema. 
-                                    </a>
-                                </li>
+                                <?php
+                                    }
+                                ?>
                             </ul>
                         </div>
                     </div>

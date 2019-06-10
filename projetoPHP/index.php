@@ -1,5 +1,5 @@
 <?php
-    require_once("./bd/conexao.php");
+    require_once("bd/conexao.php");
     $conexao = conexaoMySql();
 
 ?>
@@ -47,7 +47,7 @@
         <div id="pagina">
             <!-- IMPORTANDO O HEADER -->
             <?php 
-                require_once('./header.html');
+                require_once('header.html');
             ?>
             <!-- AREA ONDE ESTÁ TODA ESTRUTURA DO SITE, EXCETO HEADER E FOOTER -->
             <div id="tudo" class="center">
@@ -88,7 +88,7 @@
 
                     <div id="abrir-menu" class="flexbox">
                         <figure>
-                            <img class="icon-filter" src="./imgs/mobile/filtro.png">
+                            <img class="icon-filter" src="imgs/mobile/filtro.png">
                         </figure>
                     </div>
 

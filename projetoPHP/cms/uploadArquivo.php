@@ -1,6 +1,6 @@
 <?php
 
-    require_once ('./verificarUsuario.php');
+    require_once ('verificarUsuario.php');
 
     // FAZENDO CONEXAO COM BANCO DE DADOS
     require_once('../bd/conexao.php');

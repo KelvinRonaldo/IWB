@@ -102,4 +102,4 @@
         </div>
     </div>
 </form>
-<script src="./js/confirmarSenha.js"></script>
+<script src="js/confirmarSenha.js"></script>

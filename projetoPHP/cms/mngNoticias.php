@@ -1,13 +1,13 @@
 <?php
 
-    require_once ('./verificarUsuario.php');
+    require_once ('verificarUsuario.php');
 
     // FAZENDO CONEXAO COM BANCO DE DADOS
     require_once('../bd/conexao.php');
     $conexao = conexaoMySql();
 
     // IMPORTANDO ARQUIVO COM FUNÇÕES DE GERENCIAMENTO DE ARQUIVOS UPADOS
-    require_once('./uploadArquivo.php');
+    require_once('uploadArquivo.php');
 
     // INSERÇÃO DE 'NOTICIA GERAL' NO BANCO
     if(isset($_POST['btn_enviar_gerais'])){
@@ -204,7 +204,7 @@
             if($_GET['tipo'] == 'principal'){ // SE PRINCIPAL FAZ A EXCLUSÃO
                 $codNoticia = $_GET['codigo'];
                 $imagem = $_GET['img'];
-                require_once ('./uploadArquivo.php');
+                require_once ('uploadArquivo.php');
                 excluirArquivo($imagem);
 
                 $sql = "DELETE FROM tbl_noticia_principal WHERE cod_noticia = ".$codNoticia;
@@ -218,7 +218,7 @@
             }elseif($_GET['tipo'] == 'geral'){ // SE GERAL FAZ A EXCLUSÃO
                 $codNoticia = $_GET['codigo'];
                 $imagem = $_GET['img'];
-                require_once ('./uploadArquivo.php');
+                require_once ('uploadArquivo.php');
                 $imgExcluida = excluirArquivo($imagem);
         
                 $sql = "DELETE FROM tbl_noticia WHERE cod_noticia = ".$codNoticia;
@@ -244,7 +244,7 @@
         <title>GERENCIAR NOTÍCIAS</title>
         <meta charset="utf-8">
         <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
-        <script src="./js/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery-3.3.1.min.js"></script>
         <script>
             $(document).ready(function(){
                 $('.visualizar').click(function(){
@@ -256,7 +256,7 @@
                 if(tipoNoticia == 'geral'){ // SE O TIPO DA NOTICIA FOR GERAL, CHAMA O MODAL DE INSERIR OU ATUALIZAR NOTICIAS GERAIS
                     $.ajax({
                         type: "POST",
-                        url: "./modais/inserirAtualizarNoticiaGeral.php",
+                        url: "modais/inserirAtualizarNoticiaGeral.php",
                         data: {modo: modo, codigo: codNoticia},
                         success: function(dados){
                             $('#modal-noticia').html(dados);
@@ -266,7 +266,7 @@
                 console.log(`${modo} ${codNoticia} ${tipoNoticia}`)
                     $.ajax({
                         type: "POST",
-                        url: "./modais/inserirAtualizarNoticiaPrincipal.php",
+                        url: "modais/inserirAtualizarNoticiaPrincipal.php",
                         data: {modo: modo, codigo: codNoticia},
                         success: function(dados){
                             $('#modal-noticia').html(dados);
@@ -278,7 +278,7 @@
             function ativarDesativarNoticia(tipo, status, codigo, codDestaque) {
                 console.log(tipo+"\n"+status+"\n"+codigo+"\n"+codDestaque);
                 $.ajax({
-                    url:'./status.php',
+                    url:'status.php',
                     data: {pagina: 'noticias', noticia: tipo, status: status, codigo:codigo, nvl_destaque: codDestaque},
                     complete: function (response) {
                         console.log(response.responseText);
@@ -312,12 +312,12 @@
         <div id="tudo">
             <!-- IMPORTANDO ARQUIVO COM HEADER DA PAGINA -->
             <?php
-                require_once('./header.html');
+                require_once('header.html');
             ?>
             <div id="menu" class="center flexbox">
                 <!-- IMPORTANDO ARQUIVO COM MENU DA PAGINA -->
                 <?php
-                    require_once('./menu.php');
+                    require_once('menu.php');
                 ?>
             </div>
             <!-- AREA COM O CONTEUDO DA PAGINA -->
@@ -530,10 +530,10 @@
             </div>
             <!-- IMPORTANDO ARQUIVO COM FOOTER DA PAGINA -->
             <?php
-                require_once('./footer.html');
+                require_once('footer.html');
             ?>
         </div>
-        <script src="./js/tiposNoticias.js"></script>
+        <script src="js/tiposNoticias.js"></script>
         <script>
             // PEGANDO select  QUE SELECIONA O DESTAQUE DESEJADO
             const slcDestaque = document.getElementById('cmb-nivel');

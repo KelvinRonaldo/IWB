@@ -40,7 +40,7 @@
         }
     }
 ?>
-<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <script>
         $(document).ready(function(){
             $('#fechar-modal-noticia').click(function(){

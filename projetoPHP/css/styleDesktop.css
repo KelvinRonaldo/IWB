@@ -622,7 +622,7 @@
         display: none;
     }
     #modal-index{
-        width: 900px;
+        width: 910px;
         height: 650px;
         margin-top: 100px;
         display: flex;
@@ -630,18 +630,18 @@
         justify-content: center;
         flex-wrap: wrap;
         background-color: rgb(255, 255, 255);
-        border-radius: 30px;
     }
     #fechar-modal-index{
-        width: 70px;
-        height: 70px;
+        width: 50px;
+        height: 50px;
         position: relative;
-        margin-left: 900px;
-        margin-top: -55px;
+        margin-left: 860px;
+        margin-top: -45px;
+        background-color: tomato;
     }    
-    .icon-close{
-        width: 70px;
-        height: 70px;
+    .icon-close-index{
+        width: 50px;
+        height: 50px;
         cursor: pointer;
     }
     #container-modal-produto{
@@ -649,36 +649,37 @@
         height: 550px;
         overflow: auto;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         flex-wrap: wrap;
-        background-color: rgba(24, 18, 18, 0.041);
+        /* background-color: rgba(24, 18, 18, 0.041); */
         margin-top: -85px;
     }
     #titulo-produto{
         width: 900px;
         height: 60px;
-        background-color: indigo;
+        background-color: #03032e;
 
-        font-family: "cabin";
-        color: #03032e;
+        font-family: "agency fb";
+        color: #ffa114;
         font-size: 25px;
         text-align: center;
     }
     #conteudo-view-produto{
         width: 750px;
-        height: 350px;
-        background-color: #45da20;
+        height: 400px;
         display: flex;
         align-items: center;
         justify-content: center;
+        /* background-color: tomato; */
     }
     #img-view-produto{
         width: 350px;
-        background-color: rgb(255, 0, 0);
+        height: 400px;
+        /* background-color: rgb(255, 0, 0); */
         display: flex;
         align-items: center;
-        justify-content: center;
+        /* justify-content: center; */
         margin-right: 10px;
     }
     #src-view-produto{
@@ -686,9 +687,9 @@
         max-height: 350px;
     }
     #info-view-produto{
-        width: 300px;
-        height: 350px;
-        background-color: salmon;
+        width: 350px;
+        height: 400px;
+        /* background-color: salmon; */
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
@@ -702,39 +703,130 @@
     #categoria-view-produto,
     #subcategoria-view-produto{
         margin-bottom: 15px;
+        box-sizing: border-box;
     }
     #preco-view-produto{
         width: inherit;
-        height: 50px;
-        background-color: rosybrown;
+        height: 70px;
+        /* background-color: rosybrown; */
         display: flex;
         align-items: center;
         justify-content: flex-start;
 
-        font-size: 25px;
+        font-size: 40px;
+        font-style: italic;
+        font-family: cabin;
+        color: #2fa717;
+        font-family: 'agency fb';
+    }
+    .cifrao{
+        font-size: 30px;
+        vertical-align: top;
+        font-family: 'agency fb light';
     }
     #descricao-view-produto{
         width: inherit;
         min-height: 10px;
-        max-height: 120px;
-        background-color: rgb(188, 174, 143);
+        max-height: 125px;
+        /* background-color: rgb(188, 174, 143); */
+        line-height: 1;
+        border-bottom: solid 3px #ffa114;
+        padding-bottom: 5px;
 
         text-align: justify;
-        font-size: 25px;
+        font-size: 32px;
+        font-family: 'agency fb light';
     }
+    #descricao-view-produto p::first-letter{
+        margin-left: 10px;
+    }
+
     #categoria-view-produto{
         width: inherit;
         height: 40px;
-        background-color: rgb(49, 129, 204);
+        /* background-color: rgb(49, 129, 204); */
         
         font-size: 27px;
+        font-family: 'agency fb';
+        color: #08083f;
     }
     #subcategoria-view-produto{
         width: inherit;
         height: 40px;
-        background-color: rgb(155, 64, 64);
+        /* background-color: rgb(155, 64, 64); */
+        box-sizing: border-box;
+        border-bottom: solid 1px #ffa114;
         
         font-size: 27px;
+        padding-left: 10px;
+        font-family: 'agency fb';
+        color: #0f0f61;
+    }
+    #btns-compra{
+        width: inherit;
+        height: 50px;
+        /* background-color: #ec8c31; */
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        padding-right: 10px
+    }
+    #add-carrinho, #comprar{
+        height: 45px;
+        border: none;
+        cursor: pointer;
+
+        font-family: 'agency fb';
+        font-size: 25px;
+        color: #ffffff;
+    }
+    #add-carrinho{
+        width: 85px;
+        background-color: rgb(7, 7, 56);
+        transition: 0.2s ease-out;
+        border-radius: 5px;
+        margin-right: 15px;
+    }
+    #add-carrinho:hover{
+        background-color: rgb(51, 51, 136);
+        transition: 0.2s ease-out
+    }
+    #img-carrinho{
+        width: 30px;
+        height: 30px;
+    }
+    #comprar{
+        width: 85px;
+        background-color: rgb(37, 202, 15);
+        transition: 0.2s ease-out;
+        border-radius: 5px;
+    }
+    #comprar:hover{
+        background-color: rgb(20, 136, 4);
+        transition: 0.2s ease-out;
+    }
+    #img-comprar{
+        width: 30px;
+        height: 30px;
+    }
+
+    #promocao-view-produto{
+        width: 800px;
+        height: 70px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        box-sizing: border-box;
+        padding: 15px;
+
+        font-family: 'agency fb';
+        font-size: 35px;
+        color: #bb2424;
+        word-wrap: normal;
+        text-align: center;
     }
     /* >>modal<< */
     /* -----HOME----- */

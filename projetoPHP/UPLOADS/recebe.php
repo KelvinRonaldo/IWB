@@ -6,7 +6,7 @@
     echo($_FILES['userfile']['tmp_name'].'<br>');
     echo($_FILES['userfile']['error'].'<br>');
     
-    $uploaddir = './img/';
+    $uploaddir = 'img/';
     $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 
     echo('<br>');

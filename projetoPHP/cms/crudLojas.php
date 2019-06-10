@@ -1,6 +1,6 @@
 <?php
 
-    require_once('./verificarUsuario.php');// VERIFICAR SE USUARIO ESTA LOGADO
+    require_once('verificarUsuario.php');// VERIFICAR SE USUARIO ESTA LOGADO
 
     // CONEXAO COM O BANCO
     require_once('../bd/conexao.php');

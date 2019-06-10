@@ -129,7 +129,7 @@ $(document).ready(function(){
         let codCategoriaProduto = $("#slt-categoria-produto option:selected").val();
         $.ajax({
             type: "GET",
-            url: "./getRelacoesProduto.php",
+            url: "getRelacoesProduto.php",
             data: {codCategoria: codCategoriaProduto, codProduto: codProdutoRelacao, codSubcategoria: codSubcategoriaRelacao},
             complete: function(response){
                 let jsonSubcategorias = JSON.parse(response.responseText);

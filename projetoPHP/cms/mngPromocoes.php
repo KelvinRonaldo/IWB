@@ -1,6 +1,6 @@
 <?php
 
-    require_once("./verificarUsuario.php");//VERIFICA SE HÁ UM USUARIO LOGADO
+    require_once("verificarUsuario.php");//VERIFICA SE HÁ UM USUARIO LOGADO
 
     require_once("../bd/conexao.php");//CONEXAO COM O BANCO
     $conexao = conexaoMySql();
@@ -102,7 +102,7 @@
     <title>GERENCIAR PROMOÇÕES</title>
     <meta charset="utf-8">
     <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
-    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function(){
             $('.visualizar').click(function(){
@@ -113,7 +113,7 @@
         const viewModalAtualizarPromocao = (codPromocao, codProduto, nomeProduto, precoProduto) =>{
             $.ajax({
                 type: "GET",
-                url: "./modais/atualizarPromocao.php",
+                url: "modais/atualizarPromocao.php",
                 data: {cod_promocao: codPromocao, cod_produto: codProduto,
                     nome_produto: nomeProduto, preco_produto: precoProduto},
                 success: function(dados){
@@ -125,7 +125,7 @@
         const ativarDesativarPromocao = (codPromocao, status, codProduto) =>{
             $.ajax({
                 type: "GET",
-                url: "./status.php",
+                url: "status.php",
                 data: {pagina: "promocao", codigo: codPromocao, status: status, cod_produto: codProduto},
                 complete: function (response) {
                     location.reload();
@@ -149,12 +149,12 @@
         <div id="tudo">
             <!-- IMPORTANDO ARQUIVO COM HEADER DA PAGINA -->
             <?php
-                require_once('./header.html');
+                require_once('header.html');
             ?>
             <div id="menu" class="center flexbox">
                 <!-- IMPORTANDO ARQUIVO COM MENU DA PAGINA -->
                 <?php
-                    require_once('./menu.php');
+                    require_once('menu.php');
                 ?>
             </div>
             <!-- AREA COM O CONTEUDO DA PAGINA -->
@@ -260,21 +260,21 @@
                                 <!--BOTAO DE EDIÇÃO DA PROMOÇÃO -->
                                 <td class="txt-editar">
                                     <figure>
-                                        <img class="icon-edit visualizar" onclick="viewModalAtualizarPromocao(<?php echo $codPromocao.', '.$codProduto.', '.$nome.', '.$precoProduto ?>)" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codPromocao ?>" title="<?php echo 'Editar Registro '.$codPromocao ?>">
+                                        <img class="icon-edit visualizar" onclick="viewModalAtualizarPromocao(<?php echo $codPromocao.', '.$codProduto.', '.$nome.', '.$precoProduto ?>)" src="icons/edit.png" alt="<?php echo 'Editar Registro '.$codPromocao ?>" title="<?php echo 'Editar Registro '.$codPromocao ?>">
                                     </figure>
                                 </td>
                                 <!--BOTAO DE EXCLUSÃO DA PROMOÇÃO -->
                                 <td class="txt-excluir">
                                     <a href="?modo=excluir&codigo=<?php echo $codPromocao ?>">
                                         <figure>
-                                            <img class="icon-del" onclick="return confirmarExclusaoPromocao()" src="./icons/trash.png" alt="<?php echo 'Exluir Registro '.$codPromocao ?>" title="<?php echo 'Exluir Registro '.$codPromocao ?>">
+                                            <img class="icon-del" onclick="return confirmarExclusaoPromocao()" src="icons/trash.png" alt="<?php echo 'Exluir Registro '.$codPromocao ?>" title="<?php echo 'Exluir Registro '.$codPromocao ?>">
                                         </figure>
                                     </a>
                                 </td>
                                 <!--BOTAO DE TROCA DE STATUS DA PROMOÇÃO -->
                                 <td class="txt-status">
                                     <figure>
-                                        <img onclick="ativarDesativarPromocao(<?php echo($codPromocao.', '.$status.', '.$codProduto); ?>)" class="icon-status" src="./icons/<?php echo $img ?>" alt="<?php echo $altTitle ?>" title="<?php echo $altTitle ?>">
+                                        <img onclick="ativarDesativarPromocao(<?php echo($codPromocao.', '.$status.', '.$codProduto); ?>)" class="icon-status" src="icons/<?php echo $img ?>" alt="<?php echo $altTitle ?>" title="<?php echo $altTitle ?>">
                                     </figure>
                                 </td>
                             </tr>
@@ -287,10 +287,10 @@
             </div>
             <!-- IMPORTANDO ARQUIVO COM FOOTER DA PAGINA -->
             <?php
-                require_once('./footer.html');
+                require_once('footer.html');
             ?>
         </div>
-        <script src="./js/mngPromocoes.js"></script><!-- SCRIPT QUE FAZ CALCULO DE NOVO PREÇO E O MOSTRA EM TEMPO REAL PARA O USUARIO -->
+        <script src="js/mngPromocoes.js"></script><!-- SCRIPT QUE FAZ CALCULO DE NOVO PREÇO E O MOSTRA EM TEMPO REAL PARA O USUARIO -->
         <script>
             // SCRIPT QUE CONTROLA VISUALIZAÇÃO DO FORMULARIO DE CADASTRO DA PROMOÇÃO
             const btnSend = document.getElementById('btn-enviar-promocao');

@@ -1,6 +1,6 @@
 <?php
     // INPORTANO E EXECUTANDO FUNÇÃO DE CONEXAO COM BANCO DE DADOS
-    require_once('./bd/conexao.php');
+    require_once('bd/conexao.php');
     $conexao = conexaoMySQL();
     
     // DECLARAÇÃO DE VARIÁVEIS

@@ -1,6 +1,6 @@
 <?php
 
-    require_once('./bd/conexao.php');    
+    require_once('bd/conexao.php');    
     $conexao = conexaoMySql();
 
     $local = null;

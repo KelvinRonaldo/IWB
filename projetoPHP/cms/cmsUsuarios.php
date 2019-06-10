@@ -1,6 +1,6 @@
 <?php
 
-    require_once ('./verificarUsuario.php');// VERIFICAR SE USUARIO ESTA LOGADO
+    require_once ('verificarUsuario.php');// VERIFICAR SE USUARIO ESTA LOGADO
 
 //    VERIFICAR SE O USUARIO LOGADO TEM PERMISSÃO PARA ACESSAR ESTA PÁGINA
     if($_SESSION['adm_usuario'] == 'ativado'){
@@ -228,7 +228,7 @@
         <title>ADMINISTRAR USUÁRIOS </title>
         <meta charset="utf-8">
         <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
-        <script src="./js/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery-3.3.1.min.js"></script>
         <script>
             $(document).ready(function(){
                 $('.visualizar-nivel').click(function(){
@@ -243,7 +243,7 @@
             function viewModalAtualizarNivel(codNivelUsuario){
                 $.ajax({
                     type: 'Get',
-                    url: './modais/atualizarNivel.php',
+                    url: 'modais/atualizarNivel.php',
                     data: {codigo: codNivelUsuario},
                     success: function(dados){
                         $('#modal-nivel-usuario').html(dados);
@@ -254,7 +254,7 @@
             function viewModalAtualizarUser(codUsuario, codNivelUsuario){
                 $.ajax({
                     type: 'Get',
-                    url: './modais/atualizarUser.php',
+                    url: 'modais/atualizarUser.php',
                     data: {codUsuario: codUsuario, codNivelUsuario: codNivelUsuario},
                     success: function(dados){
                         $('#modal-user').html(dados);
@@ -265,7 +265,7 @@
             function ativarDesativarNivel(codNivelUsuario, status, nivel){
                 $.ajax({
                     type: 'Get',
-                    url: './status.php',
+                    url: 'status.php',
                     data: {pagina: 'nivel_usuario', codigo: codNivelUsuario, status: status, nivel: nivel},
                     complete: function (response) {
                         location.reload();
@@ -279,7 +279,7 @@
             function ativarDesativarUser(codUsuario, status){
                 $.ajax({
                     type: 'Get',
-                    url: './status.php',
+                    url: 'status.php',
                     data: {pagina: 'usuario', codigo: codUsuario, status: status},
                     complete: function (response) {
                         alert(response.responseText);
@@ -318,12 +318,12 @@
         <div id="tudo">
             <!-- IMPORTANDO ARQUIVO COM HEADER DA PAGINA -->
             <?php
-                require_once('./header.html');
+                require_once('header.html');
             ?>
             <div id="menu" class="center flexbox">
                 <!-- IMPORTANDO ARQUIVO COM MENU DA PAGINA -->
                 <?php
-                    require_once('./menu.php');
+                    require_once('menu.php');
                 ?>
             </div>
             <!-- AREA COM O CONTEUDO DA PAGINA -->
@@ -432,35 +432,35 @@
                                 <tr class="tables-registers">
                                     <td class="txt-nome-nivel"><?php echo $nomeNivel; ?></td>
                                     <td class="txt-conteudo">
-                                        <img alt="<?php echo $altTitleConteudo ?>" title="<?php echo $altTitleConteudo ?>" class="on-off-nivel" src="./icons/<?php echo($admConteudo.".png"); ?>">
+                                        <img alt="<?php echo $altTitleConteudo ?>" title="<?php echo $altTitleConteudo ?>" class="on-off-nivel" src="icons/<?php echo($admConteudo.".png"); ?>">
                                     </td>
                                     <td class="txt-fale-conosco">
-                                        <img alt="<?php echo $altTitleFaleConosco ?>" title="<?php echo $altTitleFaleConosco ?>" class="on-off-nivel" src="./icons/<?php echo($admFaleConosco.".png"); ?>">
+                                        <img alt="<?php echo $altTitleFaleConosco ?>" title="<?php echo $altTitleFaleConosco ?>" class="on-off-nivel" src="icons/<?php echo($admFaleConosco.".png"); ?>">
                                     </td>
                                     <td class="txt-produto">
-                                        <img alt="<?php echo $altTitleProdutos ?>" title="<?php echo $altTitleProdutos ?>" class="on-off-nivel" src="./icons/<?php echo($admProdutos.".png"); ?>">
+                                        <img alt="<?php echo $altTitleProdutos ?>" title="<?php echo $altTitleProdutos ?>" class="on-off-nivel" src="icons/<?php echo($admProdutos.".png"); ?>">
                                     </td>
                                     <td class="txt-usuarios">
-                                        <img alt="<?php echo $altTitleUsuarios ?>" title="<?php echo $altTitleUsuarios ?>" class="on-off-nivel" src="./icons/<?php echo($admUsuarios.".png"); ?>">
+                                        <img alt="<?php echo $altTitleUsuarios ?>" title="<?php echo $altTitleUsuarios ?>" class="on-off-nivel" src="icons/<?php echo($admUsuarios.".png"); ?>">
                                     </td>
                                     <!-- BOTAO DE EDIÇÃO DE NIVEL DE USUARIO -->
                                     <td class="txt-editar">
                                         <figure>
-                                            <img class="icon-edit visualizar-nivel" onclick="viewModalAtualizarNivel(<?php echo $codNivelUsuario; ?>)" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codNivelUsuario ?>" title="<?php echo 'Editar Registro '.$codNivelUsuario ?>">
+                                            <img class="icon-edit visualizar-nivel" onclick="viewModalAtualizarNivel(<?php echo $codNivelUsuario; ?>)" src="icons/edit.png" alt="<?php echo 'Editar Registro '.$codNivelUsuario ?>" title="<?php echo 'Editar Registro '.$codNivelUsuario ?>">
                                         </figure>
                                     </td>
                                     <!-- BOTAO DE EXCLUSAO DE NIVEL DE USUARIO -->
                                     <td class="txt-excluir">
                                         <a href="?modo=excluirNivel&codigo=<?php echo $codNivelUsuario ?>">
                                             <figure>
-                                                <img class="icon-del" onclick="return confirmarExclusaoNivel(<?php echo $nivelExcluir; ?>)" src="./icons/trash.png" alt="<?php echo 'Exluir Registro '.$codNivelUsuario ?>" title="<?php echo 'Exluir Registro '.$codNivelUsuario ?>">
+                                                <img class="icon-del" onclick="return confirmarExclusaoNivel(<?php echo $nivelExcluir; ?>)" src="icons/trash.png" alt="<?php echo 'Exluir Registro '.$codNivelUsuario ?>" title="<?php echo 'Exluir Registro '.$codNivelUsuario ?>">
                                             </figure>
                                         </a>
                                     </td>
                                     <!-- BOTAO DE TROCA DE STATUS DE NIVEL DE USUARIO -->
                                     <td class="txt-status">
                                         <figure>
-                                            <img onclick="ativarDesativarNivel(<?php echo($codNivelUsuario.', '.$nextStatus.', '.$nivel); ?>)" class="icon-status" src="./icons/<?php echo $img ?>" alt="<?php echo $altTitle ?>" title="<?php echo $altTitle ?>">
+                                            <img onclick="ativarDesativarNivel(<?php echo($codNivelUsuario.', '.$nextStatus.', '.$nivel); ?>)" class="icon-status" src="icons/<?php echo $img ?>" alt="<?php echo $altTitle ?>" title="<?php echo $altTitle ?>">
                                         </figure>
                                     </td>
                                 </tr>
@@ -558,21 +558,21 @@
                                     <!-- BOTAO DE EDIÇÃO DO USUARIO -->
                                     <td class="txt-editar">
                                         <figure>
-                                            <img class="icon-edit visualizar-user" onclick="viewModalAtualizarUser(<?php echo $codUsuario.', '.$codNivelUser ?>)" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codUsuario ?>" title="<?php echo 'Editar Registro '.$codUsuario ?>">
+                                            <img class="icon-edit visualizar-user" onclick="viewModalAtualizarUser(<?php echo $codUsuario.', '.$codNivelUser ?>)" src="icons/edit.png" alt="<?php echo 'Editar Registro '.$codUsuario ?>" title="<?php echo 'Editar Registro '.$codUsuario ?>">
                                         </figure>
                                     </td>
                                     <!-- BOTAO DE EXCLUSAO DE USUARIO -->
                                     <td class="txt-excluir">
                                         <a href="?modo=excluirUser&codigo=<?php echo $codUsuario ?>">
                                             <figure>
-                                                <img class="icon-del" onclick="return confirmarExclusaoUser(<?php echo "'".$userName."'" ?>)" src="./icons/trash.png" alt="<?php echo 'Exluir Registro '.$codUsuario ?>" title="<?php echo 'Exluir Registro '.$codUsuario ?>">
+                                                <img class="icon-del" onclick="return confirmarExclusaoUser(<?php echo "'".$userName."'" ?>)" src="icons/trash.png" alt="<?php echo 'Exluir Registro '.$codUsuario ?>" title="<?php echo 'Exluir Registro '.$codUsuario ?>">
                                             </figure>
                                         </a>
                                     </td>
                                     <!-- BOTAO DE TROCA DE STATUS DE USUARIO -->
                                     <td class="txt-status">
                                         <figure>
-                                            <img onclick="ativarDesativarUser(<?php echo($codUsuario.', '.$status); ?>)" class="icon-status" src="./icons/<?php echo $img ?>" alt="<?php echo $altTitle ?>" title="<?php echo $altTitle ?>">
+                                            <img onclick="ativarDesativarUser(<?php echo($codUsuario.', '.$status); ?>)" class="icon-status" src="icons/<?php echo $img ?>" alt="<?php echo $altTitle ?>" title="<?php echo $altTitle ?>">
                                         </figure>
                                     </td>
                                 </tr>
@@ -586,11 +586,11 @@
             </div>
             <!-- IMPORTANDO ARQUIVO COM FOOTER DA PAGINA -->
             <?php
-                require_once('./footer.html');
+                require_once('footer.html');
             ?>
         </div>
-        <script src="./js/cmsUsuario.js"></script><!-- SCRIPT QUE GERENCIA TROCA DE TELAS DE CASDASTRO DE NIVEL DE USUARIO E USUARIO -->
-        <script src="./js/confirmarSenha.js"></script><!-- SCRIPT QUE GERENCIA CONFIRMAÇÃO DE SENHA -->
+        <script src="js/cmsUsuario.js"></script><!-- SCRIPT QUE GERENCIA TROCA DE TELAS DE CASDASTRO DE NIVEL DE USUARIO E USUARIO -->
+        <script src="js/confirmarSenha.js"></script><!-- SCRIPT QUE GERENCIA CONFIRMAÇÃO DE SENHA -->
     </body>
 </html>
 <?php
