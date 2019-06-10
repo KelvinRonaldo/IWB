@@ -2,7 +2,7 @@
     console.log(`${codCategoria} e ${codSubcategoria}`);
     $.ajax({
         type: 'get',
-        url: './filtroCategorias.php',
+        url: 'filtroCategorias.php',
         data: {cod_categoria: codCategoria, cod_subcategoria: codSubcategoria},
         complete: function(response){
             let produtos = JSON.parse(response.responseText);
@@ -22,7 +22,7 @@ const inserirProdutosFiltrados = (produtos) =>{
                                     <!-- IMAGEM DO PRODUTO -->
                                     <figure>
                                         <div class='produto-img center'>
-                                            <img src='./arquivos/${produtos[i].imagem_produto}' class='img-div' alt='#' title='#'>
+                                            <img src='arquivos/${produtos[i].imagem_produto}' class='img-div' alt='#' title='#'>
                                         </div>
                                     </figure>
                                     <!-- NOME DO PRODUTO -->
@@ -49,7 +49,7 @@ buscarPorFiltros(0, 0);*/
 const buscarPorProdutosFiltros = (codCategoria, codSubcategoria) =>{
     $.ajax({
         type: 'get',
-        url: './filtroPromocoes.php',
+        url: 'filtroPromocoes.php',
         data: {cod_categoria: codCategoria, cod_subcategoria: codSubcategoria},
         complete: function(response){
             let produtos = JSON.parse(response.responseText);
@@ -79,7 +79,7 @@ const inserirProdutosFiltrados = (catalogo) =>{
                                             <figure>
                                                 <!-- IMAGEM DO PRODUTO EM PROMOÇÃO -->
                                                 <div class="promocoes-img center">
-                                                    <img src="./arquivos/${catalogo[i].imagem_produto}" class="img-div" alt="${catalogo[i].nome_produto}" title="${catalogo[i].nome_produto}">
+                                                    <img src="arquivos/${catalogo[i].imagem_produto}" class="img-div" alt="${catalogo[i].nome_produto}" title="${catalogo[i].nome_produto}">
                                                 </div>
                                             </figure>
                                             <!-- NOME DO PRODUTO EM PROMOÇÃO -->

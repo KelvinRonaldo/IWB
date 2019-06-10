@@ -1,6 +1,6 @@
 <?php
 
-    require_once ('./verificarUsuario.php'); // VERIFICAR SE USUARIO ESTA LOGADO
+    require_once ('verificarUsuario.php'); // VERIFICAR SE USUARIO ESTA LOGADO
 
 //    VERIFICAR SE O USUARIO LOGADO TEM PERMISSÃO PARA ACESSAR ESTA PÁGINA
     if($_SESSION['adm_conteudo'] == 'ativado'){
@@ -19,12 +19,12 @@
         <div id="tudo">
             <!-- IMPORTANDO ARQUIVO COM HEADER DA PAGINA -->
             <?php
-                require_once('./header.html');
+                require_once('header.html');
             ?>
             <div id="menu" class="center flexbox">
                 <!-- IMPORTANDO ARQUIVO COM MENU DA PAGINA -->
                 <?php
-                    require_once('./menu.php');
+                    require_once('menu.php');
                 ?>
             </div>
             <!-- AREA COM O CONTEUDO DA PAGINA -->
@@ -97,7 +97,7 @@
             </div>
             <!-- IMPORTANDO ARQUIVO COM FOOTER DA PAGINA -->
             <?php
-                require_once('./footer.html');
+                require_once('footer.html');
             ?>
         </div>
     </body>

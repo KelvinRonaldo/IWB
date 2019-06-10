@@ -43,13 +43,14 @@
         }else{
             $codPromocao = $rsProduto['cod_promocao'];
             $precoDesconto = number_format($rsProduto['preco_desconto'], 2, ",", ".");
-            $precoProduto = number_format($rsProduto['preco'], 2, ",", ".");
+            $precoProduto = number_format($rsProduto['preco'], 2, ",", ".")."*";
             $percentual = $rsProduto['percentual_desconto'];
             $numParcelas = $rsProduto['numero_parcelas'];
             $pagamento = $rsProduto['metodo_pagamento'];
             $precoParcela = number_format($rsProduto['preco_parcelas'], 2, ",", ".");
+            
+            $metodoPagamento = "Com ".$percentual."% de desconto sai por R$".$precoDesconto." á vista ou em até ".$numParcelas."x de R$".$precoParcela." ".$pagamento;
         }
-        $metodoPagamento = $numParcelas."x de R$".$precoParcela." - ".$pagamento;
     }
 
 ?>
@@ -60,11 +61,16 @@
         $('#fechar-modal-index').click(function(){
             $('#container').fadeOut(300);
         });
+        // $("#src-view-produto")
+        //     .wrap('<span style="display:inline-block"></span>')
+        //     .css('display', 'block')
+        //     .parent()
+        //     .zoom();
     });
 </script>
 <!-- BOTAO DE FECHAR O MODAL -->
 <div id="fechar-modal-index">
-    <img class="icon-close" alt="Fechar" title="Fechar" src="imgs/close.png">
+    <img class="icon-close-index" alt="Fechar" title="Fechar" src="imgs/close.png">
 </div>
 <div id="container-modal-produto">
     <div id="titulo-produto">
@@ -78,10 +84,10 @@
         </div>
         <div id="info-view-produto">
             <div id="preco-view-produto">
-                <h3><?= "R$".$precoProduto ?></h3>
+                <h3><span class='cifrao'>R$</span><?= $precoProduto ?></h3>
             </div>
             <div id="descricao-view-produto">
-                <p><?= $descricao ?></p>
+                <p class="teste"><?= nl2br($descricao); ?></p>
             </div>
             <div id="categoria-view-produto">
                 <h3><?= $categoria ?></h3>
@@ -89,21 +95,21 @@
             <div id="subcategoria-view-produto">
                 <h4><?= $subcategoria ?></h4>
             </div>
+            <div id="btns-compra">
+                <button id="add-carrinho">
+                    +<img id="img-carrinho" src="imgs/cart.png" alt="Add ao Carrinho" Title="Add ao Carrinho">
+                </button>
+                <button id="comprar">
+                    <img id="img-comprar" src="imgs/basket.png" alt="Comprar" Title="Comprar">
+                </button>
+            </div>
         </div>
     </div>
     <?php
         if($codPromocao != null){
     ?>
     <div id="promocao-view-produto">
-            <div id="percentual-view-produto">
-                <h3>Com <?= $percentual ?>% de desconto</h3>
-            </div>
-            <div id="preco-desconto-view-produto">
-                <h3>R$<?= $precoDesconto ?> á vista</h3>
-            </div>
-            <div id="metodo-pagamento-view-produto">
-                <h3>Ou em até <?= $metodoPagamento ?></h3>
-            </div>
+        <p><?= $metodoPagamento ?></p>
     </div>
     <?php
         }

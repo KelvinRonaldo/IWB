@@ -1,6 +1,6 @@
 <?php
 
-    require_once ('./verificarUsuario.php');// VERIFICAR SE USUARIO ESTA LOGADO
+    require_once ('verificarUsuario.php');// VERIFICAR SE USUARIO ESTA LOGADO
 
 //    VERIFICAR SE O USUARIO LOGADO TEM PERMISSÃO PARA ACESSAR ESTA PÁGINA
     if($_SESSION['adm_fale_conosco'] == 'ativado'){
@@ -32,7 +32,7 @@
         <title>CMS Road Runner</title>
         <meta charset="utf-8">
         <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
-        <script src="./js/jquery-3.3.1.min.js"></script>
+        <script src="js/jquery-3.3.1.min.js"></script>
         <script>
             $(document).ready(function(){              
                 $('.visualizar').click(function(){
@@ -44,7 +44,7 @@
                 //↓ função do ajax para mandar informações para a modal de visualização de dados
                 $.ajax({
                     type: "GET",
-                    url: "./modais/faleConosco.php",
+                    url: "modais/faleConosco.php",
                     data: {codigo:codContato},
 
                     success: function(dados){
@@ -65,13 +65,13 @@
         <div id="tudo">
             <!-- IMPORTANDO ARQUIVO COM HEADER DA PAGINA -->
             <?php
-                require_once('./header.html');
+                require_once('header.html');
             ?>
             <!-- AREA DO MENU DO SITE -->
             <div id="menu" class="center flexbox">
                 <!-- IMPORTANDO ARQUIVO COM MENU DA PAGINA -->
                 <?php
-                    require_once('./menu.php');
+                    require_once('menu.php');
                 ?>
             </div>
             <!-- AREA COM O CONTEUDO DA PAGINA -->
@@ -124,7 +124,7 @@
             </div>
             <!-- IMPORTANDO ARQUIVO COM FOOTER DA PAGINA -->
             <?php
-                require_once('./footer.html');
+                require_once('footer.html');
             ?>
         </div>
     </body>

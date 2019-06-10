@@ -1,6 +1,6 @@
 <?php
 
-    require_once('./bd/conexao.php');
+    require_once('bd/conexao.php');
     $conexao = conexaoMySql();
 
 ?>
@@ -77,7 +77,7 @@
                             <div class="img-evento flexbox">
                                 <!-- IMAGEM DO EVENTO -->
                                 <figure>
-                                    <img class="img-src-evento" alt="Evento X" title="Evento X" src="./arquivos/<?php echo(isset($imagem)? $imagem : 'naoDisponivel.jpg'); ?>">
+                                    <img class="img-src-evento" alt="Evento X" title="Evento X" src="arquivos/<?php echo(isset($imagem)? $imagem : 'naoDisponivel.jpg'); ?>">
                                 </figure>
                             </div>
                             <div class="txt-evento">

@@ -1,7 +1,7 @@
 <?php
 
     // FAZENDO CONEXAO COM BANCO DE DADOS
-    require_once('./bd/conexao.php');
+    require_once('bd/conexao.php');
     $conexao = conexaoMySql();
 
     $sql = "SELECT * FROM tbl_sobre WHERE status = 'ativado'";
@@ -45,7 +45,7 @@
                         <div id="img-sobre" class="flexbox">
                             <!-- IMAGEM DA LOJA -->
                             <figure>
-                                <img alt="Bicicletas" id="img-src-sobre" src="./arquivos/<?php echo(!empty($imagem) ? $imagem : 'naoDisponivel.jpg'); ?>">
+                                <img alt="Bicicletas" id="img-src-sobre" src="arquivos/<?php echo(!empty($imagem) ? $imagem : 'naoDisponivel.jpg'); ?>">
                             </figure>
                         </div>
                         <!-- TEXTO SOBRE A LOJA -->

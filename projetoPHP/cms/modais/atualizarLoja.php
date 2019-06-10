@@ -70,4 +70,4 @@
         </div>
     </div>                       
 </form>
-<script src="./js/preencherEndereco.js"></script>
+<script src="js/preencherEndereco.js"></script>

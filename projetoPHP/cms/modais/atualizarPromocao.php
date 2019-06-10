@@ -24,7 +24,7 @@
 
 ?>
 
-<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <!-- SCRIPT PARA FECHAR A MODAL -->
 <script>
     $(document).ready(function(){
@@ -98,7 +98,7 @@
         </div>
     </div>
 </form>
-<script src="./js/mngPromocoes.js"></script>
+<script src="js/mngPromocoes.js"></script>
 <script>
     var caixaPrecoAtual = document.getElementById("txt-preco-atual");
     caixaPrecoAtual.textContent = "R$"+parseFloat(<?php echo $preco_Produto; ?>).toFixed(2);

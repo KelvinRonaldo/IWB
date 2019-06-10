@@ -1,0 +1,77 @@
+
+@import url("styleDesktop.css");
+@import url("styleMobile.css");
+
+/* ESTILIZAÇÃO DAS PAGINAS */
+
+h1, h2, h3, h4, h5, h6, p, div, header, footer, body, nav, figure,
+ul, li, img, a, section, iframe, label{
+    margin: 0px;
+    padding: 0px;
+}
+
+/* -----PADRONIZAÇÃO----- */
+
+/* CALSSE PARA FECHAR MENU VERTICAL */
+.menu-mobile-close{
+    margin-left: -790px;
+    transition: 0.6s ease-in-out;
+    visibility: hidden;
+}
+/* CLASSE PARA ABRIR VERTICAL */
+.menu-mobile-open{
+    margin-left: 0px;
+    transition: 0.6s ease-in-out;
+    visibility: visible;
+}
+
+.flexbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.negrito{
+    font-weight: bold;
+}
+.center{
+    margin-left: auto;
+    margin-right: auto;
+}
+a{
+    color: currentColor;
+    text-decoration: none;
+    cursor: pointer;
+}
+a:active{
+    background-color: #f4861e00;
+    background-color: hsla(29, 91%, 54%, 0);
+    background-color: rgba(245, 135, 32, 0);
+    /* outline: none; */
+    /* -ms-layout-grid-line: none; */
+}
+.img-div{
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+}
+input:focus{
+    outline: none;
+    background-color: #faf1e7;
+}
+.erro{
+    background-color: #f7f5a8;
+    color: rgb(129, 24, 24);
+}
+.erro::placeholder{
+    color: rgb(209, 44, 44);
+}
+.negrito{
+    font-weight: bold;
+}
+body{
+    background-image: url(../imgs/fundo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+/* ----PADRONIZAÇÃO----- */

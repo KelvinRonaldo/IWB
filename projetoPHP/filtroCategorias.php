@@ -1,5 +1,5 @@
 <?php
-    require_once("./bd/conexao.php");
+    require_once("bd/conexao.php");
     $conexao = conexaoMySql();
 
     $codCategoria = $_GET['cod_categoria'];

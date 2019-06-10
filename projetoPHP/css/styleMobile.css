@@ -54,13 +54,37 @@
         /*float: left;*/
         outline: none;
     }
-    #caixa-login-mobile{
+    #caixa-pesquisa-mobile{
         width: 200px;
         height: 200px;
     }
-    .icon-login-mobile{
+    .icon-pesquisa-mobile{
         width: 95px;
         height: 95px;
+    }
+    #caixa-de-pesquisa{
+        width: 80%;
+        height: 180px;
+        background-color: #16213b;
+        border-radius: 10px;
+        position: absolute;
+        /* transform: translateX(-58%); */
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(80%, 0);
+        transition: all 0.4s ease-in-out;
+    }
+    #txt-pesquisa-mobile{
+        /* background-color: #03032e; */
+        width: 90%;
+        height: 50%;
+        background: none;
+        border: none;
+
+        font-family: 'agency fb light';
+        font-size: 85px;
+        color: #b9b9b9;
+
     }
     #container-menu{
         width: 100%;
@@ -117,7 +141,7 @@
         color: rgb(202, 133, 30);
     }
 
-    .text-login-mobile{
+    /* .text-login-mobile{
         width: 168px;
         height: 90px;
         float: left;
@@ -179,7 +203,7 @@
         -webkit-transition: 0.3s;
         -moz-transition: 0.3s;
         transition: 0.3s;
-    }
+    } */
     #aux-mobile{
         width: 100%;
         height: 200px;
@@ -577,6 +601,216 @@
         text-decoration: underline;
         font-size: 45px;
     }
+
+    /* >>modal<< */
+    #container{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: fixed;
+        z-index: 999;
+        display: none;
+    }
+    #modal-index{
+        width: 90%;
+        height: 75%;
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        background-color: rgb(255, 255, 255);
+    }
+    #fechar-modal-index{
+        width: 80px;
+        height: 80px;
+        position: relative;
+        margin-left: 91%;
+        margin-top: -6%;
+        background-color: tomato;
+    }    
+    .icon-close-index{
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+    }
+    #container-modal-produto{
+        width: 100%;
+        height: 90%;
+        overflow: auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        /* background-color: rgba(24, 18, 18, 0.041); */
+        margin-top: -85px;
+    }
+    #titulo-produto{
+        width: 100%;
+        height: 10%;
+        background-color: #03032e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-family: "agency fb";
+        color: #ffa114;
+        font-size: 35px;
+        text-align: center;
+    }
+    #conteudo-view-produto{
+        width: 90%;
+        height: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        /* background-color: tomato; */
+    }
+    #img-view-produto{
+        width: 90%;
+        max-height: 50%;
+        /* background-color: rgb(0, 153, 255); */
+        display: flex;
+        justify-content: center;
+    }
+    #src-view-produto{
+        max-width: 100%;
+        max-height: 500px;
+    }
+    #info-view-produto{
+        width: 90%;
+        height: 50%;
+        /* background-color: salmon; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        font-family: 'agency fb';
+    }
+    #preco-view-produto,
+    #descricao-view-produto,
+    #categoria-view-produto,
+    #subcategoria-view-produto{
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
+    #preco-view-produto{
+        width: 100%;
+        height: 20%;
+        /* background-color: rgb(200, 241, 134); */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 75px;
+        font-style: italic;
+        color: #2fa717;
+        font-family: 'agency fb';
+    }
+    .cifrao{
+        font-size: 45px;
+        vertical-align: top;
+        font-family: 'agency fb light';
+    }
+    #descricao-view-produto{
+        width: 100%;
+        min-height: 10%;
+        max-height: 40%;
+        /* background-color: rgb(188, 174, 143); */
+        line-height: 1;
+        border-bottom: solid 3px #ffa114;
+        padding-bottom: 5px;
+
+        text-align: justify;
+        font-size: 55px;
+        font-family: 'agency fb light';
+    }
+    #descricao-view-produto p::first-letter{
+        margin-left: 10px;
+    }
+
+    #categoria-view-produto{
+        width: 100%;
+        height: 12%;
+        /* background-color: rgb(49, 129, 204); */
+        
+        font-size: 60px;
+        font-family: 'agency fb';
+        color: #08083f;
+    }
+    #subcategoria-view-produto{
+        width: 100%;
+        height: 10%;
+        /* background-color: rgb(155, 64, 64); */
+        box-sizing: border-box;
+        border-bottom: solid 1px #ffa114;
+        
+        font-size: 55px;
+        padding-left: 30px;
+        font-family: 'agency fb';
+        color: #0f0f61;
+    }
+    #btns-compra{
+        width: 70%;
+        height: 15%;
+        /* background-color: #ec8c31; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        padding-right: 10px
+    }
+    #add-carrinho, #comprar{
+        height: 90%;
+        border: none;
+        cursor: pointer;
+
+        font-family: 'agency fb';
+        font-size: 25px;
+        color: #ffffff;
+    }
+    #add-carrinho{
+        width: 30%;
+        background-color: rgb(7, 7, 56);
+        transition: 0.2s ease-out;
+        border-radius: 15px;
+        margin-right: 15px;
+    }
+    #img-carrinho{
+        width: 40%;
+        /* height: 50%; */
+    }
+    #comprar{
+        width: 30%;
+        background-color: rgb(37, 202, 15);
+        transition: 0.2s ease-out;
+        border-radius: 15px;
+    }
+    #img-comprar{
+        width: 40%;
+    }
+
+    #promocao-view-produto{
+        width: 100%;
+        height: 20%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        box-sizing: border-box;
+        padding: 15px;
+
+        font-family: 'agency fb';
+        font-size: 55px;
+        color: #bb2424;
+        word-wrap: normal;
+        text-align: center;
+    }
+    /* >>modal<< */
     /* -----HOME----- */
 
 
@@ -588,22 +822,23 @@
         margin-bottom: 20px;
     }
     #principais-esq, #principais-dir{
-        height: 700px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
         overflow: hidden;
         float: left;
+        margin-bottom: 10px;
     }
     #principais-esq{
         width: 100%;
-        margin-right: 10px;
+        height: 700px;
     }
     #principais-dir{
-        width: 900px;
-        /* background-color: #ec3131; */
-        display: none;
+        width: 100%;
+        height: 550px;
+        background-color: #ec3131;
+        /* display: none; */
     }
 
 
@@ -625,7 +860,7 @@
     }
     #texto-principal1{
         width: 100%;
-        height: 220px;
+        height: 240px;
         background-color: #08083f7a;
         background-color: hsla(240, 77%, 14%, 0.478);
         background-color: rgba(8, 8, 63, 0.478);
@@ -646,21 +881,20 @@
     #texto-principal1 h2{
         font-family: 'agency fb';
         font-weight: bold;
-        font-size: 70px;
+        font-size: 80px;
         color: #f3ac08;
         margin-bottom: 10px;
     }
     #texto-principal1 p{
         font-family: 'roboto condensed', arial;
         color: #ffffff;
-        font-size: 25px;
+        font-size: 40px;
     }
 
 
     #noticia-principal2{
-        width: inherit;
-        height: 345px;
-        margin-bottom: 6px;
+        width: 50%;
+        height: 550px;
         overflow: hidden;
     }
     #conteudo-principal2{
@@ -671,14 +905,15 @@
         -webkit-transition: 0.2s ease-out;
         -moz-transition: 0.2s ease-out;
         transition: 0.2s ease-out;
-        background-image: url(../imgs/320623.png);
+        /* background-image: url(../imgs/320623.png); */
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center;
     }
     
     #texto-principal2{
-        width: 650px;
-        height: 125px;
+        width: 100%;
+        height: 195px;
         background-color: #08083f7a;
         background-color: hsla(240, 77%, 14%, 0.478);
         background-color: rgba(8, 8, 63, 0.478);
@@ -699,18 +934,19 @@
     #texto-principal2 h2{
         font-family:'agency fb';
         font-weight: bold;
-        font-size: 40px;
+        font-size: 52px;
         color: #f3ac08;
         margin-bottom: 5px;
     }
     #texto-principal2 p{
         font-family: 'roboto condensed', arial;
         color: #ffffff;
-        font-size: 22px;
+        font-size: 28px;
     }
+
     #noticia-principal3{
-        width: inherit;
-        height: 345px;
+        width: 50%;
+        height: 550px;
         overflow: hidden;
     }
     #conteudo-principal3{
@@ -726,8 +962,8 @@
         background-size: cover;
     }    
     #texto-principal3{
-        width: 650px;
-        height: 125px;
+        width: 100%;
+        height: 195px;
         background-color: #08083f7a;
         background-color: hsla(240, 77%, 14%, 0.478);
         background-color: rgba(8, 8, 63, 0.478);
@@ -747,14 +983,14 @@
     #texto-principal3 h2{
         font-family:'agency fb';
         font-weight: bold;
-        font-size: 40px;
+        font-size: 52px;
         color: #f3ac08;
         margin-bottom: 5px;
     }
     #texto-principal3 p{
         font-family: 'roboto condensed', arial;
         color: #ffffff;
-        font-size: 22px;
+        font-size: 28px;
     }
 
 

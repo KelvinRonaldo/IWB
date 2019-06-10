@@ -1,11 +1,11 @@
 
-@import url("./styleDesktop.css");
-@import url("./styleMobile.css");
+@import url("styleDesktop.css");
+@import url("styleMobile.css");
 
 /* ESTILIZAÇÃO DAS PAGINAS */
 
 h1, h2, h3, h4, h5, h6, p, div, header, footer, body, nav, figure,
-ul, li, img, a, section, iframe, label{
+ul, li, img, a, section, iframe, label, button{
     margin: 0px;
     padding: 0px;
 }

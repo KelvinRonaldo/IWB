@@ -6,7 +6,7 @@
                                 <h3>Limpar Filtros</h3>
                                 <div class="icon-subcategorias">
                                     <figure>
-                                        <img src="./imgs/eraser.png" class="icon-clean-categories">
+                                        <img src="imgs/eraser.png" class="icon-clean-categories">
                                     </figure>
                                 </div>
                             </div>
@@ -22,7 +22,7 @@
                                 <h3 onclick="buscarPorProdutosFiltros(<?= $codCategoria?>, 0)"><?php echo $categoria; ?></h3>
                                 <div class="icon-subcategorias">
                                     <figure>
-                                        <img src="./imgs/plus.png" class="icon-show-categories">
+                                        <img src="imgs/plus.png" class="icon-show-categories">
                                     </figure>
                                 </div>
 

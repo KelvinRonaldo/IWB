@@ -1,6 +1,6 @@
 <?php
 
-    require_once ('./verificarUsuario.php');
+    require_once ('verificarUsuario.php');
     ini_set('display_errors',1);
     ini_set('display_startup_errors',1);
     error_reporting(E_ALL);
@@ -118,7 +118,7 @@
             (isset($_POST['txt_preco_produto']) && $_POST['txt_preco_produto'] != null)){
 
             echo("............. -->".$_POST['btn_add_produto']."<br>");
-            require_once('./uploadArquivo.php');
+            require_once('uploadArquivo.php');
 
             $produto = $_POST['txt_nome_produto'];
             $descricaoProduto = $_POST['txt_descricao_produto'];
@@ -242,14 +242,14 @@
     <title>GERENCIAR PRODUTOS</title>
     <meta charset="utf-8">
     <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
-    <script src="./js/jquery-3.3.1.min.js"></script>
-    <script src="./js/cmsProdutos.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/cmsProdutos.js"></script>
     <script>
         function ativarDesativarCategoria(codCategoria, status){
             console.log(`${codCategoria} e ${status}`);
             $.ajax({
                 type: 'GET',
-                url: './status.php',
+                url: 'status.php',
                 data: {pagina: 'categoria', codigo: codCategoria, status: status},
                 complete: function (response) {
                     location.href = "?categorias"
@@ -264,7 +264,7 @@
             console.log(`${codSubategoria} e ${status}`);
             $.ajax({
                 type: 'GET',
-                url: './status.php',
+                url: 'status.php',
                 data: {pagina: 'subcategoria', codigo: codSubategoria, status: status},
                 complete: function (response) {
                     location.href = "?subcategorias"
@@ -278,7 +278,7 @@
             console.log(`${codProduto} e ${status}`);
             $.ajax({
                 type: 'GET',
-                url: './status.php',
+                url: 'status.php',
                 data: {pagina: 'produto', codigo: codProduto, status: status},
                 complete: function (response) {
                     location.href = "?produtos"
@@ -301,12 +301,12 @@
         <div id="tudo">
             <!-- IMPORTANDO ARQUIVO COM HEADER DA PAGINA -->
             <?php
-                require_once('./header.html');
+                require_once('header.html');
             ?>
             <div id="menu" class="center flexbox">
                 <!-- IMPORTANDO ARQUIVO COM MENU DA PAGINA -->
                 <?php
-                    require_once('./menu.php');
+                    require_once('menu.php');
                 ?>
             </div>
             <!-- AREA COM O CONTEUDO DA PAGINA -->
@@ -356,13 +356,13 @@
                                     <td class="txt-editar">
                                         <a href="?modoCategoria=editar&codigoCategoria=<?= $codCategoria ?>&nomeCategoria=<?= $tituloCategoria ?>&categorias">
                                             <figure>
-                                                <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codCategoria ?>" title="<?php echo 'Editar Registro '.$codCategoria ?>">
+                                                <img class="icon-edit visualizar" src="icons/edit.png" alt="<?php echo 'Editar Registro '.$codCategoria ?>" title="<?php echo 'Editar Registro '.$codCategoria ?>">
                                             </figure>
                                         </a>
                                     </td>
                                     <td class="txt-status">
                                         <figure>
-                                            <img onclick="ativarDesativarCategoria(<?php echo($codCategoria.', '.$statusCategoria); ?>)" class="icon-status" src="./icons/<?php echo $imgCategoria ?>" alt="<?php echo $altTitleCategoria ?>" title="<?php echo $altTitleCategoria ?>">
+                                            <img onclick="ativarDesativarCategoria(<?php echo($codCategoria.', '.$statusCategoria); ?>)" class="icon-status" src="icons/<?php echo $imgCategoria ?>" alt="<?php echo $altTitleCategoria ?>" title="<?php echo $altTitleCategoria ?>">
                                         </figure>
                                     </td>
                                 </tr>
@@ -456,13 +456,13 @@
                                     <td class="txt-editar">
                                         <a href="?modoSub=editar&codSub=<?= $codSubcategoria ?>&nomeSub=<?= $tituloSubcategoria ?>&codCategoriaSub=<?= $codCategoriaSub ?>&nomeCategoriaSub=<?= $tituloCategoriaSub ?>&codRelacao=<?= $codCategoriaSubcategoria ?>&subcategorias">
                                             <figure>
-                                                <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codSubcategoria ?>" title="<?php echo 'Editar Registro '.$codSubcategoria ?>">
+                                                <img class="icon-edit visualizar" src="icons/edit.png" alt="<?php echo 'Editar Registro '.$codSubcategoria ?>" title="<?php echo 'Editar Registro '.$codSubcategoria ?>">
                                             </figure>
                                         </a>
                                     </td>
                                     <td class="txt-status">
                                         <figure>
-                                            <img onclick="ativarDesativarSubcategoria(<?php echo($codSubcategoria.', '.$statusSubcategoria); ?>)" class="icon-status" src="./icons/<?php echo $imgSubcategoria ?>" alt="<?php echo $altTitleSubcategoria ?>" title="<?php echo $altTitleSubcategoria ?>">
+                                            <img onclick="ativarDesativarSubcategoria(<?php echo($codSubcategoria.', '.$statusSubcategoria); ?>)" class="icon-status" src="icons/<?php echo $imgSubcategoria ?>" alt="<?php echo $altTitleSubcategoria ?>" title="<?php echo $altTitleSubcategoria ?>">
                                         </figure>
                                     </td>
                                 </tr>
@@ -528,13 +528,13 @@
                                     <td class="txt-editar">
                                         <a href="?modoProduto=editar&codProduto=<?= $codProduto ?>&nomeProduto=<?= $tituloProduto ?>&preco=<?= $precoProduto?>&descricao=<?= $descricaoProduto?>&imgProduto=<?= $imagemProduto ?>&produtos">
                                             <figure>
-                                                <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codProduto ?>" title="<?php echo 'Editar Registro '.$codProduto ?>">
+                                                <img class="icon-edit visualizar" src="icons/edit.png" alt="<?php echo 'Editar Registro '.$codProduto ?>" title="<?php echo 'Editar Registro '.$codProduto ?>">
                                             </figure>
                                         </a>
                                     </td>
                                     <td class="txt-status">
                                         <figure>
-                                            <img onclick="ativarDesativarProduto(<?php echo($codProduto.', '.$statusProduto); ?>)" class="icon-status" src="./icons/<?php echo $imgProduto ?>" alt="<?php echo $altTitleProduto ?>" title="<?php echo $altTitleProduto ?>">
+                                            <img onclick="ativarDesativarProduto(<?php echo($codProduto.', '.$statusProduto); ?>)" class="icon-status" src="icons/<?php echo $imgProduto ?>" alt="<?php echo $altTitleProduto ?>" title="<?php echo $altTitleProduto ?>">
                                         </figure>
                                     </td>
                                 </tr>
@@ -674,7 +674,7 @@
                                     <td class="txt-editar">
                                         <a href="?modoRelacao=editar&codRelacaoProduto=<?= $codRelacao ?>&codCategoriaRelacao=<?= $codCategoriaRelacao?>&categoriaRelacao=<?= $tituloCategoriaRelacao ?>&codSubCatRelacao=<?= $codSubcategoriaRelacao ?>&codProdutoRelacao=<?= $codProdutoRelacao ?>&produtoRelacao=<?=$tituloProdutoRelacao ?>&relacoes">
                                             <figure>
-                                                <img class="icon-edit visualizar" src="./icons/edit.png" alt="<?php echo 'Editar Registro '.$codProdutoRelacao ?>" title="<?php echo 'Editar Registro '.$codProdutoRelacao ?>">
+                                                <img class="icon-edit visualizar" src="icons/edit.png" alt="<?php echo 'Editar Registro '.$codProdutoRelacao ?>" title="<?php echo 'Editar Registro '.$codProdutoRelacao ?>">
                                             </figure>
                                         </a>
                                     </td>
@@ -689,7 +689,7 @@
             </div>
             <!-- IMPORTANDO ARQUIVO COM FOOTER DA PAGINA -->
             <?php
-                require_once('./footer.html');
+                require_once('footer.html');
             ?>
         </div>
     </body>
