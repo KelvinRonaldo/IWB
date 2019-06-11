@@ -118,4 +118,4 @@ const inserirProdutosFiltrados = (catalogo) =>{
         }
     }, 150);
 }
-buscarPorProdutosFiltros(0, 0);
+// buscarPorProdutosFiltros(0, 0);
