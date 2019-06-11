@@ -13,17 +13,6 @@
         $filtro = "AND c.cod_categoria = ".$codCategoria." AND s.cod_subcategoria = ".$codSubcategoria;
     }
 
-    // $sql = "SELECT DISTINCT p.nome, p.*, c.cod_categoria
-    // FROM tbl_produto AS p
-    // INNER JOIN tbl_produto_subcategoria_categoria AS tpsc
-    // ON p.cod_produto = tpsc.cod_produto
-    // INNER JOIN tbl_subcategoria AS s
-    // ON tpsc.cod_subcategoria = s.cod_subcategoria
-    // INNER JOIN tbl_categoria AS c
-    // ON tpsc.cod_categoria = c.cod_categoria
-    // WHERE p.status = 'ativado' 
-    // AND s.status = 'ativado'
-    // AND c.status = 'ativado'".$filtro;
     
     $sql = "SELECT DISTINCT p.nome, p.*, pr.preco_desconto, pr.status AS status_promocao, c.cod_categoria
     FROM tbl_promocao AS pr
