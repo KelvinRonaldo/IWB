@@ -27,8 +27,8 @@ $(document).ready(function(){
                 url: 'filtroPesquisa.php',
                 data: {pesquisa: texto},
                 complete: function(response){
-                    console.log(response.responseText);
                     let produtos = JSON.parse(response.responseText);
+                    // console.log(produtos);
                     inserirProdutosFiltrados(produtos);
                 },
                 error: function(){
@@ -42,8 +42,8 @@ $(document).ready(function(){
                 url: 'filtroPesquisa.php',
                 data: {pesquisa: texto},
                 complete: function(response){
-                    console.log(response.responseText);
                     let produtos = JSON.parse(response.responseText);
+                    console.log(produtos);
                     inserirProdutosFiltrados(produtos);
                 },
                 error: function(){
@@ -52,7 +52,8 @@ $(document).ready(function(){
             });
         }
     });
-    const inserirProdutosFiltrados = (catalogo) =>{    
+    const inserirProdutosFiltrados = (catalogo) =>{   
+        console.log(catalogo);
         //LIMPA AREA DE PRODUTOS
         $('#produtos').empty();
         let desativado = 0;
@@ -68,7 +69,7 @@ $(document).ready(function(){
                 //PREENCHE REA DE PRODUTOS COM PRODUTOS VINDO DO BANCO
                 $('#produtos').append(`<div class='produto'> <figure> <div class='produto-img center'> <img src='arquivos/${catalogo[i].imagem_produto}' class='img-div' alt='#' title='#'> </div> </figure> <div class='nome-texts'> <p class='produto-nome'>${catalogo[i].nome_produto}</p> </div> <div class='descricao-texts'> <p class='produto-descricao'> ${catalogo[i].descricao_produto} </p> </div> <div class='preco-texts'> <p class='produto-preco'>R$${catalogo[i].preco_produto}</p> </div> <a class='detalhes visualizar' onclick="viewProduto(${catalogo[i].cod_produto})">Detalhes</a> </div>`);
             }
-        }, 250);
+        }, 0);
     }
-    buscarPorProdutosFiltros(0, 0);
+    // buscarPorProdutosFiltros(0, 0);
 });

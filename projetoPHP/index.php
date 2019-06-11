@@ -20,7 +20,7 @@
         <script>
             $(document).ready(function(){
                 $('.visualizar').click(function(){
-                    $('#container').fadeIn(300);
+                    $('#container-index').fadeIn(300);
                 });
             });
             const viewProduto = (codProduto) =>{
@@ -38,7 +38,7 @@
         <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
     </head>
     <body>
-        <div id="container">
+        <div id="container-index">
             <div id="modal-index" class="center">
 
             </div>

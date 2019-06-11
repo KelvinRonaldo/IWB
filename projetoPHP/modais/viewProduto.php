@@ -59,7 +59,7 @@
 <script>
     $(document).ready(function(){
         $('#fechar-modal-index').click(function(){
-            $('#container').fadeOut(300);
+            $('#container-index').fadeOut(300);
         });
         // $("#src-view-produto")
         //     .wrap('<span style="display:inline-block"></span>')

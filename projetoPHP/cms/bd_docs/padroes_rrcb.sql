@@ -45,11 +45,21 @@ UPDATE tbl_produto SET status = 'ativado' WHERE cod_produto > 0;
 #TRAZER PRODUTOS ALEATÓRIAMENTE
 SELECT * FROM tbl_produto WHERE status = 'ativado' ORDER BY RAND();
 UPDATE tbl_subcategoria SET status = 'ativado' WHERE cod_subcategoria > 0;
-#CAIXA DE PESQUISA
-SELECT * FROM tbl_produto
-WHERE nome LIKE '%caloi%' OR
-descricao LIKE '%caloi%';
 
+#CAIXA DE PESQUISA
+SELECT DISTINCT p.nome, p.*, pr.*, pr.status AS status_promocao FROM tbl_produto AS p
+LEFT JOIN tbl_promocao AS pr
+ON p.cod_produto = pr.cod_produto
+WHERE nome LIKE '%luvas%de%' OR
+descricao LIKE '%luvas%de%'
+GROUP BY p.nome;
+
+SELECT p.*, pr.*, pr.status AS status_promocao FROM tbl_produto AS p
+LEFT JOIN tbl_promocao AS pr
+ON p.cod_produto = pr.cod_produto
+WHERE p.nome LIKE '%bike%' OR
+p.descricao LIKE '%bike%'
+GROUP BY p.nome;
 
 #TRAZER PRODUTOS DE DETERMINADA CATEGORIA OU/E SUB CATEGORIA
 SELECT * FROM tbl_produto AS p

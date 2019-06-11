@@ -21,11 +21,12 @@
         $pesquisa .= $texto[$i]."%";
     }
 
-    $sql = "SELECT DISTINCT p.nome, p.*, pr.*, pr.status AS status_promocao FROM tbl_produto AS p
+    $sql = "SELECT p.*, pr.*, pr.status AS status_promocao FROM tbl_produto AS p
     LEFT JOIN tbl_promocao AS pr
     ON p.cod_produto = pr.cod_produto
     WHERE p.nome LIKE '".$pesquisa."' OR
-    p.descricao LIKE '".$pesquisa."'";
+    p.descricao LIKE '".$pesquisa."'
+    GROUP BY p.nome";
 
     $produtos[] = (array) null;
     $arrayProduto[] = (array) null;
