@@ -28,7 +28,7 @@ const inserirProdutosFiltrados = (catalogo) =>{
     setTimeout(() => {//ESPERA A AREA SER LIMPRA PARA REALIZAR O PROEENCHIMENTO PARA NÃO HAVER CONFLITO 
         for(let i = 0; i < catalogo.length; i++){
             //PREENCHE REA DE PRODUTOS COM PRODUTOS VINDO DO BANCO
-            $('#produtos').append(`<div class='produto'> <figure> <div class='produto-img center'> <img src='arquivos/${catalogo[i].imagem_produto}' class='img-div' alt='#' title='#'> </div> </figure> <div class='nome-texts'> <p class='produto-nome'>${catalogo[i].nome_produto}</p> </div> <div class='descricao-texts'> <p class='produto-descricao'> ${catalogo[i].descricao_produto} </p> </div> <div class='preco-texts'> <p class='produto-preco'>R$${catalogo[i].preco_produto}</p> </div> <a class='detalhes visualizar' onclick="viewProduto(${catalogo[i].cod_produto})">Detalhes</a> </div>`);
+            $('#produtos').append(`<div class='produto'> <figure> <div class='produto-img center'> <img src='arquivos/${catalogo[i].imagem_produto}' class='img-div' alt='#' title='#'> </div> </figure> <div class='nome-texts'> <p class='produto-nome'>${catalogo[i].nome_produto}</p> </div> <div class='descricao-texts'> <p class='produto-descricao'> ${catalogo[i].descricao_produto} </p> </div> <div class='preco-texts'> <p class='produto-preco'>R$${catalogo[i].preco_produto}</p> </div> <span class='detalhes visualizar' onclick="viewProduto(${catalogo[i].cod_produto})">Detalhes</span> </div>`);
         }
     }, 250);
 }
